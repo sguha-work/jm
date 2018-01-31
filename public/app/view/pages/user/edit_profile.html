@@ -1,0 +1,372 @@
+<div class="main-cont">
+		<div class="container-fluid">
+			
+		  <div class="row">
+			<div class="blackBg">
+			  <div class="col-sm-12"><img class="ilogo" src="app/view/images/jiya_logo_png.png"></div>
+			  
+			  <!--User Profile Start here-->
+			  <div class="container">
+				<div class="row">
+				  <div class="createProfile createProfileMar clearfix">
+					<div class="createHead">
+						<div><i class="fa fa-times round_icon" ng-click="closeProfile()"></i><i class="fa fa-edit round_icon" ng-click="editProfile()"></i></div>
+					  <h2>&nbsp; </h2>
+					  <div class="proarea">
+						<div style="width: 100px !important; height: 100px; margin-top: -15%; min-height:100px !important" class="probox" ><img class="form-control img-responsive prof_img" ng-src="{{profile.profilePic ? profile.profilePic : app/view/images/avatars.png}}" style="display:block !important"
+							ng-show="image" /><img class="proplusIco" src="app/view/images/plus.png"></div>
+						
+					</div>
+					</div>
+					
+					<div class="proName">
+					  <h2 style="text-transform:capitalize">{{profile.firstName}} {{profile.lastName}}</h2>
+						<div class="pername">{{profile.penName}}</div>
+						<div> <span>
+							<fieldset style="border:none; padding:0px; margin:0px" > <!--ng-disabled="true"-->
+					<div id="rating_div" style="font-size: 2em;" star-rating rating-value="rating.current" max="rating.max" ></div>
+				</fieldset></span>
+				</div>
+					  <!-- <div class="prostar"><img class="staralign" src="app/view/images/astar.png"><img class="staralign" src="app/view/images/astar.png"><img class="staralign" src="app/view/images/astar.png"><img class="staralign" src="app/view/images/nstar.png"><img class="staralign" src="app/view/images/nstar.png"></div> -->
+					</div>
+					</div>
+					
+				  <div class="fullwid">
+					<div layout-xs="column" layout-gt-xs="row">
+						<fieldset class="fieldset_style" ng-disabled="!editMode">
+					  <div flex="none">
+						<div class="sarea">
+						  <div layout class="flmar">
+							<div flex="none"><img class="pri" src="app/view/images/ico_04.png"> </div>
+							<div flex>
+							  <div class="shead">Short Bio</div>
+							  <textarea class="form-control fntsiz" placeholder="Short Bio" aria-describedby="basic-addon1" cols="3" ng-model="profile.shortBio"></textarea>
+							</div>
+						  </div>
+						  <div layout class="flmar">
+							<div flex="none"><br>
+							  <img class="pri" src="app/view/images/ico_05.png"> </div>
+							<div flex>
+								<div class="shead">Birth Date</div>
+								<input type="text" class="form-control ddmm fntsiz" placeholder="DD" aria-describedby="basic-addon1" ng-model="profile.date">
+								<input type="text" class="form-control ddmm fntsiz" placeholder="MM" aria-describedby="basic-addon1" ng-model="profile.month">
+								<input type="text" class="form-control ddmm fntsiz" placeholder="YYYY" aria-describedby="basic-addon1" ng-model="profile.year">
+							  <!-- <select class="form-control ddmm fntsiz" placeholder="DD">
+								<option>1</option>
+							  </select>
+							  <select class="form-control ddmm fntsiz" placeholder="MM">
+								<option>1</option>
+							  </select>
+							  <select class="form-control ddmm fntsiz" placeholder="YYYY">
+								<option>1</option>
+							  </select> -->
+							</div>
+						  </div>
+						  <div layout class="flmar">
+							<div flex="none"><img class="pri" src="app/view/images/ico_02.png"> </div>
+							<div flex>
+							  <input type="text" class="form-control fntsiz" placeholder="Email ID" aria-describedby="basic-addon1" ng-model="profile.email">
+							</div>
+						  </div>
+						  <div layout class="flmar">
+							<div flex="none"><img class="pri" src="app/view/images/ico_06.png"> </div>
+							<div flex>
+							  <input type="text" class="form-control fntsiz" placeholder="Location" aria-describedby="basic-addon1" ng-model="profile.location">
+							</div>
+						  </div>
+						</div>
+						</div>
+						</fieldset>
+						<fieldset class="fieldset_style">
+					  <div flex>
+						<div class="sarea2">
+						  <div layout-gt-sm="row" layout-sm="column" layout-xs="column" >
+							<div flex >
+							  <div class="shead">Published Post</div>
+							  <div layout="row">
+								<div flex="none"> <img class="whtbox" src="https://uinames.com/api/photos/female/29.jpg"> </div>
+								<div flex="none"> <img class="whtbox" src="https://uinames.com/api/photos/male/15.jpg"> </div>
+								<div flex="none"> <img class="whtboxPlus" src="app/view/images/avatar_plus.png"> </div>
+							  </div>
+							  <br>
+							</div>
+							<div flex >
+									<div class="shead">Drafts</div>
+									<div layout="row">
+									<div flex="none" ng-repeat="draft in profile.drafts"><div class="post_div_content drafts"><div style="cursor: pointer" data-toggle="modal" data-target="#modalsharepost" style="max-width:500px" ng-bind-html="draft.postContent | unsafe " ng-click="editPost(draft)"></div></div> </div>
+									</div>
+									<br>
+								</div>
+							<!-- <div flex >
+							  <div class="shead">Favourite Posts</div>
+							  <div layout="row">
+								<div flex="none"> <img class="whtbox" src="https://uinames.com/api/photos/female/29.jpg"> </div>
+								<div flex="none"> <img class="whtbox" src="https://uinames.com/api/photos/male/15.jpg"> </div>
+								<div flex="none"> <img class="whtboxPlus" src="app/view/images/avatar_plus.png"> </div>
+							  </div>
+							  <br>
+							</div> -->
+						  </div>
+						  <div layout-gt-sm="row" layout-sm="column" layout-xs="column" >
+							<div flex>
+							  <div class="mar10s">
+								<div class="shead2">Favourite Topics</div>
+								<select class="form-control fntsiz fullwid" placeholder="DD">
+								  <option ng-repeat="favourite in favouriteArray">{{favourite.favourite}}</option>
+								</select>
+								<br>
+							  </div>
+							</div>
+							<div flex>
+							  <div class="mar10s">
+								<div class="shead2">Privacy</div>
+								<select class="form-control fntsiz fullwid" placeholder="DD" ng-model="profile.privacyPolicy">
+									<option>private</option>
+									<option>public</option>
+								</select>
+								<br>
+							  </div>
+							</div>
+							<div flex>
+							  <div class="mar10s">
+								<div class="shead2">Perference Language</div>
+								<select class="form-control fntsiz fullwid " placeholder="DD">
+								  <option>1</option>
+								</select>
+							  </div>
+							  <br>
+							</div>
+						  </div>
+						  <div layout-gt-sm="row" layout-sm="column" layout-xs="column" >
+							<div flex>
+							  <div class="shead2">Followers</div>
+							  <div layout="row">
+								<div flex="none"> <img class="whtbox2" src="https://uinames.com/api/photos/female/29.jpg"> </div>
+								<div flex="none"> <img class="whtbox2" src="https://uinames.com/api/photos/male/10.jpg"> </div>
+								<div flex="none"> <img class="whtbox2" src="https://uinames.com/api/photos/male/11.jpg"> </div>
+								<div flex="none"> <img class="whtbox2" src="https://uinames.com/api/photos/male/12.jpg"> </div>
+								<div flex="none"> <img class="whtbox2" src="https://uinames.com/api/photos/male/13.jpg"> </div>
+								<div flex="none"> <img class="whtbox2Plus" src="app/view/images/avatar_plus.png"> </div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+						</div>
+					</fieldset>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				
+				</div>
+				<!--User Profile End here-->
+				
+				<div class="clearfix"></div>
+			  </div>
+			</div>
+			</div>
+		
+		</div>
+		
+		
+		
+		<!--Open Draft model-->
+		<div class="modal fade" id="modalsharepost" role="dialog" ng-click="showModalData = !showModalData">
+		<div class="modal-dialog modal-lg">
+		
+			<!-- Modal content-->
+			<div class="modal-content sharePostCont">
+				<div class="modal-header">
+						<h4 class="modal-title nomargin">Create Post</h4>
+					<button type="button" class="close" id="close_model" data-dismiss="modal" ng-click="closeDialog()">&times;</button>
+					
+				</div>
+				<div class="modal-body clearfix"  style="max-height: calc(100vh - 210px);overflow-y: auto;">
+						<div class="sp-step1 fade-element-in" ng-show="showFirst" id="step1">
+						<div layout-gt-xs="row" layout-xs="column" class="sp-text">
+								<div flex><p class="mobi-textCenter">Select Type:</p></div>
+								<div flex><p class="text-right mobi-textCenter">1/2</p></div>
+						</div>
+							<div layout-wrap layout-xs="column" class="step-imgset nopadding" layout-gt-xs="row">
+								<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img src="app/view/images/icons/step-1.png"/><label>Boffola</label></div></div>
+								<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img src="app/view/images/icons/step-2.png"/><label>2U</label></div></div>
+								<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img src="app/view/images/icons/step-3.png"/><label>Poejia</label></div></div>
+								<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img src="app/view/images/icons/step-4.png"/><label>Jiyatable</label></div></div>
+								<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img src="app/view/images/icons/step-5.png"/><label>Punchline</label></div></div>
+						</div>
+						
+						<div class="paddTB20">
+								<div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+										<div flex-xs="100" flex-gt-xs="50"  class="sp-text"><p>Select Language:</p></div>
+										<div flex-xs="100" flex-gt-xs="50" >
+										<select ng-model="draft.postLanguage">
+												<option value="english">English</option>
+												<option value="hindi">Hindi</option>
+										</select>
+								</div>
+								</div>
+								<div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" style="margin-top:10px;">
+										<div flex class="sp-text"><p >Select Topic:</p></div>
+										<div flex><select ng-model="draft.postTopic"><option ng-repeat="favourite in favourites" value="{{favourite.favourite}}">{{favourite.favourite}}</option></select></div>
+								</div>
+						</div>
+						</div>
+
+						<div class="sp-step2 fade-element-in" ng-show="!showFirst" id="step2">
+										<div layout-gt-xs="row" layout-xs="column" class="sp-text">
+												
+												<div flex><p class="text-right mobi-textCenter">2/2</p></div>
+										</div>
+										 <div layout-gt-sm="row">
+													<md-input-container class="md-block large" flex-gt-sm>
+														<label>Enter Title</label>
+														<input ng-model="draft.postTitle">
+														<span class="text_count" ng-bind="countOf(draft.postContent)+'/20'"></span>
+													</md-input-container>
+										 </div>
+										 
+										 <textarea required ckeditor="options"  ng-model="draft.postContent" style="width:100%; min-height:150px; border:1px solid rgba(0,0,0,0.2); " ready="onReady"></textarea>
+										 <!--<textarea required ckeditor="options" name = "description" ng-model="restaurantDetails.desc" ready="onReady"></textarea>-->
+											<!-- <textarea  ckeditor="options" >
+										 
+										 </textarea>  -->
+										 <div>
+												<div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" style="margin-top:10px;">
+														<div flex="none" class="sp-text"><p >Add Tags:</p></div>
+														
+														<md-input-container class="md-block" flex>
+														<label>Use space or comma for separating tags</label>
+														<input ng-model="draft.hastags">
+													</md-input-container>
+													
+												</div>
+										</div>
+										
+										
+										
+										 <div >
+												<div >
+														<div id="thumbnail-slider">
+																<div class="inner">
+																		<ul>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#a864a9;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#f10602;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#e87817;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#39b54a;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#ff00ff;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#00bff3;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#fff200;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#827b00;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#605ca9;"></a>
+																				</li>
+																				
+																				 <li>
+																						<a class="thumb" href="" style="background-color:#a864a9;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#f10602;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#e87817;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#39b54a;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#ff00ff;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#00bff3;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#fff200;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#827b00;"></a>
+																				</li>
+																				<li>
+																						<a class="thumb" href="" style="background-color:#605ca9;"></a>
+																				</li>
+																				
+																				
+																				
+																		</ul>
+																</div>
+														</div>
+												</div>
+										</div>
+				
+				
+								</div>
+				</div>
+				<div class="modal-custom-footer">
+							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+								<div style="min-height:80px" layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+										<div flex class="sp-btn center_text_div"><button class="red_btn" ng-click="closeDialog()" data-dismiss="modal" >Cancel</button></div>
+										
+										<div flex class="sp-btn center_text_div active"><button class="red_btn" data-dismiss="modal" ng-click="removePost(draft)">Delete</button></div>
+										<div flex class="sp-btn center_text_div active"><button class="red_btn" data-dismiss="modal" ng-click="updateDraft(draft)">Save as post</button></div>
+										<div ng-if="!showFirst" flex class="sp-btn center_text_div"><button class="back_btn" ng-click="goPrevious()" >BACK</button></div>
+										<div ng-if="showFirst" flex class="sp-btn center_text_div" ><button ng-class="{ disabled_button: !((draft.postLanguage !=null) && (draft.postTopic !=null)) }"  ng-disabled="!((draft.postLanguage !=null) && (draft.postTopic !=null)) "  class="back_btn" style="border: none;" ng-click="goNext()">NEXT</button></div>
+								</div>
+						</div>
+				
+			</div>
+			
+		</div>
+	</div>
+
+
+
+		<style>
+		.prof_img{
+			width: 100%; 
+			height: 100%;
+			display: block !important;
+			padding: 0px !important;
+		}
+		.round_icon{
+			display: inline-block;
+			border-radius: 60px;
+			box-shadow: 0px 0px 2px rgb(250,250,250);
+			padding: 1.2em 1.4em;
+			float: right;
+			background: rgb(250,250,250);
+			margin: 1%;
+			width: 50px;
+			height: 50px;
+			margin-left: 0px;
+			cursor: pointer;
+		}
+		.round_icon:hover{
+			background: rgb(230, 217, 217);
+			
+		}
+		.fieldset_style{
+			border: none;
+			width: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		.drafts{
+			max-width: 75px;
+			max-height: 75px;
+			font-size: 0.4em;
+		}
+		</style>

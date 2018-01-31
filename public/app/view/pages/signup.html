@@ -1,0 +1,124 @@
+<!-- <div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+        <form ng-submit="signup(user)" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" ng-model="user.email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" ng-model="user.password" class="form-control" name="password">
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
+        <hr>
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Or go <a href="/">home</a>.</p>
+    </div>
+    </div> -->
+    
+    
+    <!-- <md-toolbar class = "md-warn">
+    <div class = "md-toolbar-tools">
+       <h2 class = "md-flex">HTML 5</h2>
+    </div>
+ </md-toolbar>
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-sign-in"></span> Login</h1>
+        <form ng-submit="login(user)" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" ng-model="user.email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" ng-model="user.password" class="form-control" name="password">
+            </div>
+            <a ng-click="googleLogin()" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+            <a ng-click="facebookLogin()" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+            <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        </form>
+        <hr>
+        <p>Need an account? <a href="/signup">Signup</a></p>
+        <p>Or go <a href="/">home</a>.</p>
+    </div>
+    </div> -->
+    
+   
+    <div class="main-cont">
+        <div class="authCont" layout-gt-sm="row" layout-xs="column"  layout-sm="column" layout-align="center stretch">
+            <div flex layout="" layout-align="start center">
+                <div flex class="page-title-text">
+                    <h1>Dummy Text</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                </div>
+            </div>
+            
+            <div flex="none" class="authFieldBox">
+                <div class="authFormCont">
+                    <form name="signupForm" ng-submit="signup(user)" novalidate="novalidate">
+                    <img class="logo" src="app/view/images/jiya_logo_png.png" />
+                    <div class="authFormInner">
+                        <div class="text-field-cont" style="margin-top:20%">
+                            <div layout="row">
+                                <div flex style="margin-right:10px">
+                                    <input type="text" ng-model="user.firstName"  name="firstName" placeholder="First Name" required/>
+                                    <span class="error error_span" ng-show="signupForm.firstName.$touched && signupForm.firstName.$error.required">
+                                            Required!</span>
+                                </div>
+                                <div flex>
+                                    <input type="text" ng-model="user.lastName" name="lastName" placeholder="Last Name" required/>
+                                    <span class="error error_span" ng-show="signupForm.lastName.$touched && signupForm.lastName.$error.required">
+                                            Required!</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-field-cont">
+                            <div layout="row">
+                                <div flex="none">
+                                    <div class="icon-cont"><img src="app/view/images/user.png" width="20"/></div>
+                                </div>
+                                <div flex>
+                                    <input type="email" ng-model="user.email" name="email" placeholder="Email ID " ng-model-options="{'updateOn': 'blur'}" required/>
+                                    <span class="error error_span" ng-show="signupForm.email.$touched && signupForm.email.$error.required">
+                                            Required!</span>
+                                    <span class="error error_span" ng-show="signupForm.email.$error.email">
+                                            Not valid email!</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-field-cont">
+                            <div layout="row">
+                                <div flex="none">
+                                    <div class="icon-cont"><img src="app/view/images/key.png" width="20"/></div>
+                                </div>
+                                <div flex>
+                                    <input type="password" ng-model="user.password" name="password" placeholder="Password" required/>
+                                    <span class="error error_span" ng-show="signupForm.password.$touched && signupForm.password.$error.required">
+                                            Required!</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btnPrimary">
+                            <button ng-class="{ disabled_button: signupForm.$invalid }" ng-disabled="signupForm.$invalid"  type="submit">Sign up</button>
+                        </div>
+                        <p class="notRegUser">Already have an account? | <a href="/">Sign In</a></p>
+                        <a href="" class="fp-link">Forgot password?</a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        
+        
+        </div>
+        </div>
+        
+        
+        
+        
+        
+    

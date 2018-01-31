@@ -1,0 +1,143 @@
+<div ng-cloak="" class="tabsdemoDynamicHeight" style="width: 1000px;">
+    <md-content>
+      <md-tabs md-dynamic-height="" md-border-bottom="">
+        <md-tab label="Reports">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Reports</h1>
+            <div class="center-content" flex style="padding:2px !important; width: 1000px;">
+              <div class="container" style="width: 1000px;">
+                <div class="row">
+                  <div class="col-xs-12 col-md-12">
+                    <div class="table-responsive">
+                      <table ng-if="now_user.role == 'super_admin' || now_user.role == 'admin'" summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+                        <!-- <caption class="text-center">An example of a responsive table based on <a href="https://getbootstrap.com/css/#tables-responsive" target="_blank">Bootstrap</a>:</caption> -->
+                        <thead>
+                          <tr>
+                            <th>Action</th>
+                            <th>Repoter</th>
+                            <th style="width: 500px;">Preview</th>
+                            <th style="width: 500px;">Reportee</th>
+                            <th>Reportee Mail</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="report in reports">
+                            <td><input type="checkbox" ng-click="addReportToArray($event.target.checked, report._id)" ng-checked="selectAll"></td>
+                            <td>{{report.repoter}}</td>
+                           <td><div style="max-width: 300px !important; background-color:white" class="post_div_content"><div data-toggle="modal" data-target="#viewpost" style="max-width:500px" ng-bind-html="report.postContent | unsafe " ng-click="viewPost(report)"></div></div></td>
+                            <td>{{report.reportee}}</td>
+                            <td>{{report.reporteeMail}}</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                              <td colspan="5" >
+                                  <button style="float:right; margin: 10px;" class="btn btn-danger" ng-click="deleteReports()">Delete</button>
+                                  <button style="float:right; margin: 10px;" class="btn btn-danger" ng-click="unSelectAllReports()">Unselect all</button>
+                                  <button style="float:right; margin: 10px;" class="btn btn-danger" ng-click="selectAllReports()">Select all</button>
+                              </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+          
+                     
+                    </div><!--end of .table-responsive-->
+                  </div>
+                </div>
+              </div>
+          </div>
+          </md-content>
+        </md-tab>
+        <md-tab label="Feedback List">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Feedback List</h1>
+            <div class="center-content" flex style="padding:2px !important; width: 1000px;">
+              <div class="container" style="width: 1000px;">
+                <div class="row">
+                  <div class="col-xs-12 col-md-12">
+                    <div class="table-responsive">
+                      <table ng-if="now_user.role == 'super_admin' || now_user.role == 'admin'" summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+                        <!-- <caption class="text-center">An example of a responsive table based on <a href="https://getbootstrap.com/css/#tables-responsive" target="_blank">Bootstrap</a>:</caption> -->
+                        <thead>
+                          <tr>
+                            <th>Action</th>
+                            <th>User Name</th>
+                            <th>User Mail</th>
+                            <th style="width: 500px;">Feedback content</th>
+                          
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="feedback in feedbackList">
+                              <td><input type="checkbox" ng-click="addFeedbackToArray($event.target.checked, feedback._id)" ng-checked="selectAll1"></td>
+                              <td>{{feedback.userName}}</td>
+                              <td>{{feedback.email}}</td>
+                              <td>{{feedback.feedbackContent}}</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                              <td colspan="5" >
+                                  <button style="float:right; margin: 10px;" class="btn btn-danger" ng-click="deleteFeedback()">Delete</button>
+                                  <button style="float:right; margin: 10px;" class="btn btn-danger" ng-click="unSelectAllFeedback()">Unselect all</button>
+                                  <button style="float:right; margin: 10px;" class="btn btn-danger" ng-click="selectAllFeedback()">Select all</button>
+                              </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+          
+                     
+                    </div><!--end of .table-responsive-->
+                  </div>
+                </div>
+              </div>
+          </div
+          </md-content>
+        </md-tab>
+        <md-tab label="three">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Three</h1>
+            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+
+    <div class="modal fade" id="viewpost" role="dialog">
+      <div class="modal-dialog modal-lg">
+  
+          <!-- Modal content-->
+          <div class="modal-content sharePostCont">
+              <div class="modal-header">
+                  <h4 class="modal-title nomargin">View post</h4>
+                  <button type="button" class="close" id="close_model" data-dismiss="modal">&times;</button>
+  
+              </div>
+              <div class="modal-body clearfix" style="max-height: calc(100vh - 210px);overflow-y: auto;">
+                  <div class="sp-step1 fade-element-in"></div>
+                  <p class="view_post_title">{{post.postTitle}}</p>
+                  <div layout-gt-xs="row" layout-xs="column" class="sp-text">
+                          
+                          <div class="view_div_content"><div style="padding: 10px;" data-toggle="modal" data-target="#viewpost" style="max-width:500px" ng-bind-html="post.postContent | unsafe "></div></div>
+                  </div>
+              </div>
+  
+              <div class="modal-custom-footer">
+                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                  <div style="min-height:80px" layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center">
+                      <div flex class="sp-btn center_text_div">
+                          <!-- <button class="back_btn" ng-click="goPrevious()" style="width: 20%;">Close</button> -->
+                      </div>
+                  </div>
+              </div>
+  
+          </div>
+  
+      </div>
+  </div>
+  </div>
+  
+  <!--
+  Copyright 2016 Google Inc. All Rights Reserved. 
+  Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+  -->

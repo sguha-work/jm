@@ -1,0 +1,203 @@
+	<!-- Discover -->
+    <div class="center-content" style="width: 1000px;" flex>
+        <img src="app/view/images/icons/illusatration.png" class="img-responsive" />
+        <img style="width: 10%; float: right; cursor: pointer;" class="img-responsive" src="app/view/images/back-button.png" ng-if="postList.length != 0" ng-click="goBack()">
+        <div layout-wrap layout-xs="column" class="step-imgs" layout-gt-xs="row" ng-if="postList.length == 0">
+            <div flex-xs="100" flex-sm="50" flex-gt-sm="20"  class="step-imgs" ng-click="getPostbasedonCategory('boffola')"><div><img src="app/view/images/icons/step-1.png"/><label>Boffola</label></div></div>
+            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" ng-click="getPostbasedonCategory('u2')"><div><img src="app/view/images/icons/step-2.png" /><label>2U</label></div></div>
+            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" ng-click="getPostbasedonCategory('poejia')"><div><img src="app/view/images/icons/step-3.png"/><label>Poejia</label></div></div>
+            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" ng-click="getPostbasedonCategory('jiyatale')"><div><img src="app/view/images/icons/step-4.png"/><label>Jiyatable</label></div></div>
+            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" ng-click="getPostbasedonCategory('jiyatalk')"><div><img src="app/view/images/icons/step-5.png"/><label>Jiyatalk</label></div></div>
+        </div>
+
+        <!-- New Post Block -->
+        <div class="col-sm-4 col-md-3 wow fadeInUp" ng-repeat="post in postList">
+          <div class="cardbrd litround cardmars pointer" data-toggle="modal" data-target="#postview">
+            <div class="postView" style="background:#e31b24 url(/app/view/images/bgimg2.png) no-repeat center center">
+              <div class="postViewtxt" ng-bind-html="post.postContent | unsafe" style="cursor: pointer;" ng-click=""></div>
+            </div>
+            <div class="posttxts">
+              <h6 style="font-weight:bold">{{post.postTopic}}</h6>
+              <div class="cardPro">
+                <div class="cardProimg"> 
+                  <img class="nimgs" ng-src="{{ post.posterImage ? post.posterImage : '/app/view/images/icons/profile.png' }}" alt=""/>
+                </div>
+                <div class="cardProtxt">
+                  <h2>{{post.poster}}</h2>
+                  <span class="timeColor">{{post.dateAndTime|date:'d MMM h:mm a'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--<div ng-show="showSlider" class="demo" ng-repeat="count in responsive_slider">
+            <div class="item" style="margin-bottom: 0px;">
+              <ul id="responsive_{{count}}" class="responsive">
+                <!-ng-repeat->
+                <li ng-repeat="favourite in favourites">
+                    <div class="simag" ng-click="selectFavourites(favourite)" >
+                      <img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs" ng-class="{ image_selected : favourite.selected }"><img class="favsels" src="app/view/images/green.png" ng-class="{ show_tick : favourite.selected }"></div>
+                    <h2>{{favourite.favourite}}</h2>
+                    <div class="viewfav">
+                      <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
+                        <div class="vmids">25</div>
+                      </div>
+                      <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
+                        <div class="vmids">74</div>
+                      </div>
+                    </div>
+                </li>
+                 
+                <li>
+                  <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
+                  <div class="item-details">
+                    <div class="item-title">Cakes & Baking - From The Kitchen</div>
+                    <div class="item-sub">928,784 Members</div>
+                    <div class="item-link">Follow</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
+                  <div class="item-details">
+                    <div class="item-title">Cakes & Baking - From The Kitchen</div>
+                    <div class="item-sub">928,784 Members</div>
+                    <div class="item-link">Follow</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
+                  <div class="item-details">
+                    <div class="item-title">Cakes & Baking - From The Kitchen</div>
+                    <div class="item-sub">928,784 Members</div>
+                    <div class="item-link">Follow</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
+                  <div class="item-details">
+                    <div class="item-title">Cakes & Baking - From The Kitchen</div>
+                    <div class="item-sub">928,784 Members</div>
+                    <div class="item-link">Follow</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
+                  <div class="item-details">
+                    <div class="item-title">Cakes & Baking - From The Kitchen</div>
+                    <div class="item-sub">928,784 Members</div>
+                    <div class="item-link">Follow</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
+                  <div class="item-details">
+                    <div class="item-title">Cakes & Baking - From The Kitchen</div>
+                    <div class="item-sub">928,784 Members</div>
+                    <div class="item-link">Follow</div>
+                  </div>
+                </li>
+                
+              </ul>
+              <div class="goToPrevSlide" ng-click="goToPrevSlide(count-1)"><span></span></div>
+              <div class="goToNextSlide" ng-click="goToNextSlide(count-1)"><span></span></div>
+            </div>
+          </div>-->
+        <!--<div style="cursor: auto;" layout-wrap layout-xs="column" class="step-imgs" layout-gt-xs="row" ng-if="postList.length != 0">
+        
+
+
+<div class="container" >
+    <h1>Related Posts</h1>
+  <div class="menu row">
+      <div class="menu-category list-group ">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <div ng-repeat="post in postList">
+            <div class="category_post_list" ng-bind-html="post.postContent | unsafe" style="cursor: pointer;" ng-click=""></div>
+            <div>
+              <h4><b>{{post.poster}}</b></h4> 
+              <p>{{post.postTopic}}</p> 
+            </div>
+        </div>
+      </div>
+  
+      <div class="menu-category list-group">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+      </div>
+  
+      <div class="menu-category list-group">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+      </div>
+      <div class="menu-category list-group">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+      </div>
+      <div class="menu-category list-group">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+      </div>
+      <div class="menu-category list-group">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+      </div>
+      <div class="menu-category list-group">
+          <div class="menu-category-name list-group-item active">Category</div><a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+          <a href="#" class="menu-item list-group-item">Lorem ipsum.<span class="badge">€ 0.00</span></a>
+      </div>
+  </div>
+  </div>
+        </div>-->
+        <!--
+        <style>
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+
+.row {
+ -moz-column-width: 18em;
+ -webkit-column-width: 18em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap: 1em; 
+  
+}
+
+.menu-category {
+ display: inline-block;
+ margin:  0.25rem;
+ padding:  1rem;
+ width:  100%; 
+}
+</style>-->
+
+    </div>
+
+    

@@ -1,0 +1,493 @@
+.main-header{ padding:6px 20px 8px; box-shadow:0px 2px 15px rgba(0,0,0,0.2);position: relative; z-index: 1;}
+.main-header img.logo{ height:50px; margin-right:25px; vertical-align:top;}
+.main-header input{ border:2px solid #dddddd; background-position:right 10px top 7px; background-size:18px 18px; background-repeat:no-repeat; border-radius:6px; padding:5px 30px 5px 10px; margin-top:6px;}
+.left-sidebar{ min-height:calc(100vh - 59px); height:100%; background-color:#f5f5f5;}
+.left-sidebar ul{ margin-top:20px;}
+.left-sidebar li > a{ text-decoration:none;padding:10px 16px 10px 20px; height:48px; display:inline-block; width:100%;  }
+.icon-cont{ width:30px; margin-right:10px; height:30px;}
+.left-sidebar li > a span{ color:#afaeae;}
+.left-sidebar li.active { background-color:#e5e5e5; } 
+.left-sidebar li.active a span{ color:#000000; } 
+.center-content{ padding:12px 18px;}
+/*.img-responsive{ width:100%;}*/
+.center-content .blog-box{ box-shadow: 0 1px 4px 0 rgb(220, 220, 220);background: #fff;border-radius:6px; width:100%; padding:12px 20px; margin:15px 0px 10px;}
+.center-content .blog-box .profile{ margin-right:12px;}
+.center-content .blog-box md-input-container{ margin-bottom:0px !important}
+.center-content .blog-box md-input-container .md-errors-spacer{ display:none;}
+.center-content .blog-box md-input-container label{ margin:0px; }
+.center-content .blog-box p{ margin:15px 0px 5px;}
+.center-content .blog-box textarea{ width:100%; border:none; min-height:150px; border-radius:6px; background-color:#e5e5e5;}
+.center-content .blog-box ul{ margin-top:10px; list-style-type:none;}
+.center-content .blog-box ul li{ display:inline-block;}
+.center-content .blog-box ul li a{ display:inline-block; margin-right:20px;}
+.center-content .blog-box ul li a span{ display:inline-block; vertical-align:top;} /*margin-left:5px; font-size:12px; margin-top:2px;*/
+.center-content .blog-box ul li a img{ vertical-align:top;}
+.step-imgs{padding:20px 10px; text-align:center; cursor:pointer;}
+.step-imgs img{ box-shadow:0px 7px 15px rgba(0,0,0,0.1); max-width:100%; border-bottom:5px solid #FFFFFF;}
+.step-imgs img:hover{ border-bottom:5px solid #ed1b24;}
+.step-imgs label{ display:inline-block; width:100%; margin-top:20px; text-align:center;}
+
+.btnPrimary{ margin:0px; padding:0px; color:#FFFFFF;}/*background-color:#ed1b24;*/
+.btnSmall{ padding:4px 15px 4px; font-size:13px; border:none; border-radius:5px;}
+
+
+.greeting{
+    display: inline-block;
+    font-size: 2em;
+  }
+    /* ngIf animation */
+  .animationIf.ng-enter,
+  .animationIf.ng-leave {
+    -webkit-transition: opacity ease-in-out 0.1s;
+    -moz-transition: opacity ease-in-out 0.1s;
+    -ms-transition: opacity ease-in-out 0.1s;
+    -o-transition: opacity ease-in-out 0.1s;
+    transition: opacity ease-in-out 0.1s;
+  }
+  .animationIf.ng-enter,
+  .animationIf.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+  .animationIf.ng-leave,
+  .animationIf.ng-enter.ng-enter-active {
+    opacity: 1;
+  }
+  .text-line {
+    background-color: transparent;
+    color: rgba(0,0,0,0.87);
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid rgba(0,0,0,0.87) 1px;
+    padding: 3px 10px;
+    width: 98%;
+    margin-bottom: 4%;
+    /* margin-top: 20px; */
+}
+
+  .social_icons{
+    max-width: 50px;
+    max-height: 50px;
+    display: inline;
+    cursor: pointer;
+  }
+/* Social Media*/
+#socialShare {
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+}
+
+#socialShare a,
+#socialShare > .socialBox {
+  position: relative;
+  float: none;
+  display: inline-block;
+  color: #fff;
+  font-size: 20px;
+  padding: 5px;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  /* line-height: 40px; */
+  line-height: 34px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+#socialShare  a {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#socialShare > * > span {
+  /* background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.15); */
+  display: block;
+  color: #ed2028;
+  font-size: 16px;
+  padding: 8px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+#socialShare > * > span:hover,
+#socialShare > .open > span {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  transform: scale(1.25);
+  -webkit-transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+}
+
+#socialGallery {
+  left: 50%;
+  margin: 0 auto 0;
+  position: absolute;
+  /* top: 60px;
+  transform: translate(-50%, 0); */
+  visibility: hidden;
+  width: 400px;
+  top: -10px;
+}
+
+#socialGallery a {
+  visibility: hidden;
+  opacity: 0;
+  margin: 5px 2px;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: relative;
+  top: 10px;
+}
+
+#socialGallery a > span {
+  position: relative;
+  top: 4px;
+  left: 4px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.share-para-text{
+  color: #333;
+  display: inline-block;
+  margin-left: 7px !important;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+
+.socialToolBox {
+  cursor: default;
+}
+
+.pointer {
+  cursor: pointer
+}
+
+.facebook:hover {
+  background: #3b5998 !important
+}
+
+.google:hover {
+  background: #dd4b39 !important
+}
+
+.instagram:hover {
+  background: #517fa4 !important
+}
+
+.tumblr:hover {
+  background: #32506d !important
+}
+
+.twitter:hover {
+  background: #00aced !important
+}
+
+.youtube:hover {
+  background: #bb0000 !important
+}
+
+@media only screen and (max-width: 480px) {
+  #socialGallery {
+    width: 120px;
+  }
+}
+  
+  /* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+  margin-left: 10px;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+ }
+
+ /*comment*/
+ .margin_top_div{
+  margin-top: 3%;
+ }
+ .max_width{
+  width: 100%;
+ }
+ .trash_icon{
+  float: right;
+  margin-bottom: -20px;
+  cursor: pointer;
+ }
+ /**/
+ .dropbtn {
+  background-color: #ece9e9;;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #ffffff;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+ 
+/* shoe edit */
+.div_show{
+  transition: all linear 0.5s;
+  background-color: lightblue;
+  height: 100px;
+    
+}
+.ng-hide {
+  height: 0;
+}
+
+.pro_img{
+  width: 56px !important;
+  border-radius: 50px;
+}
+
+/*dialog box */
+.next_btn{
+  border: none;
+  width: 50%;
+  background: #c30109;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.red_btn{
+  border: none;
+  width: 80%;
+  background: #c30109;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.back_btn{
+  border: none;
+  width: 80%;
+  background: black;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.black_btn{
+  border: none;
+  width: 50%;
+  background: rgb(0, 0, 0);
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.center_text_div{
+  text-align: center;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 25%;
+  border-radius: 5px;
+  margin-top: 10%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 0;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.category_post_list{
+  width: 100%;
+  height: 200px;
+  background: aquamarine;
+  text-align: left;
+  padding: 20px;
+}
+.jiya-banner-cont{ background-repeat:no-repeat; background-size:cover; padding:40px 20px;}	
+.jiya-banner-cont h1{ color:#FFFFFF; text-align:center; font-size:50px;}
+.jiya-banner-cont p{ color:#FFFFFF; text-align:center; padding-top:20px;  font-size:24px; }
+  
+  
+.nopadding{ padding:0px !important;}	
+.nomargin{ margin:0px !important;}	
+
+
+/* share post*/
+.sharePostCont .modal-header { background-color:#ececec; border-radius:.3rem .3rem 0px 0px;}
+.sharePostCont h4.modal-title{ color:#000000; font-size:26px;}
+
+.sharePostCont .step-imgset .step-imgs:first-child{ padding-left:0px !important;}
+.sharePostCont .step-imgset .step-imgs:last-child{ padding-right:0px !important;}
+.sharePostCont .step-imgs img { max-width: 130px;}
+.sp-text p{ margin:0px; font-size:18px; color:#000000; }
+.sharePostCont select{ width:100%; border:1px solid #d8d8d8; padding:12px 20px; }
+
+.sharePostCont .modal-header{padding:10px 30px;}
+.sharePostCont .modal-body{ padding:15px 30px; }
+.sharePostCont .paddTB20{ padding:20px 0px;}
+.sharePostCont .sp-btn a{ display:inline-block; width:100%; height:100%; font-size:22px;padding:15px; text-decoration:none; text-align:center; color:#ae3d3d;}
+
+.sharePostCont .modal-custom-footer{ box-shadow:0px 0px 10px rgba(0,0,0,0.3);}
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+@media only screen and (max-width: 600px) {
+    .main-header input{width:100%;}
+    
+}
+@media only screen and (min-width: 600px) and (max-width: 960){
+    
+}
+@media only screen and (min-width: 921px) and (max-width: 1280px){
+    .right-sidebar{ width:250px;}
+}
+@media only screen and (min-width:1281px){
+    .right-sidebar{ width:400px;}
+}
+@media only screen and (min-width: 600px) {
+    .main-header input{width:400px;}
+    .left-sidebar{ min-width:200px;}
+}
+    

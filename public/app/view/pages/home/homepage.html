@@ -1,0 +1,1226 @@
+
+        <link href="app/view/thumbnail/thumbnail-slider.css" rel="stylesheet" type="text/css" />
+        <script src="app/view/thumbnail/thumbnail-slider.js" type="text/javascript"></script>
+        <div ng-controller="homepageCtrl" class="center-content" ng-if="showPage == 'home'" flex style="width:1000px">
+
+                <div layout="row" flex="auto">
+                        <div flex="10"></div>
+                        <div  flex="50">
+                                <div flex="none">
+                            <div>
+                                    <div class="jiya-banner-cont" style="background-image:url('app/view/images/icons/wish_image.png');">
+                                        <h1>Good morning, {{current_user.firstName}}</h1>
+                                        <p class="nomargin">" {{randomQuote.quote}} "</p>
+                                        <p class="nopadding nmobiMarL50">-- {{randomQuote.author}}</p>
+                                    </div>
+                                    <div class="blog-box">
+                                        <div layout="row">
+                                            <div layout="row" flex="70">
+                                                <div flex="none">
+                                                    <img ng-src="{{current_user.profilePic ? current_user.profilePic:'app/view/images/icons/profile.png'}}" class="profile pro_img" />
+                                                </div>
+                                                <div flex>
+                                                    <md-input-container class="md-block" flex-gt-sm>
+                                                        <label>Share a post</label>
+                                                        <input data-toggle="modal" data-target="#modalsharepost" ng-model="sharePost">
+                                                    </md-input-container>
+                                                </div>
+                                            </div>
+                                            <div flex="30" layout layout-align="end center">
+                                                <button class="btnPrimary btnSmall ">POST</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- new_posts -->
+                                    <div class="row" ng-repeat="post in postsArray">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="cardbrd postBlock">
+                                                <div class="row">
+                                                    <div class="col-xs-10">
+                                                        <div class="protabs">
+                                                            <div class="protabsimg"><img class="nimgs" ng-src="{{ post.posterImage ? post.posterImage : '/app/view/images/icons/profile.png' }}" alt=""/></div>
+                                                            <div class="protabstxt"><h2>{{post.poster}}</h2>
+                                                                <span class="timeColor">{{post.dateAndTime|date:'d MMM h:mm a'}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <div class="pull-right">
+                                                            <div class="dropdown">
+                                                                <div class="dotMenu" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">...</div>
+                                                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                                                <li><a ng-if="current_user._id == post.userId" href="#" data-toggle="modal" data-target="#modalsharepost" ng-model="sharePost" ng-click="editPost(post)">Edit</a></li>
+                                                                <li><a ng-if="current_user._id == post.userId" href="#" ng-click="removePost(post._id)">Delete</a></li>
+                                                                <li><a href="#" ng-click="submitReport(post)">Report Abuse</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <div class="postContent">
+                                                            <h2>{{post.postTitle}}</h2>
+                                                            <div class="tags"><span ng-repeat="hastag in post.hastags track by $index">#{{hastag}}</span></div>
+                                                            <div class="postTable">
+                                                                <div class="postWords1">
+                                                                    <div data-toggle="modal" data-target="#viewpost" ng-bind-html="post.postContent | unsafe " ng-click="viewPost(post)"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-xs-12 clearfix" ng-if="!(post.posterRole=='admin')">
+                                                        <div class="row">
+                                                            <div class="col-xs-6 col-sm-3">
+                                                                <a href="">
+                                                                    {{post.ratingValue}}  <img src="app/view/images/icons/rating_selectedl.png" />
+                                                                    <div class="postCrtl popup" ng-click="myFunction()"><span>Rating</span>
+                                                                        <span class="popuptext" id="myPopup">
+                                                                            <fieldset ng-click="getRatings(post, $event.target)" id="ratingSystem" class="rating">
+                                                                                <input type="radio" id="star5" name="rating" value=5 /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                                                <input type="radio" id="star4half" name="rating" value=4.5 /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                                                <input type="radio" id="star4" name="rating" value=4 /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                                                <input type="radio" id="star3half" name="rating" value=3.5 /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                                                <input type="radio" id="star3" name="rating" value=3 /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                                                <input type="radio" id="star2half" name="rating" value=2.5 /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                                                <input type="radio" id="star2" name="rating" value=2 /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                                                <input type="radio" id="star1half" name="rating" value=1.5 /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                                                <input type="radio" id="star1" name="rating" value=1 /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                                                <input type="radio" id="starhalf" name="rating" value=0.5 /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                                                            </fieldset>
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-6 col-sm-3">                                                                
+                                                                <div class="postCrtl">
+                                                                    <span ng-click="showComment(post)">
+                                                                        <img src="app/view/images/icons/comment.jpg" width="19" height="18" alt=""/>Coment
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-sm-3">
+                                                                <div class="postCrtl">
+                                                                    <div class="dropdown">
+                                                                        <div type="" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                            <img src="app/view/images/icons/share_ico.jpg" width="19" height="18" alt=""/> Share
+                                                                        </div>
+                                                                        <ul class="dropdown-menu paddyli" aria-labelledby="dropdownMenu1">
+                                                                            <li><a href="#">Facebook</a></li>
+                                                                            <li><a href="#">Google</a></li>
+                                                                            <li><a href="#">Instagram</a></li>
+                                                                            <li><a href="#">Tumblr</a></li>
+                                                                            <li><a href="#">Twitter</a></li>
+                                                                            <li><a href="#">Youtube</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-sm-3">
+                                                                <a href="">
+                                                                    <div class="postCrtl" ng-if="!post.showBookMark" ng-click="saveBookMark(post)"><img src="app/view/images/icons/book_icon.jpg" width="19" height="18" alt=""/>Save</div>
+                                                                    <div class="postCrtl" ng-if="post.showBookMark" ng-click="removeBookMark(post)"><img src="app/view/images/icons/book_icon2.jpg" width="19" height="18" alt=""/>Remove</div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--<div ng-if="post.showCommentBox" class="animationIf">
+                                                        <div class="input-group col-xs-12 margin_top_div">
+                                                            <span class="max_width">
+                                                                <i class="fa fa-trash-o trash_icon" ng-click="hideComment(post)" ></i> 
+                                                                <input placeholder="Your Comment" type="text" ng-model="post.comment" class="text-line" ng-keyup="$event.keyCode == 13 ? postComment(post) : null"/>
+                                                            </span>
+                                                        </div>    
+                                                    </div>-->
+
+                                                    <div class="col-xs-12" ng-if="post.showCommentBox">
+                                                        <div class="row">
+                                                            <div class="comPart">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon" id="basic-addon1">
+                                                                        <div class="">
+                                                                            <img class="nimgs" ng-src="{{ post.posterImage ? post.posterImage : '/app/view/images/icons/profile.png' }}" alt=""/>
+                                                                        </div>
+                                                                    </span>                                                                    
+                                                                    <textarea class="commnt" placeholder="Add a comment..." ng-model="post.comment" ng-keyup="$event.keyCode == 13 ? postComment(post) : null"></textarea>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                  
+                                        </div>
+                                    </div>
+                                    <!-- new_post_ends -->
+                                    <!-- old_post -->
+                                    <!--<div class="blog-box" ng-repeat="post in postsArray">
+                                        <div layout="row">
+                                            <div layout="row" flex="70">
+                                                <div flex="none">
+                                                   <img class="img-responsive profile pro_img" ng-src="{{ post.posterImage ? post.posterImage : app/view/images/icons/profile.png }}" />                                                    
+                                                </div>
+                                                <div flex>
+                                                    <h2>{{post.poster}}</h2>
+                                                </div>
+                                            </div>
+                                            <div flex="30" layout layout-align="end start">
+                                                    <div class="dropdown">
+                                                            <button ng-click="showMenu(post._id)" class="dropbtn"><img ng-click="showMenu(post._id)" src="app/view/images/icons/menu.png" /></button>
+                                                              <div id="{{post._id}}" class="dropdown-content">
+                                                                    <a ng-if="current_user._id == post.userId" href="#" data-toggle="modal" data-target="#modalsharepost" ng-model="sharePost"  ng-click="editPost(post)">Edit</a>
+                                                                <a ng-if="current_user._id == post.userId" href="#" ng-click="removePost(post._id)">Delete</a>
+                                                                <a href="#" ng-click="submitReport(post)">Report Abuse</a>
+                                                              </div>
+                                                            </div>
+                                                <a href="">
+                                                    
+                                                </a>
+                                            </div>
+                        
+                                        </div>
+                                        <p>{{post.postTitle}}</p>                                        
+                                        <div class="post_div_content"><div data-toggle="modal" data-target="#viewpost" style="max-width:625px" ng-bind-html="post.postContent | unsafe " ng-click="viewPost(post)"></div></div>
+                                        <ul ng-if="!(post.posterRole=='admin')">
+                                            <li>
+                                                <a href="">
+                                                  {{post.ratingValue}}  <img src="app/view/images/icons/rating_selectedl.png" />
+                                                    <div class="popup" ng-click="myFunction()"><span>Rating</span>
+                                                        <span class="popuptext" id="myPopup"><fieldset ng-click="getRatings(post, $event.target)" id="ratingSystem" class="rating">
+                                                            <input type="radio" id="star5" name="rating" value=5 /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                            <input type="radio" id="star4half" name="rating" value=4.5 /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                            <input type="radio" id="star4" name="rating" value=4 /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                            <input type="radio" id="star3half" name="rating" value=3.5 /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                            <input type="radio" id="star3" name="rating" value=3 /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                            <input type="radio" id="star2half" name="rating" value=2.5 /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                            <input type="radio" id="star2" name="rating" value=2 /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                            <input type="radio" id="star1half" name="rating" value=1.5 /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                            <input type="radio" id="star1" name="rating" value=1 /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                            <input type="radio" id="starhalf" name="rating" value=0.5 /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                                        </fieldset></span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    <span ng-click="showComment(post)"><i style="color:#ed2028; font-size:20px" class="fa fa-comments-o"></i> Comment </span>
+                                                </a>
+                                            </li>
+                                            <li>                                                
+                                                <div id="socialShare">
+                                                        <div class="socialBox pointer">
+                                                            <span style="padding: 0px; display: inline-table;" class="fa fa-share"> <p class="share-para-text" > Share</p></span>
+                                                            <div id="socialGallery">
+                                                            <div class="socialToolBox">
+                                                                <a class="facebook" href=""><i class="fa fa-facebook"></i></a>
+                                                                <a class="google" href=""><i class="fa fa-google-plus"></i></a>
+                                                                <a class="instagram" href=""><i class="fa fa-instagram"></i></a>
+                                                                <a class="tumblr" href=""><i class="fa fa-tumblr"></i></a>
+                                                                <a class="twitter" href=""><i class="fa fa-twitter"></i></a>
+                                                                <a class="youtube" href=""><i class="fa fa-youtube"></i></a>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                            </li>
+                                            <li style="margin-left: 13%;">
+                                                <a href="">
+                                                    <span ng-if="!post.showBookMark" ng-click="saveBookMark(post)"><i style="color:#ed2028; font-size:20px" class="fa fa-bookmark-o"></i> Save </span>
+                                                    <span ng-if="post.showBookMark" ng-click="removeBookMark(post)"><i style="color:#ed2028; font-size:20px" class="fa fa-bookmark"></i> Unsave </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <p class="hastag_p" ng-repeat="hastag in post.hastags track by $index">#{{hastag}}&nbsp; </p>
+                                        <!- <i class="fa fa-heart-o" style="font-size:24px; float: right; cursor: pointer;" ng-if="!post.showBookMark" ng-click="saveBookMark(post)"></i>
+                                        <i class="fa fa-heart" style="font-size:24px; float: right; cursor: pointer; color: #b32c2e;" ng-if="post.showBookMark" ng-click="removeBookMark(post)"></i> ->
+                                        <span ng-if="(post.posterRole=='admin')"><img style="width: 100px; float:right; margin-top: 10px;" src="app/view/images/icons/feature.png" /></span>
+                        
+                                        <div ng-if="post.showCommentBox" class="animationIf">
+                                            <div class="input-group col-xs-12 margin_top_div">
+                                                <span class="max_width"><i class="fa fa-trash-o trash_icon" ng-click="hideComment(post)" ></i> <input placeholder="Your Comment" type="text" ng-model="post.comment" class="text-line" ng-keyup="$event.keyCode == 13 ? postComment(post) : null"/></span>
+                                            </div>    
+                                        </div>  
+                                        <div class="div_show" ng-hide="showedit">
+                                                
+                                        </div>
+                                    </div>-->
+                                    <!-- old_post_ends -->
+
+                                    <!-- New Post Modal Step 1 -->
+                                    <div class="modal fade" id="modalsharepost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-click="showModalData = !showModalData">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">CREATE POST</h4>
+                                            </div>
+                                            <div class="modal-body">                                                
+                                                <div class="sp-step1 fade-element-in" ng-show="showFirst" id="step1">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            <div class="popTitle">Select Type</div>
+                                                        </div>
+                                                        <div class="col-xs-3"><span class="pull-right stepsInd">1/2</span></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-4 col-sm-2 col-md-2 text-center" id="boffola" ng-click="selectCategrory('boffola')">
+                                                            <div class="topicBox" data-toggle="tooltip" data-placement="top" title="Hooray!">
+                                                                <img src="app/view/images/icons/boffola.png" class="img-responsive" alt=""/>
+                                                                <img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'boffola' }">
+                                                                <div class="topictxt">Boffola</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-4 col-sm-2 col-md-2 text-center" id="u2" ng-click="selectCategrory('u2')">
+                                                            <div class="topicBox" data-toggle="tooltip" data-placement="top" title="Hooray!">
+                                                                <img src="app/view/images/icons/u2.png" class="img-responsive" alt=""/>
+                                                                <img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'u2' }">
+                                                                <div class="topictxt">2U</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-4 col-sm-2 col-md-2 text-center" id="poejia" ng-click="selectCategrory('poejia')">
+                                                            <div class="topicBox" data-toggle="tooltip" data-placement="top" title="Hooray!">
+                                                                <img src="app/view/images/icons/poejia.png" class="img-responsive" alt=""/>
+                                                                <img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'poejia' }">
+                                                                <div class="topictxt">Poejia</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-4 col-sm-2 col-md-2 text-center" id="jiyatable" ng-click="selectCategrory('jiyatale')">
+                                                            <div class="topicBox" data-toggle="tooltip" data-placement="top" title="Hooray!">
+                                                                <img src="app/view/images/icons/jiyatale.png" class="img-responsive" alt=""/>
+                                                                <img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'jiyatale' }">
+                                                                <div class="topictxt">Jiyatale</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-4 col-sm-2 col-md-2 text-center" id="jiyatalk" ng-click="selectCategrory('jiyatalk')">
+                                                            <div class="topicBox" data-toggle="tooltip" data-placement="top" title="Hooray!">
+                                                                <img src="app/view/images/icons/jiyatalk.png" class="img-responsive" alt=""/>
+                                                                <img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'jiyatalk' }">
+                                                                <div class="topictxt">Jiyatalk</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-4 col-sm-2 col-md-2 text-center" id="article" ng-click="selectCategrory('article')">
+                                                            <div class="topicBox" data-toggle="tooltip" data-placement="top" title="Hooray!">
+                                                                <img src="app/view/images/icons/article.png" class="img-responsive" alt=""/>
+                                                                <img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'article' }">
+                                                                <div class="topictxt">Article</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12"><div class="popTitle">Title</div></div>
+                                                        <div class="col-sm-12"><input class="titleBox" ng-model="post.postTitle" placeholder="Enter title here..." maxlength="50"></div>
+                                                        <div class="col-sm-6">
+                                                            <div class="popTitle">Language</div>
+                                                            <select class="popSelect" size="4" ng-model="post.postLanguage">
+                                                                <option value="english">English</option>
+                                                                <option value="hindi">Hindi</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="popTitle">Topic</div>
+                                                            <select class="popSelect" size="4" ng-model="post.postTopic">
+                                                                <option ng-repeat="favourite in favourites" value="{{favourite.favourite}}">{{favourite.favourite}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="sp-step2 fade-element-in" ng-show="!showFirst" id="step2">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            <div class="popTitle">{{ post.postTitle }}</div>
+                                                        </div>
+                                                        <div class="col-xs-3"><span class="pull-right stepsInd">2/2</span></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="textTools">
+                                                                <div class="divblock fntbold atvs" data-toggle="tooltip" data-placement="top" title="Bold"><a href="#" class="embolden"><b>B</b></a></div>
+                                                                <div class="divblock fntitl"  data-toggle="tooltip" data-placement="top" title="Italic"><a href="#" class="italic"><i>I</i></a></div>
+                                                                <div class="divblock fntund" data-toggle="tooltip" data-placement="top" title="Underline"><a href="#" class="underline"><u>U</u></a></div>
+                                                            </div>
+                                                            
+                                                            <div id="content_post" class="backImg textEditor" style="height: 250px; color: black; text-align: center; font-size: 1.5em;" ng-style="{'background-image':'url(' + url + ')'}" ng-model="div_content" ng-keydown="contentLength(div_content)" contenteditable></div>
+                                                            <div id="thumbnail-slider">
+                                                                <div class="inner">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a class="thumb" href="#" ng-click="setBgImg('app/view/images/bgimg1.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg1.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg2.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg2.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg3.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg3.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg4.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg4.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg5.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg5.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg6.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg6.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg7.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg7.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg8.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg8.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg9.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg9.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        
+                                                                            <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg10.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg10.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg1.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg1.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg2.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg2.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg3.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg3.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg4.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg4.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg5.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg5.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg6.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg6.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg7.png')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg7.png"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg8.jpg')";>
+                                                                                <img style="width: 40px; height: 40px;" src="app/view/images/bgimg8.jpg"  alt="Smiley face">
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group"><span class="input-group-addon tagpads" id="basic-addon1"><img src="app/view/images/icons/tag.png" alt=""/></span>
+                                                            <textarea class="commnt commnt2" ng-model="post.hastags" placeholder="Hashtag use space or comma for separating tags"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer followbg">
+                                                <div ng-if="showFirst" class="pull-left"><button type="button" class="greyBtns" ng-class="{ disabled_button: !((post.postTitle !=null) && (post.postTitle !='') && (post.postLanguage !=null) && (post.postTopic !=null)) }"  ng-disabled="!((post.postTitle !=null) && (post.postTitle !='') && (post.postLanguage !=null) && (post.postTopic !=null))" ng-click="saveAsDraft(post)" data-dismiss="modal">Save as Draft</button></div>
+                                                <div ng-if="showFirst" class="pull-right"><button type="button" class="greyBtns" ng-class="{ disabled_button: !((post.postTitle !=null) && (post.postTitle !='') && (post.postLanguage !=null) && (post.postTopic !=null)) }"  ng-disabled="!((post.postTitle !=null) && (post.postTitle !='') && (post.postLanguage !=null) && (post.postTopic !=null))"  ng-click="goNext()">Next</button></div>
+                    
+                                                <div ng-if="!showFirst" class="pull-left"><button class="greyBtns" ng-click="saveAsDraft(post)" data-dismiss="modal">SAVE AS DRAFT</button></div> <!--<a href="">SAVE AS DRAFT</a>-->
+                                                <div ng-if="!showFirst" class="pull-right">
+                                                    <button class="greyBtns" ng-click="goPrevious()">Previous</button>
+                                                    <button class="redBtns twoBtns" ng-class="{ disabled_button: !((post.postTitle !=null && post.postTitle !=''))}"  ng-disabled="!((post.postTitle !=null && post.postTitle !=''))" data-dismiss="modal" ng-click="postStatus(post)">POST</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- old_modal1 ->
+                                    <div class="modal fade" id="modalsharepost2" role="dialog" ng-click="showModalData2 = !showModalData2">
+                                            <div class="modal-dialog">
+                                            
+                                              <!- Modal content modal-lg ->
+                                              <div class="modal-content sharePostCont">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title nomargin">Create Post</h4>
+                                                  <button type="button" class="close" id="close_model" data-dismiss="modal" ng-click="closeDialog()">&times;</button>
+                                                  
+                                                </div>
+                                                <div class="modal-body clearfix"  style="max-height: calc(100vh - 210px);overflow-y: auto;">
+                                                    <div class="sp-step1 fade-element-in" ng-show="showFirst" id="step1">
+                                                    <div layout-gt-xs="row" layout-xs="column" class="sp-text">
+                                                        <div flex><p class="mobi-textCenter">Select Type:</p></div>
+                                                        <div flex><p class="text-right mobi-textCenter">1/2</p></div>
+                                                    </div>
+                                                      <div layout-wrap layout-xs="column" class="step-imgset nopadding" layout-gt-xs="row">
+                                                        <div style="position: relative;" flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" id="boffola" ng-click="selectCategrory('boffola')"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img  class="imgOverride" src="app/view/images/icons/boffola.png"/><img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'boffola' }"><label>Boffola</label></div></div>
+                                                        <div style="position: relative;" flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" id="u2" ng-click="selectCategrory('u2')"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img class="imgOverride" src="app/view/images/icons/2U.png"/><img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'u2' }"><label>2U</label></div></div>
+                                                        <div style="position: relative;" flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" id="boffola" ng-click="selectCategrory('poejia')"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img class="imgOverride" src="app/view/images/icons/Poejia.png"/><img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'poejia' }"><label>Poejia</label></div></div>
+                                                        <div style="position: relative;" flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" id="boffola" ng-click="selectCategrory('jiyatable')"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img class="imgOverride" src="app/view/images/icons/Jiyatale.png"/><img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'jiyatable' }"><label>Jiyatable</label></div></div>
+                                                        <div style="position: relative;" flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" id="boffola" ng-click="selectCategrory('punchline')"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img class="imgOverride" src="app/view/images/icons/jiyatalk.png"/><img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'punchline' }"><label>Jiyatalk</label></div></div>
+                                                        <div style="position: relative;" flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs" id="boffola" ng-click="selectCategrory('article')"><div data-toggle="tooltip" data-placement="top" title="Hooray!"><img class="imgOverride" src="app/view/images/icons/article.png"/><img class="favsels" src="app/view/images/green.png" ng-class="{ hover_tick : showTick == 'article' }"><label>Article</label></div></div>
+                                                    </div>
+                                                    
+                                                    <div class="paddTB20">
+                                                        <div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+                                                            <div flex-xs="100" flex-gt-xs="50"  class="sp-text"><p>Select Language:</p></div>
+                                                            <div flex-xs="100" flex-gt-xs="50" >
+                                                            <select ng-model="post.postLanguage">
+                                                                <option value="english">English</option>
+                                                                <option value="hindi">Hindi</option>
+                                                            </select>
+                                                        </div>
+                                                        </div>
+                                                        <div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" style="margin-top:10px;">
+                                                            <div flex class="sp-text"><p >Select Topic:</p></div>
+                                                            <div flex><select ng-model="post.postTopic"><option ng-repeat="favourite in favourites" value="{{favourite.favourite}}">{{favourite.favourite}}</option></select></div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                
+                                                    <div class="sp-step2 fade-element-in" ng-show="!showFirst" id="step2">
+                                                            <div layout-gt-xs="row" layout-xs="column" class="sp-text">
+                                                                
+                                                                <div flex><p class="text-right mobi-textCenter">2/2</p></div>
+                                                            </div>
+                                                             <div layout-gt-sm="row">
+                                                                  <md-input-container class="md-block large" flex-gt-sm>
+                                                                    <label>Enter Title</label>
+                                                                    <input ng-model="post.postTitle">
+                                                                    <span class="text_count" ng-bind="countOf(post.postContent)+'/20'"></span>
+                                                                  </md-input-container>
+                                                             </div>
+                                                             <!-<textarea required ckeditor="options"  ng-model="post.postContent" style="width:100%; min-height:150px; border:1px solid rgba(0,0,0,0.2); " ready="onReady"></textarea>->
+                                                             <a href="#" class="embolden"><b>B</b></a>
+                                                             <a href="#" class="italic"><i>I</i></a>
+                                                             <a href="#" class="underline"><u>U</u></a>
+                                                             
+                                                             
+                                                             <div id="content_post" class="backImg textEditor" style="height: 250px; color: black; text-align: center; font-size: 1.5em;" ng-style="{'background-image':'url(' + url + ')'}" ng-model="div_content" ng-keydown="contentLength(div_content)" contenteditable></div>
+                                                             <!-<textarea required ckeditor="options" name = "description" ng-model="restaurantDetails.desc" ready="onReady"></textarea>->
+                                                              <!- <textarea  ckeditor="options" >
+                                                             
+                                                             </textarea>  ->
+                                                             <div>
+                                                                <div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" style="margin-top:10px;">
+                                                                    <div flex="none" class="sp-text"><p >Add Tags:</p></div>
+                                                                    
+                                                                    <md-input-container class="md-block" flex>
+                                                                    <label>Use space or comma for separating tags</label>
+                                                                    <input ng-model="post.hastags">
+                                                                  </md-input-container>
+                                                                  
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            
+                                                             <div >
+                                                                <div >
+                                                                    <div id="thumbnail-slider">
+                                                                        <div class="inner">
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <a class="thumb" href="#" ng-click="setBgImg('app/view/images/bgimg1.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg1.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg2.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg2.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg3.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg3.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg4.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg4.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg5.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg5.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg6.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg6.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg7.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg7.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg8.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg8.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg9.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg9.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                
+                                                                                 <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg10.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg10.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg1.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg1.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg2.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg2.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg3.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg3.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg4.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg4.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg5.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg5.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg6.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg6.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg7.png')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg7.png"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="thumb" href="" ng-click="setBgImg('app/view/images/bgimg8.jpg')";>
+                                                                                        <img style="width: 40px; height: 40px;" src="app/view/images/bgimg8.jpg"  alt="Smiley face">
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                
+                                                
+                                                        </div>
+                                                </div>
+                                                <div class="modal-custom-footer">
+                                                      <!- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> ->
+                                                          <div style="min-height:80px" layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+                                                            <div ng-if="showFirst" flex class="sp-btn center_text_div"><button class="black_btn" ng-click="saveAsDraft(post)" data-dismiss="modal" >SAVE AS DRAFT</button></div>
+                                                            <div ng-if="showFirst" flex class="sp-btn center_text_div" ><button ng-class="{ disabled_button: !((post.postLanguage !=null) && (post.postTopic !=null)) }"  ng-disabled="!((post.postLanguage !=null) && (post.postTopic !=null)) "  class="next_btn" style="border: none;" ng-click="goNext()">NEXT</button></div>
+                                
+                                                            <div ng-if="!showFirst" flex class="sp-btn center_text_div"><button class="red_btn" ng-click="saveAsDraft(post)" data-dismiss="modal" >SAVE AS DRAFT</button></div> <!-<a href="">SAVE AS DRAFT</a>->
+                                                            <div ng-if="!showFirst" flex class="sp-btn center_text_div"><button class="back_btn" ng-click="goPrevious()" >BACK</button></div>
+                                                            <!- <div flex class="sp-btn" ><a  data-toggle="modal" data-target="#modal-shareposts">NEXT</a></div> ->
+                                                            <div ng-if="!showFirst" flex class="sp-btn center_text_div active"><button  ng-class="{ disabled_button: !((post.postTitle !=null && post.postTitle !=''))}"  ng-disabled="!((post.postTitle !=null && post.postTitle !=''))" class="red_btn" data-dismiss="modal" ng-click="postStatus(post)">POST</button></div>
+                                                            <!- (post.postContent !=null && post.postContent !='') && ->
+                                                            <!- <input data-toggle="modal" data-dismiss="modal" data-target="#modal-sharepost" ng-click="openPrevModel()"   ng-model="sharePost"data-target="#modal-shareposts" ng-click="getFavourites()"> ->
+                                                        </div>
+                                                    </div>
+                                                
+                                              </div>
+                                              
+                                            </div>
+                                          </div>-->
+
+                                        <!-- Post View Modal -->
+                                        <!-- new_post_view_modal -->
+                                        <div class="modal fade" id="viewpost" tabindex="-1" role="dialog" aria-labelledby="postviewLabel">
+                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                <button type="button" class="close newClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                    <div class="protabs">
+                                                        <div class="protabsimg">
+                                                            <img class="nimgs" ng-src="{{ post.posterImage ? post.posterImage : '/app/view/images/icons/profile.png' }}" alt=""/>
+                                                        </div>
+                                                        <div class="protabstxt">
+                                                            <h2>{{post.poster}}</h2>
+                                                            <span class="timeColor">{{post.dateAndTime|date:'d MMM h:mm a'}}</span>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="pptitle">{{post.postTitle}} </div>
+                                                        <div class="postedIn">Post is {{post.postType}} </div>
+                                                        <div class="tags">
+                                                            <span ng-repeat="hastag in post.hastags track by $index">#{{hastag}}</span>
+                                                        </div>
+                                                        <div class="row">                                                                                                                
+                                                            <div class="postContent">
+                                                                <div class="postWords" data-toggle="modal" data-target="#viewpost" ng-bind-html="post.postContent | unsafe"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 clearfix">
+                                                    <div class="row">
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <div class="postCrtl">
+                                                                <img src="app/view/images/icons/rating_selectedl.png" width="19" height="18" alt=""/>{{post.ratingValue}} Rating
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <div class="postCrtl">
+                                                                <img src="app/view/images/icons/comment.jpg" width="19" height="18" alt=""/>Comment
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <div class="postCrtl">
+                                                                <div class="dropdown">
+                                                                    <div id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="app/view/images/icons/share_ico.jpg" width="19" height="18" alt=""/>Share</div>
+                                                                    <ul class="dropdown-menu paddyli" aria-labelledby="dropdownMenu1">
+                                                                        <li><a href="#">Facebook</a></li>
+                                                                        <li><a href="#">Google</a></li>
+                                                                        <li><a href="#">Instagram</a></li>
+                                                                        <li><a href="#">Tumblr</a></li>
+                                                                        <li><a href="#">Twitter</a></li>
+                                                                        <li><a href="#">Youtube</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-3">                                                            
+                                                            <a href="">
+                                                                <div class="postCrtl" ng-if="!post.showBookMark" ng-click="saveBookMark(post)"><img src="app/view/images/icons/book_icon.jpg" width="19" height="18" alt=""/>Save</div>
+                                                                <div class="postCrtl" ng-if="post.showBookMark" ng-click="removeBookMark(post)"><img src="app/view/images/icons/book_icon2.jpg" width="19" height="18" alt=""/>Remove</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="">
+                                                    <div class="col-xs-12 toplines">
+                                                        <div class="commnts" ng-repeat="comment in post.comments">
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-9">
+                                                                    <div class="protabs">
+                                                                        <div class="protabsimg">
+                                                                            <img class="nimgs" ng-src="{{ post.posterImage ? post.posterImage : '/app/view/images/icons/profile.png' }}" alt=""/>
+                                                                        </div>
+                                                                        <div class="protabstxt">
+                                                                            <h2></h2>
+                                                                            <div class="postHrs visible-xs pull-left">2 hours ago</div>
+                                                                            <div class="clearfix"></div>
+                                                                            <div class="rates">
+                                                                                <img src="app/view/images/icons/rating_selected_full.png" width="15" height="14" alt=""/>
+                                                                                <img src="app/view/images/icons/rating_selected_full.png" width="15" height="14" alt=""/>
+                                                                                <img src="app/view/images/icons/rating_selected_full.png" width="15" height="14" alt=""/>
+                                                                                <img src="app/view/images/icons/rating_selected_half.png" width="15" height="14" alt=""/>
+                                                                                <img src="app/view/images/icons/rating_selectedl.png" width="15" height="14" alt=""/>
+                                                                            </div>
+                                                                            <span class="cmdtxt">{{comment.commentBody}} </span>
+                                                                            <div class="seemore">Show More</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-4 col-sm-3 hidden-xs">
+                                                                    <div class="postHrs pull-right">{{post.dateAndTime|date:'d MMM h:mm a'}}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="comPart">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon" id="basic-addon1">
+                                                                        <div class="">
+                                                                            <img class="nimgs" ng-src="{{ post.posterImage ? post.posterImage : '/app/view/images/icons/profile.png' }}" alt=""/>
+                                                                        </div>
+                                                                    </div>                                                                    
+                                                                    <textarea class="commnt" placeholder="Add a comment..." ng-model="post.comment"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-12">
+                                                                <div class="pull-right" ng-click="postComment(post)">
+                                                                    <img src="app/view/images/icons/send-button.png" class="" alt=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer followbg">
+                                                <div class="pull-left text-left">
+                                                    <div class="followMe">Browsing content in<br>
+                                                    <strong>Discover </strong> </div>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <button type="button" class="greyBtns">Follow</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- data-toggle="modal" data-target="#modalsharepost"  -->
+                                        <!-- old_post_view_modal -->
+                                        <div class="modal fade" id="viewpost2" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                        
+                                                <!-- Modal content-->
+                                                <div class="modal-content sharePostCont">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title nomargin">View post</h4>
+                                                        <button type="button" class="close" id="close_model" data-dismiss="modal">&times;</button>
+                                        
+                                                    </div>
+                                                    <div class="modal-body clearfix" style="max-height: calc(100vh - 210px);overflow-y: auto;">
+                                                        <div class="sp-step1 fade-element-in"></div>
+                                                        <p class="view_post_title">{{post.postTitle}}</p>
+                                                        <div layout-gt-xs="row" layout-xs="column" class="sp-text">
+                                                                
+                                                                <div class="view_div_content"><div style="padding: 10px;" data-toggle="modal" data-target="#viewpost" style="max-width:500px" ng-bind-html="post.postContent | unsafe "></div></div>
+                                                        </div>
+                                                    </div>
+                                        
+                                                    <div class="modal-custom-footer">
+                                                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                                                        <div style="min-height:80px" layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center">
+                                                            <div flex class="sp-btn center_text_div">
+                                                                <!-- <button class="back_btn" ng-click="goPrevious()" style="width: 20%;">Close</button> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                        <div flex="30">
+                            <div class="leftpaddy">
+                            <div class="cardsBg">
+                                 <!-- <img style="width:250px;" class="img-responsive" src="app/view/images/happy.png">  -->
+                                <table class="infobox vcard" style="width:17em">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2" style="text-align:center;font-size:125%;font-weight:bold;font-size: 130%;">
+                                                <span class="fn">Bhimrao Ramji Ambedkar</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center">
+                                                <a href="/wiki/File:Dr._Bhim_Rao_Ambedkar.jpg" class="image" title="Ambedkar as a young man" >
+                                                    <img alt="Ambedkar as a young man" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Dr._Bhim_Rao_Ambedkar.jpg/220px-Dr._Bhim_Rao_Ambedkar.jpg"
+                                                        width="220" height="286" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Dr._Bhim_Rao_Ambedkar.jpg/330px-Dr._Bhim_Rao_Ambedkar.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/8/87/Dr._Bhim_Rao_Ambedkar.jpg/440px-Dr._Bhim_Rao_Ambedkar.jpg 2x"
+                                                        data-file-width="1229" data-file-height="1600" style="margin-bottom:10px">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center"></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="text-align:center;background:lavender">
+                                                <a href="/wiki/Minister_of_Law_and_Justice_(India)" class="mw-redirect" title="Minister of Law and Justice (India)">1st Minister of Law and Justice</a>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center;border-bottom:none">
+                                                <span class="nowrap">
+                                                    <b>In office</b>
+                                                </span>
+                                                <br> 15 August 1947&nbsp;– September 1951</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align:left">
+                                                <span class="nowrap">Prime Minister</span>
+                                            </th>
+                                            <td>
+                                                <a href="/wiki/Jawaharlal_Nehru" title="Jawaharlal Nehru">Jawaharlal Nehru</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align:left">
+                                                <span class="nowrap">Preceded by</span>
+                                            </th>
+                                            <td>Position established</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align:left">
+                                                <span class="nowrap">Succeeded by</span>
+                                            </th>
+                                            <td>
+                                                <a href="/wiki/Charu_Chandra_Biswas" title="Charu Chandra Biswas">Charu Chandra Biswas</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="text-align:center;background:lavender">
+                                                <a href="/wiki/Constituent_Assembly_of_India" title="Constituent Assembly of India">Chairman of the Constitution Drafting Committee</a>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center;border-bottom:none">
+                                                <span class="nowrap">
+                                                    <b>In office</b>
+                                                </span>
+                                                <br> 29 August 1947&nbsp;– 24 January 1950</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="text-align:center;background:lavender">Labour Member,
+                                                <a href="/wiki/Viceroy%27s_Executive_Council" title="Viceroy's Executive Council">Viceroy's Executive Council</a>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center;border-bottom:none">
+                                                <span class="nowrap">
+                                                    <b>In office</b>
+                                                </span>
+                                                <br> 1942–1946
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align:left">
+                                                <span class="nowrap">Preceded by</span>
+                                            </th>
+                                            <td>
+                                                <a href="/wiki/Feroz_Khan_Noon" title="Feroz Khan Noon">Feroz Khan Noon</a>
+                                            </td>
+                                        </tr>
+                                        <tr style="display:none">
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="text-align:center;background:lavender">Personal details</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Born</th>
+                                            <td>
+                                                <span style="display:none">(
+                                                    <span class="bday">1891-04-14</span>)</span>14 April 1891
+                                                <br>
+                                                <a href="/wiki/Mhow" title="Mhow">Mhow</a>,
+                                                <a href="/wiki/Central_Provinces" title="Central Provinces">Central Provinces</a>,
+                                                <a href="/wiki/British_India" class="mw-redirect" title="British India">British India</a>
+                                                <br> (now in
+                                                <a href="/wiki/Madhya_Pradesh" title="Madhya Pradesh">Madhya Pradesh</a>,
+                                                <a href="/wiki/India" title="India">India</a>)</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Died</th>
+                                            <td>6 December 1956
+                                                <span style="display:none">(
+                                                    <span class="dday deathdate">1956-12-06</span>)</span> (aged&nbsp;65)
+                                                <br>
+                                                <a href="/wiki/Delhi" title="Delhi">Delhi</a>,
+                                                <a href="/wiki/India" title="India">India</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Political party</th>
+                                            <td>
+                                                <a href="/wiki/Scheduled_Castes_Federation" title="Scheduled Castes Federation">Scheduled Castes Federation</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Other political
+                                                <br> affiliations
+                                            </th>
+                                            <td>
+                                                <a href="/wiki/Independent_Labour_Party_(India)" title="Independent Labour Party (India)">Independent Labour Party</a>,
+                                                <a href="/wiki/Republican_Party_of_India" title="Republican Party of India">Republican Party of India</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Spouse(s)</th>
+                                            <td>
+                                                <div class="plainlist">
+                                                    <ul>
+                                                        <li>
+                                                            <span itemscope="" itemtype="https://en.wikipedia.org/wiki/B. R. Ambedkar">Ramabai (
+                                                                <abbr title="married">m.</abbr>&nbsp;1906;
+                                                                <abbr title="died">d.</abbr>&nbsp;1935)</span>
+                                                            <sup id="cite_ref-Columbia2_1-0" class="reference">
+                                                                <a href="#cite_note-Columbia2-1">[1]</a>
+                                                            </sup>
+                                                        </li>
+                                                        <li>
+                                                            <span itemscope="" itemtype="https://en.wikipedia.org/wiki/B. R. Ambedkar">Savita Ambedkar (
+                                                                <abbr title="married">m.</abbr>&nbsp;
+                                                                <abbr title="15 April 1948">1948</abbr>)</span>
+                                                            <sup id="cite_ref-Columbia6_2-0" class="reference">
+                                                                <a href="#cite_note-Columbia6-2">[2]</a>
+                                                            </sup>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <a href="/wiki/Alma_mater" title="Alma mater">Alma mater</a>
+                                            </th>
+                                            <td>
+                                                <div class="plainlist">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="/wiki/University_of_Mumbai" title="University of Mumbai">University of Mumbai</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/wiki/Columbia_University" title="Columbia University">Columbia University</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/wiki/London_School_of_Economics" title="London School of Economics">London School of Economics</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Profession</th>
+                                            <td>Jurist, economist, politician, social reformer</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Awards</th>
+                                            <td>
+                                                <a href="/wiki/Bharat_Ratna" title="Bharat Ratna">Bharat Ratna</a>
+                                                <small>(posthumously in 1990)</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Signature</th>
+                                            <td>
+                                                <a href="/wiki/File:Dr.ambedkar_signature.jpg" class="image" title="B. R. Ambedkar's signature">
+                                                    <img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Dr.ambedkar_signature.jpg/128px-Dr.ambedkar_signature.jpg"
+                                                        width="128" height="51" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Dr.ambedkar_signature.jpg/192px-Dr.ambedkar_signature.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Dr.ambedkar_signature.jpg/256px-Dr.ambedkar_signature.jpg 2x"
+                                                        data-file-width="298" data-file-height="119">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                            <div class="cardsBg">
+                                    <img style="width:250px; padding:25%" class="img-responsive" src="app/view/images/trending.png"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div flex="10"></div>
+                        <!-- <div flex hide-sm hide-xs>
+                            [flex]
+                        </div> -->
+                    </div>
+
+            <!-- <img src="app/view/images/icons/jiya_banner.png" class="img-responsive" /> -->
+            
+        </div>
+        <div style="background:#e5e5e5" ng-if="showPage == 'home'" flex>
+
+        </div>
+        
+        <div discover ng-if="showPage == 'discover'"></div>
+
+        <div report ng-if="showPage == 'report'"></div>
+
+        <div usermanagement ng-if="showPage == 'usermanagement'"></div>
+
+        <div draft ng-if="showPage == 'draft'"></div>
+        
+        <div feedback ng-if="showPage == 'feedback'"></div>
+
+        <div notification ng-if="showPage == 'notification'"></div>
+
+        <div viewprofile ng-if="showPage == 'profile'"></div>
+
+<style>
+        .fade-element-in.ng-enter {
+      transition: 0.8s linear all;
+      opacity: 0;
+    }
+    
+    .fade-element-in-init .fade-element-in.ng-enter {
+      opacity: 1;
+    }
+    
+    .fade-element-in.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
+    
+    .fade-element-in.ng-leave {
+      transition: 0.3s linear all;
+      opacity: 1;
+    }
+    .fade-element-in.ng-leave.ng-leave-active {
+      opacity: 0;
+    }
+    .post_div_content{
+    width: 100%;
+    border: none;
+    /* max-height: 150px; */
+    border-radius: 6px;
+    background-color: #c5c3c324;
+    padding: 10px;
+    overflow-y: auto;
+    /*new styles*/
+    white-space: nowrap; 
+    /* overflow: hidden; */
+    text-overflow: ellipsis; 
+    cursor: pointer;
+    }
+    .view_div_content{
+    width: 100%;
+    border: none;
+    margin-top: 15px;
+    height: 500px;
+    border-radius: 6px;
+    background-color: #e5e5e5;
+    padding: 10px;
+    overflow-y: auto;
+    }
+
+    .view_post_title{
+    font-size: 1.5em;
+    text-align: center;
+    }
+    .hastag_p{
+        display: inline-block;
+    }
+    .text_count{
+    float: right;
+    margin-top: 10px;
+    }
+
+    .hover_tick{
+    display: block !important;
+    position: absolute !important;
+    top: 35px !important;
+    border: 0 !important;
+    box-shadow: none!important;
+    opacity: .9 !important;
+    /*left: 76% !important;
+    margin-left: -45px !important;
+    max-width: 40px !important;*/
+    }
+
+    .backImg {
+    /*display: inline-block;*/
+    /*background-image: url(app/view/images/jiya_logo_png.png);*/
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    min-height: 100px;
+    min-width: 200px;
+    outline: 0;
+    padding: 30px 30px 40px 20px;
+}
+
+    .imgOverride{
+        padding: 25px;
+        max-width: 75px !important;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+     
+});
+    // add this rail gallery effect
+$(document).on('click', '#socialShare > .socialBox', function() {
+
+  var self = $(this);
+  var element = $('#socialGallery a');
+  var c = 0;
+
+  if (self.hasClass('animate')) {
+    return;
+  }
+
+  if (!self.hasClass('open')) {
+
+    self.addClass('open');
+
+    TweenMax.staggerTo(element, 0.3, {
+        opacity: 1,
+        visibility: 'visible'
+      },
+      0.075);
+    TweenMax.staggerTo(element, 0.3, {
+        top: -12,
+        ease: Cubic.easeOut
+      },
+      0.075);
+
+    TweenMax.staggerTo(element, 0.2, {
+        top: 0,
+        delay: 0.1,
+        ease: Cubic.easeOut,
+        onComplete: function() {
+          c++;
+          if (c >= element.length) {
+            self.removeClass('animate');
+          }
+        }
+      },
+      0.075);
+
+    self.addClass('animate');
+
+  } else {
+
+    TweenMax.staggerTo(element, 0.3, {
+        opacity: 0,
+        onComplete: function() {
+          c++;
+          if (c >= element.length) {
+            self.removeClass('open animate');
+            element.css('visibility', 'hidden');
+          };
+        }
+      },
+      0.075);
+  }
+});
+
+
+</script>
+

@@ -1,0 +1,354 @@
+<div class="container" style="width: 1000px;"> 
+  <!-- Profile Block -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="profiles">
+        <div class="row">
+          <div class="col-sm-6 col-md-8">
+            <div class="proArea">
+              <div class="proPhot">
+                <img ng-src="{{profile.profilePic ? profile.profilePic : 'app/view/images/pphotos.png'}}" class="proPhotImg" alt=""/>
+              </div>
+              <div class="proName2">
+                <div>{{profile.firstName}} {{profile.lastName}}</div>
+                <div class="mystars">
+                  <img src="app/view/images/starw_sel.png" class="stars" alt=""/>
+                  <img src="app/view/images/starw_sel.png" class="stars" alt=""/>
+                  <img src="app/view/images/starw_sel.png" class="stars" alt=""/>
+                  <img src="app/view/images/starw_sel.png" class="stars" alt=""/>
+                  <img src="app/view/images/starw_nor.png" class="stars" alt=""/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3 col-md-2">
+            <div class="profolltxt">
+              <div class="proalign"><span>254</span> Followers</div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3 col-md-2">
+            <div class="profolltxt">
+              <div class="proalign"><span>189</span> Following</div>
+            </div>
+          </div>
+        </div>
+        <div class="proInfos">
+          <div class="row">
+            <div class="col-sm-6 col-md-4">
+              <div class="prolocdob"><img src="app/view/images/loc_icon.png" width="18" height="18" alt=""/> <span>{{profile.location}}</span></div>
+            </div>
+            <div class="col-sm-3 col-md-4">
+              <div class="prolocdob"><img src="app/view/images/dob_icon.png" width="18" height="18" alt=""/> <span>{{profile.dateOfBirth | date:'dd/MM/yyyy' }}</span></div>
+            </div>
+            <div class="col-sm-3 col-md-4">
+              <div class="prolocdob pointer"><img src="app/view/images/book_ico.png" width="18" height="18" alt=""/> <span>Bookmarked (25) </span></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="">
+              <h4>Short-Bio</h4>
+              <p ng-if="profile.shortBio">{{profile.shortBio}}</p>
+              <p ng-if="!profile.shortBio">Write your short Biography...</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <h5>Privacy Setting</h5>
+            <div class="row">
+              <div class="col-sm-6"><input type="radio">Private</div>
+              <div class="col-sm-6"><input type="radio">Public </div>
+            </div>
+            <br>
+            <div class="pull-right">
+              <button type="button" class="whiteBtns" data-dismiss="modal">Draft</button>
+              <button type="button" class="whiteBtns twoBtns" data-dismiss="modal">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  
+  <!-- Post Block -->
+  <!-- <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="cardbrd postBlock">
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="protabs">
+              <div class="protabsimg"> <img src="img/12.jpg" class="nimgs" alt=""/> </div>
+              <div class="protabstxt">
+                <h2>Abhinav Verma</h2>
+                <span class="timeColor">2 hours ago </span> </div>
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <div class="dotMenu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">...</div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                  <li><a href="#">Edit</a></li>
+                  <li><a href="#">Delete</a></li>
+                  <li><a href="#">Report Abuse</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="postContent">
+          <h2>A journey of a thousand miles begins with a single step</h2>
+          <div class="postTable" style="background:#e31b24 url(img/road.png) no-repeat center center"><div class="postWords">You must begin something if you hope to finish it; something that takes a long time to finish begins with one step</div></div>
+          </div>
+		  </div>
+        </div>
+      </div>
+      
+      <div class="cardbrd postBlock">
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="protabs">
+              <div class="protabsimg"> <img src="img/12.jpg" class="nimgs" alt=""/> </div>
+              <div class="protabstxt">
+                <h2>Abhinav Verma</h2>
+                <span class="timeColor">2 hours ago </span> </div>
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <div class="dotMenu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">...</div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                  <li><a href="#">Edit</a></li>
+                  <li><a href="#">Delete</a></li>
+                  <li><a href="#">Report Abuse</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="postContent">
+          <h2>A journey of a thousand miles begins with a single step</h2>
+          <div class="postTable"><div class="postWords1" ><div>You must begin something if you hope to finish it; something that takes a long time to finish begins with one step. You must begin something if you hope to finish it; something that takes a long time to finish begins with one step.</div> <div>You must begin something if you hope to finish it; something that takes a long time to finish begins with one step. You must begin something if you hope to finish it; </div><div>something that takes a long time to finish begins with one step</div></div></div>
+          </div>
+		  </div>
+        </div>
+      </div>
+      
+      <div class="cardbrd postBlock">
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="protabs">
+              <div class="protabsimg"> <img src="img/12.jpg" class="nimgs" alt=""/> </div>
+              <div class="protabstxt">
+                <h2>Abhinav Verma</h2>
+                <span class="timeColor">2 hours ago </span> </div>
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <div class="dotMenu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">...</div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                  <li><a href="#">Edit</a></li>
+                  <li><a href="#">Delete</a></li>
+                  <li><a href="#">Report Abuse</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="postContent">
+          <h2>A journey of a thousand miles begins with a single step</h2>
+          <div class="postTable"><div class="postWords" style="background:#e31b24 url(img/road2.png) no-repeat center center">You must begin something if you hope to finish it; something that takes a long time to finish begins with one step</div></div>
+          </div>
+          <textarea class="commnt"></textarea>
+		  </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <!-- Followers Block -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="newtitle clearfix">
+        <div class="pull-left">Followers</div>
+        <div class="pull-right"><span>254</span></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/1.jpg" class="fcphoto" alt=""/>
+            <h2>Hana Marko</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/2.jpg" class="fcphoto" alt=""/>
+            <h2>Luiza Baciu</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/3.jpg" class="fcphoto" alt=""/>
+            <h2>Hana Marko</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/4.jpg" class="fcphoto" alt=""/>
+            <h2>Patricia Hall</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/5.jpg" class="fcphoto" alt=""/>
+            <h2>Adina Baghiu</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/6.jpg" class="fcphoto" alt=""/>
+            <h2>Agustina Castañeda</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/7.jpg" class="fcphoto" alt=""/>
+            <h2>Milena López</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/8.jpg" class="fcphoto" alt=""/>
+            <h2>Catinca Ciorbea</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/9.jpg" class="fcphoto" alt=""/>
+            <h2>Lăcrămioara Puiu</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/10.jpg" class="fcphoto" alt=""/>
+            <h2>Annikki Sirén Tavares</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/12.jpg" class="fcphoto" alt=""/>
+            <h2>Janet Rice Tavares</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="cardbrd followCards clearfix"> <img src="https://uinames.com/api/photos/female/14.jpg" class="fcphoto" alt=""/>
+            <h2>Carolina Tavares Tavares</h2>
+            <div class="locstat"><img src="app/view/images/loc_icon2.png" width="18" height="18" alt=""/> <span>Wellington, New Zealand</span></div>
+            <div class="followtxt">Unfollow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-sm-12"> <br>
+      <div class="cardbrd">
+        <div class="selecti">[x] Select All</div>
+        <div class="table-responsive">
+          <table class="table table-hover remsmars" width="100%">
+            <tbody>
+              <tr>
+                <td class="seltbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/1.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_sel.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/6.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/10.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="seltbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/9.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_sel.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/12.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/1.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/6.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/10.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/9.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+              <tr>
+                <td class="nortbl"><div class="inlines">[x]</div>
+                  <div class="inlines"><img src="img/12.jpg" class="dimgs" alt=""/></div>
+                  <div class="inlines"><img src="img/star_nor.png" class="stars" alt=""/></div>
+                  <div class="inlines">Draft Mail01 </div></td>
+                <td class="text-right"><span class="ddates">22 Nov</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

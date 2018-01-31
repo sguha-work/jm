@@ -1,0 +1,352 @@
+<style>
+	.main-header{ padding:6px 20px 8px; box-shadow:0px 2px 15px rgba(0,0,0,0.2);position: relative; z-index: 1;}
+	.main-header img.logo{ height:50px; margin-right:25px; vertical-align:top;}
+	.main-header input{ border:2px solid #dddddd; background-position:right 10px top 7px; background-size:18px 18px; background-repeat:no-repeat; border-radius:6px; padding:5px 30px 5px 10px; margin-top:6px;}
+	.left-sidebar{ min-height:calc(100vh - 59px); height:100%; background-color:#f5f5f5;}
+	.left-sidebar ul{ margin-top:20px;}
+	.left-sidebar li > a{ text-decoration:none;padding:10px 16px 10px 20px; height:48px; display:inline-block; width:100%;  }
+	.icon-cont{ width:30px; margin-right:10px; height:30px;}
+	.left-sidebar li > a span{ color:#afaeae;}
+	.left-sidebar li.active { background-color:#e5e5e5; } 
+	.left-sidebar li.active a span{ color:#000000; } 
+	.center-content{ padding:12px 18px;}
+	.img-responsive{ width:100%;}
+	.center-content .blog-box{ border:2px solid #e6e6e6; border-radius:6px; width:100%; padding:12px 20px; margin:15px 0px 10px;}
+	.center-content .blog-box .profile{ margin-right:12px;}
+	.center-content .blog-box md-input-container{ margin-bottom:0px !important}
+	.center-content .blog-box md-input-container .md-errors-spacer{ display:none;}
+	.center-content .blog-box md-input-container label{ margin:0px; }
+	.center-content .blog-box p{ margin:15px 0px 5px;}
+	.center-content .blog-box textarea{ width:100%; border:none; min-height:150px; border-radius:6px; background-color:#e5e5e5;}
+	.center-content .blog-box ul{ margin-top:10px; list-style-type:none;}
+	.center-content .blog-box ul li{ display:inline-block;}
+	.center-content .blog-box ul li a{ display:inline-block; margin-right:20px;}
+	.center-content .blog-box ul li a span{ display:inline-block; vertical-align:top; margin-left:5px; font-size:12px; margin-top:2px;}
+	.center-content .blog-box ul li a img{ vertical-align:top;}
+	.step-imgs{padding:20px 10px; text-align:center; cursor:pointer;}
+	.step-imgs img{ box-shadow:0px 7px 15px rgba(0,0,0,0.1); max-width:100%; border-bottom:5px solid #FFFFFF;}
+	.step-imgs img:hover{ border-bottom:5px solid #ed1b24;}
+	.step-imgs label{ display:inline-block; width:100%; margin-top:20px; text-align:center;}
+	
+	.btnPrimary{ background-color:#ed1b24; margin:0px; padding:0px; color:#FFFFFF;}
+	.btnSmall{ padding:4px 15px 4px; font-size:13px; border:none; border-radius:5px;}
+	.sharePostCont .modal-custom-footer .sp-btn.active, .sharePostCont .modal-custom-footer .sp-btn.active a{ background-color:#ae2201; color:#FFFFFF;}
+	@media only screen and (max-width: 600px) {
+	    .main-header input{width:100%;}
+	    .nmobiMarL50{ margin:0px;}
+	    .sharePostCont{ }
+	    .mobi-textCenter{ text-align:center !important;}
+	    .sharePostCont .modal-custom-footer .sp-btn:first-child { border-bottom:2px solid #d9d9d9;}
+	}
+	@media only screen and (min-width: 600px) and (max-width: 960){
+		.nmobiMarL50{  margin:0px;}
+		.sharePostCont{ }
+		
+	}
+	@media only screen and (min-width: 921px) and (max-width: 1280px){
+		.right-sidebar{ width:250px;}
+		.nmobiMarL50{ margin:0px 0px 0px 200px;}
+		.sharePostCont{ }
+	}
+	@media only screen and (min-width:1281px){
+		.right-sidebar{ width:400px;}
+		.nmobiMarL50{ margin:0px 0px 0px 300px;}
+		.sharePostCont{ }
+	}
+	@media only screen and (min-width: 601px) {
+		.main-header input{width:400px;}
+		.left-sidebar{ min-width:200px;}
+		.sharePostCont .modal-custom-footer .sp-btn:first-child { border-right:2px solid #d9d9d9;}
+	}
+		
+		
+	.jiya-banner-cont{ background-repeat:no-repeat; background-size:cover; padding:40px 20px;}	
+	.jiya-banner-cont h1{ color:#FFFFFF; text-align:center; font-size:50px;}
+	.jiya-banner-cont p{ color:#FFFFFF; text-align:center; padding-top:20px;  font-size:24px; }
+		
+		
+	.nopadding{ padding:0px !important;}	
+	.nomargin{ margin:0px !important;}	
+</style>
+
+<link href="app/view/thumbnail/thumbnail-slider.css" rel="stylesheet" type="text/css" />
+<script src="app/view/thumbnail/thumbnail-slider.js" type="text/javascript"></script>
+    
+<div class="jiya-container">
+	<div class="main-header" layout="row">
+		<div flex="none"><img src="app/view/images/jiya_logo_png.png" class="logo" /></div>
+		<div flex><input type="text" style="background-image:url('app/view/images/search.png');"/></div>
+	</div>
+	
+	
+	<div class="page-container" layout="row" layout-wrap layout-align="none none" >
+		<div class="left-sidebar" flex="none">
+			<ul>
+				<li class="active"><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="28" src="app/view/images/icons/home_selected.png"/></div><span flex hide-xs>Home</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/discover_normal.png"/></div><span hide-xs>Discover</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/invite_n.png"/></div><span hide-xs>Invite</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="22" src="app/view/images/icons/writing_comp_n.png"/></div><span hide-xs>Writing</br>Competitions</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="22" src="app/view/images/icons/profile_n.png"/></div><span hide-xs>Profile</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="22" src="app/view/images/icons/notification_n.png"/></div><span hide-xs>Notification</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/feedback_n.png"/></div><span hide-xs>Feedback</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/settings_n.png"/></div><span hide-xs>Settings</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/report_n.png"/></div><span hide-xs>Reports</span></div></a></li>
+				<li><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/help_n.png"/></div><span hide-xs>Help</span></div></a></li>
+			</ul>
+		</div>
+		
+		
+		<!-- Home Page -->
+		<div class="center-content" flex ng-show="true">
+			<div class="jiya-banner-cont" style="background-image:url('app/view/images/icons/wish_image.png');">
+				<h1>Good morning, JIYA</h1>
+				<p class="nomargin">" Life is tough my darling, but so are you "</p>
+				<p class="nopadding nmobiMarL50">-- Stephanie Bennette Henry</p>
+			</div>
+			
+			<div class="blog-box">
+				<div layout="row">
+					<div layout="row" flex="70">
+						<div flex="none">
+							<img  data-toggle="modal" data-target="#modal-shareposts" src="app/view/images/icons/profile.png" class="profile"/>
+						</div>
+						<div flex>
+							<md-input-container class="md-block" flex-gt-sm>
+				            	<label>Share a post</label>
+				            	<input ng-model="sharePost">
+				          	</md-input-container>
+						</div>
+					</div>
+					<div flex="30" layout layout-align="end center">
+						<button class="btnPrimary btnSmall ">POST</button>
+					</div>
+				</div>
+			</div>
+			<div class="blog-box">
+				<div layout="row">
+					<div layout="row" flex="70">
+						<div flex="none">
+							<img src="app/view/images/icons/profile.png" class="profile"/>
+						</div>
+						<div flex>
+							<h2>JIYA</h2>
+						</div>
+					</div>
+					<div flex="30" layout layout-align="end start">
+						<a href=""><img src="app/view/images/icons/menu.png" /></a>
+					</div>
+					
+				</div>
+				<p>Dummy Text</p>
+				<textarea></textarea>
+				<ul>
+					<li><a href=""><img src="app/view/images/icons/rating_selectedl.png"/><span>Rating</span></a></li>
+					<li><a href=""><span>Comment</span></a></li>
+					<li><a href=""><img src="app/view/images/icons/Share_normal.png"/><span>Share</span></a></li>
+				</ul>
+				<p>#Dummy Text  #Dummy Text</p>
+			</div>
+		</div>
+		
+		
+		<!-- Discover -->
+		<div class="center-content" flex ng-hide="true">
+			<img src="app/view/images/icons/illusatration.png" class="img-responsive" />
+			
+			<div layout-wrap layout-xs="column" class="step-imgs" layout-gt-xs="row">
+				<div flex-xs="100" flex-sm="50" flex-gt-sm="20"  class="step-imgs"><div><img src="app/view/images/icons/step-1.png"/><label>Boffola</label></div></div>
+				<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-2.png"/><label>2U</label></div></div>
+				<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-3.png"/><label>Poejia</label></div></div>
+				<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-4.png"/><label>Jiyatable</label></div></div>
+				<div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-5.png"/><label>Punchline</label></div></div>
+			</div>
+		</div>
+		
+		
+		
+		<div class="right-sidebar" hide-xs hide-sm flex="none" ng-show="false"></div>
+	</div>
+</div>
+
+
+<style>
+	.sharePostCont .modal-header { background-color:#ececec; border-radius:.3rem .3rem 0px 0px;}
+	.sharePostCont h4.modal-title{ color:#000000; font-size:26px;}
+	
+	.sharePostCont .step-imgset .step-imgs:first-child{ padding-left:0px !important;}
+	.sharePostCont .step-imgset .step-imgs:last-child{ padding-right:0px !important;}
+	.sharePostCont .step-imgs img { max-width: 130px;}
+	.sp-text p{ margin:0px; font-size:18px; color:#000000; }
+	.sharePostCont select{ width:100%; border:1px solid #d8d8d8; padding:12px 20px; }
+	
+	.sharePostCont .modal-header{padding:10px 30px;}
+	.sharePostCont .modal-body{ padding:15px 30px; }
+	.sharePostCont .paddTB20{ padding:20px 0px;}
+	.sharePostCont .sp-btn a{ display:inline-block; width:100%; height:100%; font-size:22px;padding:15px; text-decoration:none; text-align:center; color:#ae3d3d;}
+	
+	.sharePostCont .modal-custom-footer{ box-shadow:0px 0px 10px rgba(0,0,0,0.3);}
+	
+	.sp-step2 md-input-container.large label{ font-size: 24px;}
+	.sp-step2 md-input-container  .md-errors-spacer{display:none;}
+</style>
+
+
+ <!-- Modal -->
+  <div class="modal fade" id="modal-shareposts" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content sharePostCont">
+        <div class="modal-header">
+        	<h4 class="modal-title nomargin">Create Post</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body ">
+        	<div class="sp-step1" ng-show="false">
+	        	<div layout-gt-xs="row" layout-xs="column" class="sp-text">
+	        		<div flex><p class="mobi-textCenter">Select Type:</p></div>
+	        		<div flex><p class="text-right mobi-textCenter">1/2</p></div>
+	        	</div>
+	          	<div layout-wrap layout-xs="column" class="step-imgset nopadding" layout-gt-xs="row">
+		            <div flex-xs="100" flex-sm="50" flex-gt-sm="20"  class="step-imgs"><div><img src="app/view/images/icons/step-1.png"/><label>Boffola</label></div></div>
+		            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-2.png"/><label>2U</label></div></div>
+		            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-3.png"/><label>Poejia</label></div></div>
+		            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-4.png"/><label>Jiyatable</label></div></div>
+		            <div flex-xs="100" flex-sm="50" flex-gt-sm="20" class="step-imgs"><div><img src="app/view/images/icons/step-5.png"/><label>Punchline</label></div></div>
+		        </div>
+		        <div class="paddTB20">
+			        <div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+			        	<div flex-xs="100" flex-gt-xs="50"  class="sp-text"><p>Select Language:</p></div>
+			        	<div flex-xs="100" flex-gt-xs="50" ><select><option>Option Value</option></select></div>
+			        </div>
+			        <div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" style="margin-top:10px;">
+			        	<div flex class="sp-text"><p >Select Topic:</p></div>
+			        	<div flex><select><option>Option Value</option></select></div>
+			        </div>
+		        </div>
+	        </div>
+	        <div class="sp-step2">
+	        	<div layout-gt-xs="row" layout-xs="column" class="sp-text">
+	        		
+	        		<div flex><p class="text-right mobi-textCenter">2/2</p></div>
+	        	</div>
+	        	 <div layout-gt-sm="row">
+			          <md-input-container class="md-block large" flex-gt-sm>
+			            <label>Enter Title</label>
+			            <input ng-model="user.firstName">
+			          </md-input-container>
+		         </div>
+		         <textarea style="width:100%; min-height:150px; border:1px solid rgba(0,0,0,0.2);'">
+		         
+		         </textarea>
+		         <div>
+			        <div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" style="margin-top:10px;">
+			        	<div flex="none" class="sp-text"><p >Add Tags:</p></div>
+			        	
+			        	<md-input-container class="md-block" flex>
+			            <label>Use space for separating tags</label>
+			            <input ng-model="user.firstName">
+			          </md-input-container>
+			          
+			        </div>
+		        </div>
+		        
+		        
+		        
+		         <div >
+			        <div >
+			            <div id="thumbnail-slider">
+			                <div class="inner">
+			                    <ul>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#a864a9;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#f10602;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#e87817;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#39b54a;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#ff00ff;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#00bff3;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#fff200;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#827b00;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#605ca9;"></a>
+			                        </li>
+			                        
+			                         <li>
+			                            <a class="thumb" href="" style="background-color:#a864a9;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#f10602;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#e87817;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#39b54a;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#ff00ff;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#00bff3;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#fff200;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#827b00;"></a>
+			                        </li>
+			                        <li>
+			                            <a class="thumb" href="" style="background-color:#605ca9;"></a>
+			                        </li>
+			                        
+			                        
+			                        
+			                    </ul>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+    
+    
+	        </div>
+	        
+        </div>
+        <div class="modal-custom-footer" ng-show="false">
+          	<div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+	        	<div flex class="sp-btn"><a href="">SAVE AS DRAFT</a></div>
+	        	<div flex class="sp-btn"><a href="">NEXT</a></div>
+	        </div>
+	    </div>
+	    
+	    <div class="modal-custom-footer">
+          	<div layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="start center" >
+	        	<div flex class="sp-btn"><a href="">SAVE AS DRAFT</a></div>
+	        	<div flex class="sp-btn"><a href="">BACK</a></div>
+	        	<div flex class="sp-btn active"><a href="">POST</a></div>
+	        </div>
+	    </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  
+  
+  

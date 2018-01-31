@@ -1,0 +1,11 @@
+<div id="sideNav" class="left-sidebar" flex="none">
+    <ul>
+        <li  id="home" ng-click="navigateTo('home')" class="active"><a href=""><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="28" src="app/view/images/icons/home_selected.png"/></div><span flex hide-xs>Home</span></div></a></li>
+        <li ng-repeat="item in sideNav_items" id="{{item.name}}"><a href=""><div ng-click="navigateTo(item.name)" layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" ng-src="app/view/images/icons/{{item.image}}.png"/></div><span hide-xs style="text-transform: capitalize;">{{item.name}}</span></div></a></li>
+        <li id="usermanagement" ng-if="showUserManagement"><a href="" ng-click="navigateTo('usermanagement')" ><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/profile_n.png"/></div><span hide-xs>User management</span></div></a></li>
+        <li id="draft" ng-if="showUserManagement"><a href="" ng-click="navigateTo('draft')" ><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img width="24" src="app/view/images/icons/profile_n.png"/></div><span hide-xs>Draft</span></div></a></li>
+        <li id="logout"><a href="" ng-click="navigateTo('logout')" ><div layout="row" layout-align="start center"><div flex="none" class="icon-cont"><img style="opacity: 0.6;" width="24" src="app/view/images/icons/logout_n.png"/></div><span hide-xs>Logout</span></div></a></li>
+    </ul>
+</div>
+		
+	
