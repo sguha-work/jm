@@ -4,19 +4,6 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         alert("login event captured");
     });
     $scope.login = function (userData) {
-        // $http({
-        //     url: CONSTANT.API_BASE_URL + 'login',
-        //     method: "POST",
-        //     data: user,
-        //     headers: { 'Content-Type': 'application/json' }
-        // })
-        //     .then(function (response) {
-        //         console.log("user data sent");
-
-        //     },
-        //     function (response) { // optional
-        //         console.log("some error occured");
-        //     });
         $rootScope.showLoader = true;
         authService.login(userData)
             .then(function (data) {
