@@ -1,101 +1,80 @@
-<!-- <md-toolbar class = "md-warn">
-    <div class = "md-toolbar-tools">
-       <h2 class = "md-flex">HTML 5</h2>
-    </div>
- </md-toolbar>
-<div class="container">
-    <div class="col-sm-6 col-sm-offset-3">
-        <h1><span class="fa fa-sign-in"></span> Login</h1>
-        <form ng-submit="login(user)" method="post">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" ng-model="user.email" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" ng-model="user.password" class="form-control" name="password">
-            </div>
-            <a ng-click="googleLogin()" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-            <a ng-click="facebookLogin()" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-            <button type="submit" class="btn btn-warning btn-lg">Login</button>
-        </form>
-        <hr>
-        <p>Need an account? <a href="/signup">Signup</a></p>
-        <p>Or go <a href="/">home</a>.</p>
-    </div>
-    </div> -->
-    
-   
-    <div class="main-cont">
-    <div class="authCont" layout-gt-sm="row" layout-xs="column"  layout-sm="column" layout-align="center stretch">
-    	<div flex layout="" layout-align="start center">
-    		<div flex class="page-title-text">
-    			<h1>Dummy Text</h1>
-    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-    		</div>
-    	</div>
-    	
-    	<div flex="none" class="authFieldBox">
-			<form name="loginForm" ng-submit="login(user)" novalidate="novalidate">
-    		<div class="authFormCont">
-    			<img class="logo" src="app/view/images/jiya_logo_png.png" />
-    			<div class="authFormInner">
-    				<img src="app/view/images/login_with_text.png" />
-    				<div layout="row" class="soc-media">
-    					<div flex>
-							<!-- <a href="#" ng-click="fbLogin()"><img src="app/view/images/fb_button_normal.png" /></a> -->
-							<a href="#" ng-click="facebook()"><img src="app/view/images/fb_button_normal.png" /></a>
-    					</div>
-    					<div flex>
-							<!-- <google-plus-signin clientid="104628895635-v3f65f12tqsnsme0acdceer5q9accrju"></google-plus-signin> -->
-							<a href="#" ng-click="google()"><img src="app/view/images/google_button_normal.png" /></a>
-    					</div>
-    				</div>
-    				
-    				<div class="text-field-cont">
-    					<div layout="row">
-    						<div flex="none">
-    							<div class="icon-cont"><img src="app/view/images/user.png" width="20"/></div>
-    						</div>
-    						<div flex>
-								<input type="email" ng-model="user.email" name="useremail" ng-model-options="{'updateOn': 'blur'}" placeholder="Username/Email ID " required>
-								<span class="error error_span" ng-show="loginForm.useremail.$touched && loginForm.useremail.$error.required">
-										Required!</span>
-								<span class="error error_span" ng-show="loginForm.useremail.$error.email">
-										Not valid email!</span>
-    						</div>
-    					</div>
-    				</div>
-    				<div class="text-field-cont">
-    					<div layout="row">
-    						<div flex="none">
-    							<div class="icon-cont"><img src="app/view/images/key.png" width="20"/></div>
-    						</div>
-    						<div flex>
-								<input type="password" name="userpassword"  ng-model="user.password" placeholder="Password" required>
-								<span class="error error_span" ng-show="loginForm.userpassword.$touched && loginForm.userpassword.$error.required">
-									Required!</span>
-    						</div>
-    					</div>
-    				</div>
-    				
-    				<div class="btnPrimary">
-    					<button ng-class="{ disabled_button: loginForm.$invalid }" ng-disabled="loginForm.$invalid" type="submit">Sign in</button>
-    				</div>
-    				
-    				<p class="notRegUser">Not a registered user? | <a href="/signup">Sign up</a></p>
-    				<a href="" class="fp-link">Forgot password?</a>
-    			</div>
+<div class="main-cont">
+	<div class="authCont" layout-gt-sm="row" layout-xs="column" layout-sm="column" layout-align="center stretch">
+		<div flex layout="" layout-align="start center">
+			<div flex class="page-title-text">
+				<h1>Dummy Text</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
 			</div>
+		</div>
+
+		<div flex="none" class="authFieldBox">
+			<form name="loginForm" ng-controller="loginCtrl" ng-submit="login(user)" novalidate="novalidate">
+				<div class="authFormCont">
+					<img class="logo" src="app/view/images/jiya_logo_png.png" />
+					<div class="authFormInner">
+						<img src="app/view/images/login_with_text.png" />
+						<div layout="row" class="soc-media">
+							<div flex>
+								<!-- <a href="#" ng-click="fbLogin()"><img src="app/view/images/fb_button_normal.png" /></a> -->
+								<a href="#" ng-click="facebook()">
+									<img src="app/view/images/fb_button_normal.png" />
+								</a>
+							</div>
+							<div flex>
+								<!-- <google-plus-signin clientid="104628895635-v3f65f12tqsnsme0acdceer5q9accrju"></google-plus-signin> -->
+								<a href="#" ng-click="google()">
+									<img src="app/view/images/google_button_normal.png" />
+								</a>
+							</div>
+						</div>
+
+						<div class="text-field-cont">
+							<div layout="row">
+								<div flex="none">
+									<div class="icon-cont">
+										<img src="app/view/images/user.png" width="20" />
+									</div>
+								</div>
+								<div flex>
+									<input type="email" ng-model="user.email" name="useremail" ng-model-options="{'updateOn': 'blur'}" placeholder="Username/Email ID "
+									 required>
+									<span class="error error_span" ng-show="loginForm.useremail.$touched && loginForm.useremail.$error.required">
+										Required!</span>
+									<span class="error error_span" ng-show="loginForm.useremail.$error.email">
+										Not valid email!</span>
+								</div>
+							</div>
+						</div>
+						<div class="text-field-cont">
+							<div layout="row">
+								<div flex="none">
+									<div class="icon-cont">
+										<img src="app/view/images/key.png" width="20" />
+									</div>
+								</div>
+								<div flex>
+									<input type="password" name="userpassword" ng-model="user.password" placeholder="Password" required>
+									<span class="error error_span" ng-show="loginForm.userpassword.$touched && loginForm.userpassword.$error.required">
+										Required!</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="btnPrimary">
+							<button ng-class="{ disabled_button: loginForm.$invalid }" ng-disabled="loginForm.$invalid" type="submit">Sign in</button>
+						</div>
+
+						<p class="notRegUser">Not a registered user? |
+							<a href="/signup">Sign up</a>
+						</p>
+						<a href="" class="fp-link">Forgot password?</a>
+					</div>
+				</div>
 			</form>
 			<div>{{messages}}</div>
-    	</div>
-    
-    
-    </div>
-    </div>
-    
-    
-    
-    
-    
+		</div>
+
+
+	</div>
+</div>

@@ -11,6 +11,7 @@ var app = angular.module('userApp', ['appRoutes',
                                      'angularMoment',
                                      'summernote',
                                      'ckeditor',
-                                     'base64'])
+                                     'base64',
+                                     ]);
 
 
