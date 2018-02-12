@@ -308,7 +308,7 @@
                           </div>
                       </li>
                        
-                      <li>
+                      <!-- <li>
                         <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
                         <h2>Dummy Text</h2>
                         <div class="viewfav">
@@ -419,15 +419,16 @@
                             <div class="vmids">74</div>
                           </div>
                         </div>
-                      </li>
+                      </li> -->
                     </ul>
+                    <div style="text-align: center" ng-show="favourites.length === 0">As there are no stories for now you may skip to next step</div>
                     <div id="goToPrevSlide">&nbsp;</div>
                     <div id="goToNextSlide">&nbsp;</div>
                   </div>
                 </div>
                 <div style="text-align:center">
                     <input type="button" name="previous" class="previous action-button" value="Previous">
-                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Submit" ng-disabled="selectedFav.length < 3" ng-class="{ disabled_button: selectedFav.length < 3 }" > 
+                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Submit" ng-disabled="selectedFav.length < 3 || favourites.length !== 0" ng-class="{ disabled_button: selectedFav.length < 3 }" > 
                 </div>
               </div>
               <div class="fullwid">
@@ -729,7 +730,6 @@
 
 
   $(".next").click(function () {
-    debugger;
     if (animating) return false;
     animating = true;
 
@@ -759,7 +759,6 @@
   $(".previous").click(function () {
     if (animating) return false;
     animating = true;
-    debugger;
     current_fs = $(this).closest("fieldset");
     previous_fs = $(this).closest("fieldset").prev();
 

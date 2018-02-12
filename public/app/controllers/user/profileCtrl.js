@@ -218,6 +218,8 @@ app.controller('profileCtrl',['$scope', 'CONSTANT', '$http',
             },
             function (response) { // optional
                 console.log("some error occured");
+                $scope.favourites = [];
+                $rootScope.showLoader = false;
             });
     }
     //helpers
