@@ -11,7 +11,16 @@ app.controller('profileCtrl',['$scope', 'CONSTANT', '$http',
     $scope.selectedFrnds = [];
     $scope.following = [];
     $scope.selectedFav =[];
-
+    $scope.profile.privacyPolicy = "public";
+    
+    $scope.isAllRequirementFulfilled = (function() {
+        //!acceptAgreement && profile.birthday=='' && profile.penName==''
+        if($scope.profile.penName && $scope.profile.penName!='' && typeof $scope.profile.birthday != 'undefined' && $scope.acceptAgreement) {
+            return true;
+        } else {
+            return false;
+        }
+    });
     $scope.getCurrentUser = function(){
         if(authService.isLoggedIn()){
             authService.getUser().then(function (data){
@@ -67,7 +76,7 @@ app.controller('profileCtrl',['$scope', 'CONSTANT', '$http',
 
     
 
-    $scope.submitProfile = function (profile_details) {
+    $scope.submitProfile = function (profile_details) {console.log(profile_details);
         profile_details.profilePic = $base64.encode('a string');
         profile_details.dateOfBirth = returnDate(profile_details);
         profile_details.profilePic = $scope.base64_img;
