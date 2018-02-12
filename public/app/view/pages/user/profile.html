@@ -428,7 +428,7 @@
                 </div>
                 <div style="text-align:center">
                     <input type="button" name="previous" class="previous action-button" value="Previous">
-                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Submit" ng-disabled="selectedFav.length < 3 || favourites.length !== 0" ng-class="{ disabled_button: selectedFav.length < 3 }" > 
+                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Submit" ng-disabled="favourites.length !== 0 && selectedFav.length < 3" ng-class="{ disabled_button: favourites.length !== 0 && selectedFav.length < 3 }" > 
                 </div>
               </div>
               <div class="fullwid">
