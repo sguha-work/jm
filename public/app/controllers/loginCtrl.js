@@ -46,9 +46,9 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
                 console.log(response);
 
             },
-            function (response) { // optional
-                console.log("some error occured");
-            });
+                function (response) { // optional
+                    console.log("some error occured");
+                });
 
     }
 
@@ -61,9 +61,9 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
                 console.log(response);
 
             },
-            function (response) { // optional
-                console.log("some error occured");
-            });
+                function (response) { // optional
+                    console.log("some error occured");
+                });
 
     }
 
@@ -90,9 +90,9 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
                 }
 
             },
-            function (response) { // optional
-                console.log("some error occured");
-            });
+                function (response) { // optional
+                    console.log("some error occured");
+                });
 
     }
 

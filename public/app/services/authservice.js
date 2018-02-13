@@ -1,64 +1,64 @@
-app.service('authService', function($window, $http, CONSTANT){
+app.service('authService', function ($window, $http, CONSTANT) {
     var authservice = {};
 
-    authservice.signup = function(user){
-        return $http.post( CONSTANT.API_BASE_URL+'signup',user).then(function(data){
+    authservice.signup = function (user) {
+        return $http.post(CONSTANT.API_BASE_URL + 'signup', user).then(function (data) {
             return data;
         })
     }
 
-    authservice.login = function(loginData){
-        return $http.post('/api/authenticate', loginData).then(function(data){
-            if(data.data.token){
+    authservice.login = function (loginData) {
+        return $http.post('/api/authenticate', loginData).then(function (data) {
+            if (data.data.token) {
                 $window.localStorage.setItem('token', data.data.token);
-            }else{
+            } else {
                 $window.localStorage.removeItem('token');
             }
             return data;
-         })
+        })
     }
-    authservice.setToken =function(token){
-        if(token){
+    authservice.setToken = function (token) {
+        if (token) {
             $window.localStorage.setItem('token', token);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    authservice.isLoggedIn = function(){
-        if($window.localStorage.getItem('token')){
+    authservice.isLoggedIn = function () {
+        if ($window.localStorage.getItem('token') == "null" || $window.localStorage.getItem('token') == null) {
+            return false;
+        } else {
             return true;
-        }else{
-            return false;
         }
     }
 
-    authservice.logout = function(){
+    authservice.logout = function () {
         $window.localStorage.removeItem('token');
-         
-    } 
 
-    authservice.getUser = function(){
-        if($window.localStorage.getItem('token')){
+    }
+
+    authservice.getUser = function () {
+        if ($window.localStorage.getItem('token')) {
             return $http.post('/api/me');
-        }else{
-            $q.reject({ message: 'User has no token '});
+        } else {
+            $q.reject({ message: 'User has no token ' });
         }
     }
 
     //***********************Home Controller Reated Services*******************/
 
-    authservice.getAllUserPosts = function(post) {
-        return $http.post(CONSTANT.API_BASE_URL+'alluserPosts',post).then(function(response){
+    authservice.getAllUserPosts = function (post) {
+        return $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post).then(function (response) {
             return response;
         })
     }
 
-    authservice.postStatus = function(post){
-        return $http.post(CONSTANT.API_BASE_URL+'addpost', post).then(function(data){
+    authservice.postStatus = function (post) {
+        return $http.post(CONSTANT.API_BASE_URL + 'addpost', post).then(function (data) {
             return data;
         })
     }
 
- return authservice;
+    return authservice;
 })

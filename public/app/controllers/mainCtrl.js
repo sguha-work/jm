@@ -9,6 +9,10 @@ app.controller('mainCtrl', function ($http, authService, $location, Facebook, $r
     $rootScope.$on('$routeChangeStart', function () {
         if (authService.isLoggedIn()) {
             authService.getUser().then(function (data) {
+                if (typeof data.data.user === "undefined") {
+                    $window.localStorage.removeItem(token);
+                    $location.path('/');
+                }
                 $rootScope.current_user = data.data.user;
                 if ($rootScope.current_user.profilePic != "" && $rootScope.current_user.profilePic != null) {
                     $rootScope.current_user.profilePic = getRelativePath($rootScope.current_user.profilePic);
@@ -124,9 +128,9 @@ app.controller('mainCtrl', function ($http, authService, $location, Facebook, $r
                 console.log(response);
 
             },
-            function (response) { // optional
-                console.log("some error occured");
-            });
+                function (response) { // optional
+                    console.log("some error occured");
+                });
 
     }
 
@@ -139,9 +143,9 @@ app.controller('mainCtrl', function ($http, authService, $location, Facebook, $r
                 console.log(response);
 
             },
-            function (response) { // optional
-                console.log("some error occured");
-            });
+                function (response) { // optional
+                    console.log("some error occured");
+                });
 
     }
     $scope.fbLogin = function () {

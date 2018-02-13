@@ -1,5 +1,9 @@
 app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare) {
 
+  if (!authService.isLoggedIn()) {
+    $location.path('/');
+  }
+
   var thehours = new Date().getHours();
   var themessage;
   var morning = ('Good morning');
@@ -58,9 +62,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
         }
         console.log("Data Received");
       },
-      function (response) { // optional
-        console.log("some error occured");
-      });
+        function (response) { // optional
+          console.log("some error occured");
+        });
   }
   $scope.getRoandomQuote();
 

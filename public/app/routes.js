@@ -96,7 +96,7 @@ routes.run(['$rootScope', 'authService', '$location', function ($rootScope, auth
         } else if (next.$$route.authenticated == false) {
             if (authService.isLoggedIn()) {
                 event.preventDefault();
-                $location.path('/page');
+                $location.path('/home');
             }
         } else {
             console.log("Technical Error Occured");
