@@ -1,6 +1,6 @@
 app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CONSTANT, toastr, $timeout, $location) {
 
-    $scope.$on('loginEvent', function() {
+    $scope.$on('loginEvent', function () {
         alert("login event captured");
     });
     $scope.login = function (userData) {
@@ -78,9 +78,10 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         authService.signup(user)
             .then(function (response) {
                 if (response.data.success) {
-                    toastr.success('Account Created!');
+                    toastr.success('Account Created! Please check "' + user.email + '" and activate your profile');
+                    $rootScope.showLoader = false;
                     $timeout(function () {
-                        $rootScope.showLoader = false;
+
                         $location.path('/');
                     }, 100)
                 } else {
