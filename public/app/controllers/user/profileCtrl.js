@@ -82,14 +82,15 @@ app.controller('profileCtrl',['$scope', 'CONSTANT', '$http',
         profile_details.profilePic = $scope.base64_img;
         profile_details.favourites = $scope.favourites; 
         profile_details.id = $rootScope.current_user._id;
+        $rootScope.showLoader = true;
         $http({
             url: CONSTANT.API_BASE_URL + 'updateprofile',
             method: "POST",
             data: profile_details,
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
-            $rootScope.showLoader = true;
             $timeout(function(){
+                $rootScope.showLoader = false;
                 authService.setToken(response.data.token);
                 $location.path('/home');
                 $rootScope.showLoader = false;
@@ -97,6 +98,7 @@ app.controller('profileCtrl',['$scope', 'CONSTANT', '$http',
             },1500)
         },
             function (response) {
+                $rootScope.showLoader = false;
                 $location.path("/home");
             });
     }
