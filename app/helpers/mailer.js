@@ -2,7 +2,12 @@ var nodemailer = require('nodemailer');
 var os = require('os');      /*For Email Functionality*/
 var hbs = require('nodemailer-express-handlebars');
 var path = require("path");
+var atob = require('atob');
 
+var gmailAccount = {
+    user: 'jiya.tech.email@gmail.com',
+    pass: atob('YWNoaWxsZXNoZWN0b3IqMQ==')
+}
 //! create reusable transporter object using the default SMTP transport
 const mailer = {};
 
@@ -24,13 +29,10 @@ var getCurrentIp = function () {
 
 
 mailer.welcomeMail = function (email, done) {
+    console.log("****************"); console.log(Base64.decode('YWNoaWxsZXNoZWN0b3IqMQ=='));
     var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
-        auth: {
-            //  user: 'jiya.tech.email@gmail.com',
-            //  pass: 'ArighnaMaity@123'
-            user: 'sguha1988.life@gmail.com'
-        }
+        auth: gmailAccount
     });
     //   smtpTransport.use('complie', hbs({
     //     viewPath: __dirname,
@@ -76,10 +78,7 @@ mailer.activationMail = function (email, username, token, done) {
     var img_path_src = path.join(__dirname, '../views/images/top.png');
     var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
-        auth: {
-            user: 'jiya.tech.email@gmail.com',
-            pass: 'ArighnaMaity@123'
-        }
+        auth: gmailAccount
     });
 
     smtpTransport.use('compile', hbs({
@@ -127,10 +126,7 @@ mailer.accountCreationMail = function (email, password, token, done) {
     var img_path_src = path.join(__dirname, '../views/images/top.png');
     var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
-        auth: {
-            user: 'jiya.tech.email@gmail.com',
-            pass: 'ArighnaMaity@123'
-        }
+        auth: gmailAccount
     });
 
     smtpTransport.use('compile', hbs({
@@ -180,10 +176,7 @@ mailer.reportMail = function (obj, done) {
     var address = getCurrentIp();
     var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
-        auth: {
-            user: 'jiya.tech.email@gmail.com',
-            pass: 'ArighnaMaity@123'
-        }
+        auth: gmailAccount
     });
 
     var mailOptions = {
