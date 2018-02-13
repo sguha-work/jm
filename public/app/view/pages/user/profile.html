@@ -1,8 +1,3 @@
-
-
-
-
-
 <div class="main-cont">
   <div class="container-fluid">
     <div class="row">
@@ -13,7 +8,7 @@
 
         <!--Step 02 Start here-->
         <form id="msform" name="profileForm" novalidate="novalidate">
-           
+
           <fieldset style="border: 0px solid!important">
             <div class="container">
               <div class="row">
@@ -43,17 +38,18 @@
                    -->
                     <div layout-gt-xs="row" layout-xs="column" layout-wrap>
                       <div flex-gt-xs="none" flex-xs="100">
-                          <input  id="imageOpen" style="display:none" class="form-control hidden" type="file" img-upload onchange="angular.element(this).scope().fileReader(this)" name="profilePic" >
+                        <input id="imageOpen" style="display:none" class="form-control hidden" type="file" img-upload onchange="angular.element(this).scope().fileReader(this)"
+                          name="profilePic">
                         <div ng-if="!image && !profile.profilePic" class="box">
                           <img class="plusIco" ng-click="openFileBrowser()" src="app/view/images/plus.png">
                         </div>
                         <div ng-if="image && !profile.profilePic" class="profile_div_boxshadow">
-                          <img class="form-control img-responsive circle" ng-src="{{image ? image : app/view/images/avatars.png}}"
-                            ng-show="image || profile.profilePic" />
+                          <img class="form-control img-responsive circle" ng-src="{{image ? image : app/view/images/avatars.png}}" ng-show="image || profile.profilePic"
+                          />
                         </div>
                         <div ng-if="profile.profilePic" class="profile_div_boxshadow">
-                          <img class="form-control img-responsive circle" ng-src="{{profile.profilePic ? profile.profilePic : app/view/images/avatars.png}}" style="display:block!important"
-                            ng-show="image || profile.profilePic" />
+                          <img class="form-control img-responsive circle" ng-src="{{profile.profilePic ? profile.profilePic : app/view/images/avatars.png}}"
+                            style="display:block!important" ng-show="image || profile.profilePic" />
                         </div>
                       </div>
                       <div flex-gt-xs="" flex-xs="100">
@@ -62,25 +58,28 @@
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_01.png">
                             </span>
-                            <input type="text" ng-model= "profile.name" class="form-control" placeholder="Name" aria-describedby="basic-addon1" required>
+                            <input type="text" ng-model="profile.name" class="form-control" placeholder="Name" aria-describedby="basic-addon1" required>
                           </div>
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_02.png">
                             </span>
-                            <input ng-disabled="true"  type="text" ng-model= "profile.email" class="form-control" placeholder="Email ID" aria-describedby="basic-addon1" required>
+                            <input ng-disabled="true" type="text" ng-model="profile.email" class="form-control" placeholder="Email ID" aria-describedby="basic-addon1"
+                              required>
                           </div>
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_03.png">
                             </span>
-                            <input type="text" ng-model= "profile.penName"  class="form-control" placeholder="Pen Name" aria-describedby="basic-addon1" required>
+                            <input type="text" ng-model="profile.penName" class="form-control" placeholder="Pen Name" aria-describedby="basic-addon1"
+                              required>
                           </div>
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_04.png">
                             </span>
-                            <textarea class="form-control" ng-model= "profile.shortBio" placeholder="Short Bio" aria-describedby="basic-addon1" cols="3" required></textarea>
+                            <textarea class="form-control" ng-model="profile.shortBio" placeholder="Short Bio" aria-describedby="basic-addon1" cols="3"
+                              required></textarea>
                           </div>
                           <!-- <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
@@ -99,22 +98,24 @@
                               <option>1</option>
                             </select> -->
 
-                            
-                         <!-- </div> -->
+
+                          <!-- </div> -->
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_05.png">
                             </span>
                             <datepicker date-format="MM/dd/yyyy" date-month-title="selected year">
-                              <input type="text" ng-model= "profile.birthday"  class="form-control" placeholder="Birthday" aria-describedby="basic-addon1" required>
-                          </datepicker>
+                              <input type="text" ng-model="profile.birthday" class="form-control" placeholder="Birthday" aria-describedby="basic-addon1"
+                                required>
+                            </datepicker>
                             <!-- <input type="text" ng-model= "profile.birthday"  class="form-control" placeholder="Birthday" aria-describedby="basic-addon1"> -->
                           </div>
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_06.png">
                             </span>
-                            <input type="text" ng-model= "profile.location" class="form-control" placeholder="Location" aria-describedby="basic-addon1" required>
+                            <input type="text" ng-model="profile.location" class="form-control" placeholder="Location" aria-describedby="basic-addon1"
+                              required>
                           </div>
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
@@ -126,14 +127,16 @@
                               </div>
                               <div flex>
                                 <div class="form-group prive ptitle2">
-                                  <input type="radio" ng-model= "profile.privacyPolicy" value="private" name="radiog_lite" id="radio1" class="form-control css-radiobox" />
+                                  <input type="radio" ng-model="profile.privacyPolicy" value="private" name="radiog_lite" id="radio1" class="form-control css-radiobox"
+                                  />
                                   <label for="radio1" class="css-label radGroup1 radGroup1">Private</label>
                                 </div>
                               </div>
                               <div flex>
                                 <div class="prive ptitle2">
-                                  <input type="radio" ng-model= "profile.privacyPolicy" value="public" name="radiog_lite" id="radio2" class="form-control css-radiobox" required/>
-                                  <label for="radio2" class="css-label radGroup2 radGroup2" >Public</label>
+                                  <input type="radio" ng-model="profile.privacyPolicy" value="public" name="radiog_lite" id="radio2" class="form-control css-radiobox"
+                                    required/>
+                                  <label for="radio2" class="css-label radGroup2 radGroup2">Public</label>
                                 </div>
                               </div>
                             </div>
@@ -144,15 +147,16 @@
                             </span>
                             <div flex>
                               <div class="prive ptitle2">
-                                <input type="checkbox" name="checkboxG1" ng-model="acceptAgreement"  id="checkboxG1" class="form-control css-checkbox" required/>
+                                <input type="checkbox" name="checkboxG1" ng-model="acceptAgreement" id="checkboxG1" class="form-control css-checkbox" required/>
                                 <label for="checkboxG1" class="css-label2 radGroup1">I agree to the usage policy of JIYA</label>
                               </div>
                             </div>
                           </div>
                           <div class="pull-right">
-                              <input ng-click="fbLogin()" ng-disabled="!isAllRequirementFulfilled()" ng-class="{ disabled_button: !isAllRequirementFulfilled() }" type="button" name="next" class="next nextbtn action-button" value="Next"> 
-                             
-                              <!-- <div class="nextbtn">Next</div> -->
+                            <input ng-click="fbLogin()" ng-disabled="!isAllRequirementFulfilled()" ng-class="{ disabled_button: !isAllRequirementFulfilled() }"
+                              type="button" name="next" class="next nextbtn action-button" value="Next">
+
+                            <!-- <div class="nextbtn">Next</div> -->
                           </div>
                           <div class="clearfix"></div>
                         </div>
@@ -185,8 +189,8 @@
               </div>
 
             </div>
-            
-         
+
+
           </fieldset>
 
           <fieldset style="border: 0px solid!important">
@@ -213,13 +217,14 @@
                       </div>
                       <div class="col-sm-12">
                         <div class="selall">
-                           <!-- <md-checkbox ng-click="selectAll($event)" ng-checked="selectedFrnds.length == friends.length" ng-model="selectall_check" ></md-checkbox> -->
-                            <input  type="checkbox" style="width: 70px;"  ng-click="selectAll($event)" ng-checked="selectedFrnds.length == friends.length" ng-model="selectall_check">
+                          <!-- <md-checkbox ng-click="selectAll($event)" ng-checked="selectedFrnds.length == friends.length" ng-model="selectall_check" ></md-checkbox> -->
+                          <input type="checkbox" style="width: 70px;" ng-click="selectAll($event)" ng-checked="selectedFrnds.length == friends.length"
+                            ng-model="selectall_check">
                           <!-- <input type="checkbox" name="checkboxG2" id="checkboxG2" class="css-checkbox" /> -->
                           <!-- <label for="checkboxG2" class="css-label2 radGroup2"> -->
-                            <strong>Select 1-{{friends.length}} of {{friends.length}}</strong>
-                         
-                          <div ng-if="selectedFrnds.length == friends.length"  ng-click="followAll()"  style="margin-left: 70%;" class="followbtn">Follow</div>
+                          <strong>Select 1-{{friends.length}} of {{friends.length}}</strong>
+
+                          <div ng-if="selectedFrnds.length == friends.length" ng-click="followAll()" style="margin-left: 70%;" class="followbtn">Follow</div>
                         </div>
                       </div>
                     </div>
@@ -227,14 +232,16 @@
                       <!--Set 01 -->
                       <div layout-gt-xs="row" layout-xs="column" class="fbrdbtms" ng-repeat="friend in friends | limitTo:5">
                         <div flex="none" layout layout-align="center center">
-                            <input type="checkbox" style="width: 70px;" ng-checked="selectedFrnds.indexOf(friend.id) >= 0" ng-click="selectFriend(friend);" ng-model="friend.selected" ng-disabled="selectedFrnds.length == friends.length">
+                          <input type="checkbox" style="width: 70px;" ng-checked="selectedFrnds.indexOf(friend.id) >= 0" ng-click="selectFriend(friend);"
+                            ng-model="friend.selected" ng-disabled="selectedFrnds.length == friends.length">
                           <!-- <input type="checkbox" name="checkboxG{{$index}}" id="checkboxG{{$index}}" class="css-checkbox" ng-click="selectParticular(friend)" />
                           <label for="checkboxG{{$index}}" class="css-label2 radGroup4"></label> -->
-                          
+
                         </div>
                         <div flex="none">
                           <div>
-                            <img class="followImg" ng-src="{{friend.picture ? friend.picture : app/view/images/avatarss.png}}" onError="angular.element(this).scope().friend.picture = false" style="background-image: url(app/view/images/avatarss.png);width: 100px;  height: 100px; border-radius: 50%;">
+                            <img class="followImg" ng-src="{{friend.picture ? friend.picture : app/view/images/avatarss.png}}" onError="angular.element(this).scope().friend.picture = false"
+                              style="background-image: url(app/view/images/avatarss.png);width: 100px;  height: 100px; border-radius: 50%;">
                           </div>
                         </div>
                         <div flex layout layout-align="center center">
@@ -246,14 +253,16 @@
                           </div>
                         </div>
                         <div flex="none" layout layout-align="center center">
-                          <div ng-if="!friend.follow" ng-class="{ disabled_button: !friend.selected  || selectedFrnds.length == friends.length }"  ng-disabled="!friend.selected || selectedFrnds.length == friends.length"  ng-click="followJiyan(friend)"  class="followbtn">Follow</div>
-                          <div ng-if="friend.follow" ng-class="{ disabled_button: !friend.selected || selectedFrnds.length == friends.length}"  ng-disabled="!friend.selected || selectedFrnds.length == friends.length"  ng-click="withdrawJiyan(friend)"  class="followbtn">Withdraw</div>
+                          <div ng-if="!friend.follow" ng-class="{ disabled_button: !friend.selected  || selectedFrnds.length == friends.length }" ng-disabled="!friend.selected || selectedFrnds.length == friends.length"
+                            ng-click="followJiyan(friend)" class="followbtn">Follow</div>
+                          <div ng-if="friend.follow" ng-class="{ disabled_button: !friend.selected || selectedFrnds.length == friends.length}" ng-disabled="!friend.selected || selectedFrnds.length == friends.length"
+                            ng-click="withdrawJiyan(friend)" class="followbtn">Withdraw</div>
                         </div>
                       </div>
                     </div>
                     <div style="text-align:center">
-                        <input type="button" name="previous" class="previous action-button" value="Previous">
-                        <input type="button" name="next" class="next nextbtn action-button" ng-click="getFavourites()" value="Next"> 
+                      <input type="button" name="previous" class="previous action-button" value="Previous">
+                      <input type="button" name="next" class="next nextbtn action-button" ng-click="getFavourites()" value="Next">
                     </div>
                   </div>
                 </div>
@@ -263,179 +272,84 @@
           </fieldset>
 
           <fieldset style="border: 0px solid!important">
-          <div class="container">
-            <div class="row">
-              <div class="createProfile createProfileMar clearfix">
-                <div class="createHead">
-                  <h2>Select Favorite Topics</h2>
-                </div>
-                <div class="fullwid favs"> <br>
-                  <div class="row">
-                    <div class="col-sm-12 bmhide">
-                      <ol class="cd-multi-steps text-bottom count">
-                        <li class="visited"><a>Create Profile</a></li>
-                        <li class="visited"><a>Follow JIYANS</a></li>
-                        <li class="current"><a>Select Favourite Topics</a></li>
-                      </ol>
+            <div class="container">
+              <div class="row">
+                <div class="createProfile createProfileMar clearfix">
+                  <div class="createHead">
+                    <h2>Select Favorite Topics</h2>
+                  </div>
+                  <div class="fullwid favs">
+                    <br>
+                    <div class="row">
+                      <div class="col-sm-12 bmhide">
+                        <ol class="cd-multi-steps text-bottom count">
+                          <li class="visited">
+                            <a>Create Profile</a>
+                          </li>
+                          <li class="visited">
+                            <a>Follow JIYANS</a>
+                          </li>
+                          <li class="current">
+                            <a>Select Favourite Topics</a>
+                          </li>
+                        </ol>
+                      </div>
+                    </div>
+                    <div align="center">
+                      <h3>Which stories look interesting to you?</h3>
+                      <p>Choose from our recommended stories below or try searching for specific topics</p>
+                      <h4>Select at least 3 stories to active</h4>
+                    </div>
+                    <div class="srcbox">
+                      <div class="input-group">
+                        <input type="text" class="infullwid" placeholder="Search By Topics" aria-describedby="basic-addon1" style="border: none;"
+                          ng-model="search_text">
+                        <span class="input-group-addon srcbgs" id="basic-addon1" ng-click="searchfav(search_text)">
+                          <img class="" src="app/view/images/search_icon.png">
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div align="center">
-                    <h3>Which stories look interesting to you?</h3>
-                    <p>Choose from our recommended stories below or try searching for specific topics</p>
-                    <h4>Select at least 3 stories to active</h4>
-                  </div>
-                  <div class="srcbox">
-                    <div class="input-group">
-                      <input type="text" class="infullwid" placeholder="Search By Topics" aria-describedby="basic-addon1" style="border: none;" ng-model="search_text">
-                      <span class="input-group-addon srcbgs" id="basic-addon1" ng-click="searchfav(search_text)" ><img class="" src="app/view/images/search_icon.png" ></span> </div>
-                  </div>
-                </div>
-                <div class="demo">
-                  <div class="item" style="margin-bottom: 0px;">
-                    <ul id="responsive" class="responsive">
-                      <!--ng-repeat-->
-                      <li ng-repeat="favourite in favourites">
-                          <div class="simag" ng-click="selectFavourites(favourite)" >
-                            <img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs" ng-class="{ image_selected : favourite.selected }"><img class="favsels" src="app/view/images/green.png" ng-class="{ show_tick : favourite.selected }"></div>
+                  <div class="demo">
+                    <div class="item" style="margin-bottom: 0px; padding-left:5%">
+                      <ul id="responsive" class="responsive">
+                        <!--ng-repeat-->
+                        <li ng-repeat="favourite in favourites">
+                          <div class="simag" ng-click="selectFavourites(favourite)">
+                            <img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs" ng-class="{ image_selected : favourite.selected }">
+                            <img class="favsels" src="app/view/images/green.png" ng-class="{ show_tick : favourite.selected }">
+                          </div>
                           <h2>{{favourite.favourite}}</h2>
                           <div class="viewfav">
-                            <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
+                            <div class="wid50s wid50sleft">
+                              <img class="vmids" src="app/view/images/eye.png">
                               <div class="vmids">25</div>
                             </div>
-                            <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
+                            <div class="wid50s wid50sright">
+                              <img class="vmids" src="app/view/images/gstar.png">
                               <div class="vmids">74</div>
                             </div>
                           </div>
-                      </li>
-                       
-                      <!-- <li>
-                        <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag active"><img class="favsels" src="app/view/images/tick.png">
-                          <div align="center"><img src="https://s-media-cache-ak0.pinimg.com/originals/81/03/6f/81036f073ff5e5037104f554134ec9ba.jpg" class="resimgs"></div>
-                        </div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag"><img class="favsels" src="app/view/images/tick.png">
-                          <div align="center"><img src="http://www.dailymobile.net/wp-content/uploads/2013/09/android-960x854-wallpaper-2220.jpg" class="resimgs"></div>
-                        </div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv1ZOQAQU5ZcdzV10s453SEnlT32sLUg4-xUOKUDh-zF0Y6ra_" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag active"><img class="favsels" src="app/view/images/tick.png"><img src="http://www3.images.coolspotters.com/wallpapers/133872/abstract-mobile-wallpaper.jpg" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag active"><img class="favsels" src="app/view/images/tick.png"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW7tmvhXaGodJLLh0FubhrDz-JuLSciq1Hku4tGg0YPitrFmNuaw" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag active"><img class="favsels" src="app/view/images/tick.png"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_9_JEN4FFg4Z4wIJA65yIcagTPsF0n1vy7JbqrhiJjcjjBoImGw" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="http://andytips.org/wp-content/uploads/2016/12/HD-Wallpapers-For-Mobile-3.jpg" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="simag"><img class="favsels" src="app/view/images/tick.png"><img src="https://1079638729.rsc.cdn77.org/pic/v2/gallery/preview/babochki-nasekomye-34593.jpg" class="resimgs"></div>
-                        <h2>Dummy Text</h2>
-                        <div class="viewfav">
-                          <div class="wid50s wid50sleft"><img class="vmids" src="app/view/images/eye.png">
-                            <div class="vmids">25</div>
-                          </div>
-                          <div class="wid50s wid50sright"><img class="vmids" src="app/view/images/gstar.png">
-                            <div class="vmids">74</div>
-                          </div>
-                        </div>
-                      </li> -->
-                    </ul>
-                    <div style="text-align: center" ng-show="favourites.length === 0">As there are no stories for now you may skip to next step</div>
-                    <div id="goToPrevSlide">&nbsp;</div>
-                    <div id="goToNextSlide">&nbsp;</div>
+                        </li>
+
+                        
+                      </ul>
+                      <div style="text-align: center" ng-show="favourites.length === 0">As there are no stories for now you may skip to next step</div>
+                      <div id="goToPrevSlide">&nbsp;</div>
+                      <div id="goToNextSlide">&nbsp;</div>
+                    </div>
+                  </div>
+                  <div style="text-align:center">
+                    <input type="button" name="previous" class="previous action-button" value="Previous">
+                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Submit" ng-disabled="favourites.length !== 0 && selectedFav.length < 3"
+                      ng-class="{ disabled_button: favourites.length !== 0 && selectedFav.length < 3 }">
                   </div>
                 </div>
-                <div style="text-align:center">
-                    <input type="button" name="previous" class="previous action-button" value="Previous">
-                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Submit" ng-disabled="favourites.length !== 0 && selectedFav.length < 3" ng-class="{ disabled_button: favourites.length !== 0 && selectedFav.length < 3 }" > 
+                <div class="fullwid">
+                  <div class="clearfix"></div>
                 </div>
               </div>
-              <div class="fullwid">
-                <div class="clearfix"></div>
-              </div>
             </div>
-          </div>
           </fieldset>
           <!--Step 02 End here-->
 
@@ -594,13 +508,15 @@
 
 <style>
   /*form styles*/
-.image_selected{
-  opacity: 0.5 !important;
-}
 
-.show_tick{
-  display: inline-block !important;
-}
+  .image_selected {
+    opacity: 0.5 !important;
+  }
+
+  .show_tick {
+    display: inline-block !important;
+  }
+
   /*Hide all except first fieldset*/
 
   #msform fieldset:not(:first-of-type) {
@@ -726,7 +642,7 @@
   var left, opacity, scale; //fieldset properties which we will animate
   var animating; //flag to prevent quick multi-click glitches
 
-  
+
 
 
   $(".next").click(function () {
@@ -735,7 +651,7 @@
 
     current_fs = $(this).closest("fieldset");
     next_fs = $(this).closest("fieldset").next();
-    
+
     $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
     next_fs.show();
@@ -763,7 +679,7 @@
     previous_fs = $(this).closest("fieldset").prev();
 
     //de-activate current step on progressbar
-   // $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+    // $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 
     //show the previous fieldset
     previous_fs.show();
