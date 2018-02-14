@@ -31,12 +31,12 @@
 
 						<!-- Modal content-->
 						<div class="modal-content">
-							<div class="modal-header" style="padding:35px 50px;">
+							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4>
 									<span class="glyphicon glyphicon-lock"></span> Forgot Password</h4>
 							</div>
-							<div class="modal-body" style="padding:40px 50px;">
+							<div class="modal-body">
 
 								<div class="form-group">
 									<label for="usrname">
@@ -44,19 +44,10 @@
 									<input type="text" class="form-control" ng-change="checkValue()" ng-model="forgetPasswordEmail" id="usrname" placeholder="Enter email">
 									<span class="error error_span">{{forgetPasswordEmailFieldVerificationError}}</span>
 								</div>
-
-
 								<button type="submit" class="btn btn-success btn-block" ng-class="{ disabled_button: forgetPasswordEmailFieldInvalid }" ng-disabled="forgetPasswordEmailFieldInvalid">
 									<span class="glyphicon glyphicon-off"></span> Send Password</button>
-
-							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-									<span class="glyphicon glyphicon-remove"></span> Cancel</button>
-
 							</div>
 						</div>
-
 					</div>
 				</div>
 				<!-- modal end -->
