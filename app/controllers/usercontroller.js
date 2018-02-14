@@ -190,10 +190,20 @@ userController.enableUser = function (req, res) {
     })
 }
 
-userController.sendForgotPasswordMail = (function (req, response) {
+userController.checkIfEmailIdExists = (function(request, response) {
     userDB.getUserByEmail(req.body.email, function (error, data) {
         if (error == null) {
+            response.json({success: true});
+        } else {
+            response.json(error);
+        }
+    });
+});
 
+userController.sendForgotPasswordMail = (function (request, response) {
+    userDB.getUserByEmail(req.body.email, function (error, data) {
+        if (error == null) {
+            
         } else {
             response.json(error);
         }
