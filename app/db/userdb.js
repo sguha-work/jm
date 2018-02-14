@@ -8,15 +8,15 @@ var fileWriter = require("../helpers/file_writer.js");
 
 const userDB = {};
 
-userDB.findOneById = function(id, done){
-  User.findOne({"_id": id }).select('email').exec(function(err, user){
-    if(err){
+userDB.findOneById = function (id, done) {
+  User.findOne({ "_id": id }).select('email').exec(function (err, user) {
+    if (err) {
       return done(err);
-    }else{
+    } else {
       return done(null, user);
     }
   })
-}       
+}
 
 userDB.findOneUser = function (email, done) {
   User.findOne({ email: email })
@@ -36,6 +36,18 @@ userDB.findOneUser = function (email, done) {
       })
     });
 }
+
+User.getUserByEmail = (function (email, done) {
+  User.findOne({ email: email }).exec(function (err, user) {
+    if (err) {
+      done(res.json({ success: false, message: 'Technical issue occured' }), null);
+    } else if (!user) {
+      done(res.json({ success: false, status: 404, message: 'User not found' }), null);
+    } else {
+      done(null, user);
+    }
+  });
+});
 
 userDB.addUser = function (userData, done) {
   User.findOne({ "email": userData.email }, function (err, data) {
@@ -98,7 +110,7 @@ userDB.activateUser = function (token, done) {
           if (err) {
             return done(err);
           } else {
-            return done(null, { success:true, message: "successfully activated" });
+            return done(null, { success: true, message: "successfully activated" });
           }
         });
       }
@@ -135,18 +147,18 @@ userDB.updateProfile = function (user_obj, done) {
     user.privacyPolicy = user_obj.privacyPolicy;
     user.favourites = user_obj.favourites;
     user.isNewUser = false;
-    if(user_obj.birthday){
-      user.dateOfBirth = new Date(user_obj.birthday);  
-    }else{
-      user.dateOfBirth = user_obj.dateOfBirth  
+    if (user_obj.birthday) {
+      user.dateOfBirth = new Date(user_obj.birthday);
+    } else {
+      user.dateOfBirth = user_obj.dateOfBirth
     }
     user.location = user_obj.location;
-    if(user_obj.profilePic){
+    if (user_obj.profilePic) {
       fileWriter.writeProfileImage(user_obj.profilePic, function (err, path) {
         if (err) {
           return done(err);
         } else {
-          user.profilePic = path; 
+          user.profilePic = path;
           user.save(function (err) {
             if (err) {
               return done(err);
@@ -157,7 +169,7 @@ userDB.updateProfile = function (user_obj, done) {
           })
         }
       });
-    }else{
+    } else {
       user.save(function (err) {
         if (err) {
           return done(err);
@@ -170,126 +182,126 @@ userDB.updateProfile = function (user_obj, done) {
   })
 }
 
-  userDB.validateToken = function(token, done){
-    if(token){
-      jwt.verify(token, 'jiyawebsite', function(err, decoded){
-          if(err){
-            done(null, { success:false, message:'Token Invalid'});
-          }else{
-            done(null, { success:true, "user": decoded.user });
-           }
-      });
-  }else{
-    done(null, { success:false, message:"No token provided"});
-  }
-  }
-
-  userDB.getAllusers = function(role, done){
-    if(role == 'super_admin'){
-      userDB.findBySuperUser(function(err, response){
-        if (err) { done(err); }
-        else{
-          done(null, response);
-        }
-      })
-    }else if(role == 'admin'){
-      userDB.findByAdmin(function(err, response){
-        if (err) { done(err); }
-        else{
-          done(null, response);
-        }
-    })
-   }else{
-     done(null, { success:false, message:"Permission denied"});
-   }
-  }
-
-  userDB.findBySuperUser = function(done){
-    User.find({ "role" : {'$ne': "super_admin" } },'firstName lastName email role featuredContent deleteUser featureList active', (function(err,data){
-      if(err){
-          done(err);
-      }
-      else{
-          done(null, data);
-      }
-    }));
-  } 
-
-  userDB.findByAdmin = function(done){
-    User.find({ "role" : "user" },'firstName lastName email role', (function(err,data){
-      if(err){
-          done(err);
-      }
-      else{
-          done(null, data);
-      }
-    }));
-  }
-
-  userDB.findallAdmins = function(done){
-    User.find({ "role" : "admin" },(function(err,data){
-      if(err){
-          done(err);
-      }
-      else{
-          done(null,{ success:true, "data": data } );
-      }
-    }));
-  }
-
-  userDB.findallUserEmails = function(done){
-    User.find({"role" : {'$ne': "super_admin" }},'email',(function(err,data){
-      if(err){
-          done(err);
-      }
-      else{
-          done(null,{ success:true, "data": data } );
-      }
-    }));
-  }
-
-  userDB.createUser = function (userData, done) {
-    User.findOne({ "email": userData.email }, function (err, data) {
+userDB.validateToken = function (token, done) {
+  if (token) {
+    jwt.verify(token, 'jiyawebsite', function (err, decoded) {
       if (err) {
-        return done(err);
-      } else if (data) {
-        return done(null, messages.errors.user_exists);
+        done(null, { success: false, message: 'Token Invalid' });
+      } else {
+        done(null, { success: true, "user": decoded.user });
       }
-      userData.temporaryToken = jwt.sign({ username: userData.username, email: userData.email }, 'jiyawebsite', { expiresIn: '24h' });
-      userData.isNewUser = true;
-      userData.role = "admin";
-      userData.save().then(() => {
-        mailer.accountCreationMail(userData.email, userData.original_password, userData.temporaryToken, function (err, data) {
-          if (err) { return done(err); }
-          else {
-            return done(null, messages.success.user_created);
-          }
-        });
-      })
-        .catch((err) => {
-          return done(null, messages.errors.required_missing);
-        });
     });
-  };
+  } else {
+    done(null, { success: false, message: "No token provided" });
+  }
+}
 
-  userDB.disable = function(id, done){
-    User.findOneAndUpdate({ "_id":id },{$set:{active : false }}, function(err, data){
-      if(err){ return done(err); }
-      else{
-        return done(null, { success:true, "message": "User disabled" });
+userDB.getAllusers = function (role, done) {
+  if (role == 'super_admin') {
+    userDB.findBySuperUser(function (err, response) {
+      if (err) { done(err); }
+      else {
+        done(null, response);
       }
     })
-  }
-
-  userDB.enable = function(id, done){
-    User.findOneAndUpdate({ "_id":id },{$set:{active : true }}, function(err, data){
-      if(err){ return done(err); }
-      else{
-        return done(null, { success:true, "message": "User disabled" });
+  } else if (role == 'admin') {
+    userDB.findByAdmin(function (err, response) {
+      if (err) { done(err); }
+      else {
+        done(null, response);
       }
     })
+  } else {
+    done(null, { success: false, message: "Permission denied" });
   }
+}
 
-  
+userDB.findBySuperUser = function (done) {
+  User.find({ "role": { '$ne': "super_admin" } }, 'firstName lastName email role featuredContent deleteUser featureList active', (function (err, data) {
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, data);
+    }
+  }));
+}
+
+userDB.findByAdmin = function (done) {
+  User.find({ "role": "user" }, 'firstName lastName email role', (function (err, data) {
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, data);
+    }
+  }));
+}
+
+userDB.findallAdmins = function (done) {
+  User.find({ "role": "admin" }, (function (err, data) {
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, { success: true, "data": data });
+    }
+  }));
+}
+
+userDB.findallUserEmails = function (done) {
+  User.find({ "role": { '$ne': "super_admin" } }, 'email', (function (err, data) {
+    if (err) {
+      done(err);
+    }
+    else {
+      done(null, { success: true, "data": data });
+    }
+  }));
+}
+
+userDB.createUser = function (userData, done) {
+  User.findOne({ "email": userData.email }, function (err, data) {
+    if (err) {
+      return done(err);
+    } else if (data) {
+      return done(null, messages.errors.user_exists);
+    }
+    userData.temporaryToken = jwt.sign({ username: userData.username, email: userData.email }, 'jiyawebsite', { expiresIn: '24h' });
+    userData.isNewUser = true;
+    userData.role = "admin";
+    userData.save().then(() => {
+      mailer.accountCreationMail(userData.email, userData.original_password, userData.temporaryToken, function (err, data) {
+        if (err) { return done(err); }
+        else {
+          return done(null, messages.success.user_created);
+        }
+      });
+    })
+      .catch((err) => {
+        return done(null, messages.errors.required_missing);
+      });
+  });
+};
+
+userDB.disable = function (id, done) {
+  User.findOneAndUpdate({ "_id": id }, { $set: { active: false } }, function (err, data) {
+    if (err) { return done(err); }
+    else {
+      return done(null, { success: true, "message": "User disabled" });
+    }
+  })
+}
+
+userDB.enable = function (id, done) {
+  User.findOneAndUpdate({ "_id": id }, { $set: { active: true } }, function (err, data) {
+    if (err) { return done(err); }
+    else {
+      return done(null, { success: true, "message": "User disabled" });
+    }
+  })
+}
+
+
 
 module.exports = userDB;

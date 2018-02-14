@@ -113,4 +113,8 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         $("#myModal").modal();
     });
 
+    $scope.sendPassword = (function() {
+        var email = $scope.forgetPasswordEmail;
+    });
+
 })

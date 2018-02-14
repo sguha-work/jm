@@ -105,7 +105,8 @@ userController.add = function (req, res) {
     });
 };
 userController.updateprofile = function (req, res) {
-    userDB.updateProfile(req.body, function (err, response) {console.log("*******");console.log(err);console.log(response);
+    userDB.updateProfile(req.body, function (err, response) {
+        console.log("*******"); console.log(err); console.log(response);
         if (err) {
             res.json(err);
         } else {
@@ -188,6 +189,17 @@ userController.enableUser = function (req, res) {
         }
     })
 }
+
+userController.sendForgotPasswordMail = (function (req, response) {
+    userDB.getUserByEmail(req.body.email, function (error, data) {
+        if (error == null) {
+
+        } else {
+            response.json(error);
+        }
+    });
+});
+
 
 module.exports = userController;
 
