@@ -60,7 +60,12 @@ userDB.getTotalNumberOfUser = (function (done) {
       return done(null, data);
     }
   })
-})
+});
+userDB.getRandomProfilePics = (function() {
+  User.find({"profilePic":{ "$exists" : true }, firstName:{ "$exists" : true }  }, function(error, data) {
+    
+  });
+});
 
 userDB.addUser = function (userData, done) {
   User.findOne({ "email": userData.email }, function (err, data) {
