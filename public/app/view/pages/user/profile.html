@@ -17,25 +17,6 @@
                     <h2>Create Profile </h2>
                   </div>
                   <div class="profileArea">
-                    <!-- <div class="row">
-                      <div class="col-sm-12">
-                        <h3>Welcome to the JIYA Family</h3>
-                      </div>
-                      <div class="col-sm-12 bmhide">
-                        <ol class="cd-multi-steps text-bottom count">
-                          <li class="current">
-                            <a>Create Profile</a>
-                          </li>
-                          <li class="">
-                            <a>Follow JIYANS</a>
-                          </li>
-                          <li class="">
-                            <a>Select Favourite Topics</a>
-                          </li>
-                        </ol>
-                      </div>
-                    </div>
-                   -->
                     <div layout-gt-xs="row" layout-xs="column" layout-wrap>
                       <div flex-gt-xs="none" flex-xs="100">
                         <input id="imageOpen" style="display:none" class="form-control hidden" type="file" img-upload onchange="angular.element(this).scope().fileReader(this)"
@@ -78,28 +59,10 @@
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_04.png">
                             </span>
-                            <textarea class="form-control" ng-model="profile.shortBio" placeholder="Short Bio" aria-describedby="basic-addon1" cols="3"
-                              required></textarea>
+                            <textarea class="form-control" ng-model="profile.shortBio" maxlength="160" placeholder="Short Bio (Max 160 charecters)" aria-describedby="basic-addon1"
+                              cols="3" required></textarea>
                           </div>
-                          <!-- <div class="input-group marbott">
-                            <span class="input-group-addon" id="basic-addon1">
-                              <img class="" src="app/view/images/ico_05.png">
-                            </span>
-                            <input type="text" class="form-control ddmm" placeholder="DD" aria-describedby="basic-addon1" ng-model="profile.date">
-                            <input type="text" class="form-control ddmm" placeholder="MM" aria-describedby="basic-addon1" ng-model="profile.month">
-                            <input type="text" class="form-control" placeholder="YYYY" aria-describedby="basic-addon1" ng-model="profile.year">
-                            <!-- <select class="form-control ddmm" placeholder="DD">
-                              <option>1</option>
-                            </select>
-                            <select class="form-control ddmm" placeholder="MM">
-                              <option>1</option>
-                            </select>
-                            <select class="form-control ddmm" placeholder="YYYY">
-                              <option>1</option>
-                            </select> -->
 
-
-                          <!-- </div> -->
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
                               <img class="" src="app/view/images/ico_05.png">
@@ -108,7 +71,7 @@
                               <input type="text" ng-model="profile.birthday" class="form-control" placeholder="Birthday" aria-describedby="basic-addon1"
                                 required>
                             </datepicker>
-                            <!-- <input type="text" ng-model= "profile.birthday"  class="form-control" placeholder="Birthday" aria-describedby="basic-addon1"> -->
+
                           </div>
                           <div class="input-group marbott">
                             <span class="input-group-addon" id="basic-addon1">
@@ -332,7 +295,7 @@
                           </div>
                         </li>
 
-                        
+
                       </ul>
                       <div style="text-align: center" ng-show="favourites.length === 0">As there are no stories for now you may skip to next step</div>
                       <div id="goToPrevSlide">&nbsp;</div>

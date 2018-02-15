@@ -15,7 +15,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
 
         $scope.isAllRequirementFulfilled = (function () {
             //!acceptAgreement && profile.birthday=='' && profile.penName==''
-            if ($scope.profile.penName && $scope.profile.penName != '' && typeof $scope.profile.birthday != 'undefined' && $scope.acceptAgreement) {
+            if ($scope.profile.name && $scope.profile.name != '' && $scope.profile.shortBio && $scope.profile.shortBio != '' && typeof $scope.profile.birthday != 'undefined' && $scope.acceptAgreement) {
                 return true;
             } else {
                 return false;
