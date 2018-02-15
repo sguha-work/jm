@@ -21,12 +21,22 @@
                       <div flex-gt-xs="none" flex-xs="100">
                         <input id="imageOpen" style="display:none" class="form-control hidden" type="file" img-upload onchange="angular.element(this).scope().fileReader(this)"
                           name="profilePic">
-                        <div ng-if="!image && !profile.profilePic" class="box">
+                        <div class="box" ng-show="!image && !profile.profilePic">
                           <img class="plusIco" ng-click="openFileBrowser()" src="app/view/images/plus.png">
                         </div>
                         <div ng-if="image && !profile.profilePic" class="profile_div_boxshadow">
-                          <img class="form-control img-responsive circle" ng-src="{{image ? image : app/view/images/avatars.png}}" ng-show="image || profile.profilePic"
-                          />
+                          <span style="
+                            position: absolute;
+                            z-index: 9999;
+                            left: 5.5%;
+                            top: 43%;
+                            background: grey;
+                            opacity: 0.5;
+                            color: white;
+                            border-radius: 5px;
+                        ">Click to change</span>
+                          <img style="cursor:pointer" ng-click="changeImage()" class="form-control img-responsive circle" title="Click to change" ng-src="{{image ? image : app/view/images/avatars.png}}"
+                            ng-show="image || profile.profilePic" />
                         </div>
                         <div ng-if="profile.profilePic" class="profile_div_boxshadow">
                           <img class="form-control img-responsive circle" ng-src="{{profile.profilePic ? profile.profilePic : app/view/images/avatars.png}}"

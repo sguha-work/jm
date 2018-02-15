@@ -108,6 +108,10 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
             $("#imageOpen").trigger("click");
         }
 
+        $scope.changeImage = (function() {
+            $("#imageOpen").trigger("click");
+        });
+
         $scope.followJiyan = function (friend) {
             $http({
                 url: CONSTANT.API_BASE_URL + 'followuser',
