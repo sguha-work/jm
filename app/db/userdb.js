@@ -61,9 +61,9 @@ userDB.getTotalNumberOfUser = (function (done) {
     }
   })
 });
-userDB.getRandomProfilePics = (function() {
-  User.find({"profilePic":{ "$exists" : true }, firstName:{ "$exists" : true }  }, function(error, data) {
-    
+userDB.getRandomProfilePics = (function () {
+  User.find({ "profilePic": { "$exists": true }, firstName: { "$exists": true } }, function (error, data) {
+
   });
 });
 
@@ -74,10 +74,10 @@ userDB.addUser = function (userData, done) {
     } else if (data) {
       return done(null, messages.errors.user_exists);
     }
-    userData.temporaryToken = jwt.sign({ username: userData.username, email: userData.email }, 'jiyawebsite', { expiresIn: '24h' });
+    userData.temporaryToken = jwt.sign({ email: userData.email }, 'jiyawebsite', { expiresIn: '24h' });
     userData.isNewUser = true;
     userData.save().then(() => {
-      mailer.activationMail(userData.email, userData.username, userData.temporaryToken, function (err, data) {
+      mailer.activationMail(userData.email, userData.temporaryToken, function (err, data) {
         if (err) { return done(err); }
         else {
           return done(null, messages.success.user_created);

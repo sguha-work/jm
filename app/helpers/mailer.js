@@ -29,7 +29,6 @@ var getCurrentIp = function () {
 
 
 mailer.welcomeMail = function (email, done) {
-    console.log("****************"); console.log(Base64.decode('YWNoaWxsZXNoZWN0b3IqMQ=='));
     var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
         auth: gmailAccount
@@ -73,7 +72,7 @@ mailer.welcomeMail = function (email, done) {
     });
 }
 
-mailer.activationMail = function (email, username, token, done) {
+mailer.activationMail = function (email, token, done) {
     var address = getCurrentIp();
     var img_path_src = path.join(__dirname, '../views/images/top.png');
     var smtpTransport = nodemailer.createTransport({
