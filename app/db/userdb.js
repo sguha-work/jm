@@ -49,6 +49,19 @@ User.getUserByEmail = (function (email, done) {
   });
 });
 
+userDB.getTotalNumberOfUser = (function (done) {
+  User.count({}, function (error, data) {
+    if (error) {
+      return done(JSON.stringify({ success: false, message: 'Technical issue occured' }), null);
+
+    } else if (!data) {
+      return done(JSON.stringify({ success: false, message: 'Technical issue occured' }), null);
+    } else {
+      return done(null, data);
+    }
+  })
+})
+
 userDB.addUser = function (userData, done) {
   User.findOne({ "email": userData.email }, function (err, data) {
     if (err) {

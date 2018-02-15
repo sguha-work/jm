@@ -1,10 +1,10 @@
 app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
     '$routeParams', 'Facebook', 'socket', 'authService',
     '$rootScope', '$location', '$timeout', 'toastr', '$base64',
-    '$window', 'socialService',
+    '$window', 'socialService', 'userRegService',
     function ($scope, CONSTANT, $http, $routeParams, Facebook,
         socket, authService, $rootScope, $location, $timeout,
-        toastr, $base64, $window, socialService) {
+        toastr, $base64, $window, socialService, userRegService) {
 
         $scope.profile = {};
         $scope.profile.email = $rootScope.current_user.email;
@@ -12,6 +12,16 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         $scope.following = [];
         $scope.selectedFav = [];
         $scope.profile.privacyPolicy = "public";
+
+        $scope.totalNumberOfUser = "";
+
+        var getTotalNumberOfUser = (function () {
+            userRegService.getTotalNumberOfUser().then(function (data) {
+                $scope.totalNumberOfUser = isNaN(data.data)?"0":data.data;
+            });
+        });
+
+        getTotalNumberOfUser();
 
         $scope.isAllRequirementFulfilled = (function () {
             //!acceptAgreement && profile.birthday=='' && profile.penName==''
@@ -108,7 +118,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
             $("#imageOpen").trigger("click");
         }
 
-        $scope.changeImage = (function() {
+        $scope.changeImage = (function () {
             $("#imageOpen").trigger("click");
         });
 

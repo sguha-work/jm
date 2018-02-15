@@ -190,10 +190,10 @@ userController.enableUser = function (req, res) {
     })
 }
 
-userController.checkIfEmailIdExists = (function(request, response) {
+userController.checkIfEmailIdExists = (function (request, response) {
     userDB.getUserByEmail(req.body.email, function (error, data) {
         if (error == null) {
-            response.json({success: true});
+            response.json({ success: true });
         } else {
             response.json(error);
         }
@@ -203,7 +203,17 @@ userController.checkIfEmailIdExists = (function(request, response) {
 userController.sendForgotPasswordMail = (function (request, response) {
     userDB.getUserByEmail(req.body.email, function (error, data) {
         if (error == null) {
-            
+
+        } else {
+            response.json(error);
+        }
+    });
+});
+
+userController.getTotalNumberOfUser = (function (request, response) {
+    userDB.getTotalNumberOfUser(function (error, data) {
+        if (error == null) {
+            response.json(data);
         } else {
             response.json(error);
         }
