@@ -70,12 +70,6 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
 
     $scope.signup = function (user) {
         $rootScope.showLoader = true;
-        // $http({
-        //     url: CONSTANT.API_BASE_URL+'signup',
-        //     method: "POST",
-        //     data: user,
-        //     headers: {'Content-Type': 'application/json'}
-        // })
         authService.signup(user)
             .then(function (response) {
                 if (response.data.success) {
