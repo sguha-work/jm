@@ -17,11 +17,30 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
 
         var getTotalNumberOfUser = (function () {
             userRegService.getTotalNumberOfUser().then(function (data) {
-                $scope.totalNumberOfUser = isNaN(data.data)?"0":data.data;
+                $scope.totalNumberOfUser = isNaN(data.data) ? "0" : data.data;
             });
         });
 
         getTotalNumberOfUser();
+
+        var getRandomProfiles = (function () {
+            userRegService.getRandomProfiles().then(function (data) {
+                var userDataArray = [];
+                for (var index in data.data) {
+                    var userObject = {};
+                    if (typeof data.data[index].profilePic == "undefined") {
+                        userObject.profilePic = "app/view/images/avatarss.png";
+                    } else {
+                        userObject.profilePic = data.data[index].profilePic;
+                    }
+                    userObject.name = data.data[index].firstName;
+                    userDataArray.push(userObject);
+                }
+                $scope.randomProfiles = userDataArray;
+            });
+        });
+
+        getRandomProfiles();
 
         $scope.isAllRequirementFulfilled = (function () {
             //!acceptAgreement && profile.birthday=='' && profile.penName==''
@@ -196,7 +215,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 $scope.friends = $rootScope.google_friends;
             } else {
                 toastr.success("Moving to next step as no Facebook or Gmail friends found");
-                $timeout(function() {
+                $timeout(function () {
                     $("#btn_getFavourite").trigger("click");
                 }, 3000);
             }

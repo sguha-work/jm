@@ -71,6 +71,7 @@ module.exports = function (router, passport) {
     router.get('/groupmail', userController.sendMulticlientMail);
     router.post('/createuser', userController.createUser);
     router.get('/getTotalNumberOfUser', userController.getTotalNumberOfUser);
+    router.get('/getRandomProfiles', userController.getRandomProfiles);
 
     //Post router
     router.post('/alluserPosts', postController.getAllUserPosts);

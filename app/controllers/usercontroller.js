@@ -220,6 +220,16 @@ userController.getTotalNumberOfUser = (function (request, response) {
     });
 });
 
+userController.getRandomProfiles = (function (request, response) {
+    userDB.getRandomProfiles(function (error, data) {
+        if (error == null) {
+            response.json(data);
+        } else {
+            response.json(error);
+        }
+    });
+});
+
 
 module.exports = userController;
 

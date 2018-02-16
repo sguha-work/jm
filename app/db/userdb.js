@@ -61,9 +61,15 @@ userDB.getTotalNumberOfUser = (function (done) {
     }
   })
 });
-userDB.getRandomProfilePics = (function () {
-  User.find({ "profilePic": { "$exists": true }, firstName: { "$exists": true } }, function (error, data) {
-
+userDB.getRandomProfiles = (function (done) {
+  User.aggregate([{ $sample: { size: 8 } }], function(error, data) {
+    if(error) {
+      return done(JSON.stringify({ success: false, message: 'Technical issue occured' }), null);
+    } else if(!data) {
+      return done(JSON.stringify({ success: false, message: 'Technical issue occured' }), null);
+    } else {
+      return done(null, data);
+    }
   });
 });
 

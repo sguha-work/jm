@@ -21,5 +21,11 @@ app.service('userRegService', function ($window, $http, CONSTANT) {
         })
     });
 
+    userservice.getRandomProfiles = (function () {
+        return $http.get(CONSTANT.API_BASE_URL + 'getRandomProfiles').then(function (data) {
+            return data;
+        })
+    });
+
     return userservice;
 })
