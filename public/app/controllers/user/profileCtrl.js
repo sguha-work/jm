@@ -32,6 +32,10 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                         userObject.profilePic = "app/view/images/avatarss.png";
                     } else {
                         userObject.profilePic = data.data[index].profilePic;
+                        if (userObject.profilePic.indexOf("/") !== -1 && userObject.profilePic.indexOf("http://") === -1 && userObject.profilePic.indexOf("https://") === -1) {
+                            var pic = "app/view/images/profile_pictures/" + userObject.profilePic.split("/").pop();
+                            userObject.profilePic = pic;
+                        }
                     }
                     userObject.name = data.data[index].firstName;
                     userDataArray.push(userObject);
