@@ -186,7 +186,7 @@
                         </ol>
                       </div>
                       <div class="col-sm-12">
-                        <div class="selall">
+                        <div class="selall" ng-if="friends.length">
                           <!-- <md-checkbox ng-click="selectAll($event)" ng-checked="selectedFrnds.length == friends.length" ng-model="selectall_check" ></md-checkbox> -->
                           <input type="checkbox" style="width: 70px;" ng-click="selectAll($event)" ng-checked="selectedFrnds.length == friends.length"
                             ng-model="selectall_check">
@@ -198,7 +198,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="overScroll">
+                    <div class="overScroll" ng-if="friends.length">
                       <!--Set 01 -->
                       <div layout-gt-xs="row" layout-xs="column" class="fbrdbtms" ng-repeat="friend in friends | limitTo:5">
                         <div flex="none" layout layout-align="center center">
@@ -232,7 +232,7 @@
                     </div>
                     <div style="text-align:center">
                       <input type="button" name="previous" class="previous action-button" value="Previous">
-                      <input type="button" name="next" class="next nextbtn action-button" ng-click="getFavourites()" value="Next">
+                      <input type="button" id="btn_getFavourite" name="next" class="next nextbtn action-button" ng-click="getFavourites()" value="Next">
                     </div>
                   </div>
                 </div>

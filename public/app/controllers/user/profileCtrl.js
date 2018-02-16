@@ -194,7 +194,11 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 $scope.getLoginStatus();
             } else if ($scope.profile_user.google.length > 0) {
                 $scope.friends = $rootScope.google_friends;
-                console.log($rootScope.google_friends);
+            } else {
+                toastr.success("Moving to next step as no Facebook or Gmail friends found");
+                $timeout(function() {
+                    $("#btn_getFavourite").trigger("click");
+                }, 3000);
             }
 
         };
