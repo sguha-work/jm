@@ -203,5 +203,48 @@ mailer.reportMail = function (obj, done) {
     });
 }
 
+mailer.forgetPasswordMail = function (email, password, done) {
+    var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: gmailAccount
+    });
+    //   smtpTransport.use('complie', hbs({
+    //     viewPath: __dirname,
+    //     extName:'.hbs'
+    //   }))
 
+    smtpTransport.use('compile', hbs({
+        viewEngine: {
+            extname: '.hbs',
+            layoutsDir: path.join(__dirname, '../views'),
+            defaultLayout: 'forgetPassword'
+        },
+        viewPath: path.join(__dirname, '../views'),
+        extName: '.hbs'
+    }));
+
+    var mailOptions = {
+        from: 'jiya.tech',
+        to: email,
+        //bcc: '',
+        subject: 'Password request Email',
+        template: 'forgetPassword',
+        context: {
+            email: email,
+            password: password
+        }
+
+    };
+
+    smtpTransport.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            return;
+        } else {
+            console.log('Email sent: ' + info.response);
+            done();
+
+        }
+    });
+}
 module.exports = mailer;

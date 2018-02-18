@@ -60,5 +60,13 @@ app.service('authService', function ($window, $http, CONSTANT) {
         })
     }
 
+    authservice.getAndSendPasswordAsEmail = (function(email) {
+        return $http.get(CONSTANT.API_BASE_URL + 'getAndSendPasswordAsEmail', email).then(function(data) {
+            return data;
+        }, function(data) {
+            return data;
+        });
+    });
+
     return authservice;
 })

@@ -104,6 +104,7 @@ userController.add = function (req, res) {
         }
     });
 };
+
 userController.updateprofile = function (req, res) {
     userDB.updateProfile(req.body, function (err, response) {
         console.log("*******"); console.log(err); console.log(response);
@@ -200,10 +201,11 @@ userController.checkIfEmailIdExists = (function (request, response) {
     });
 });
 
-userController.sendForgotPasswordMail = (function (request, response) {
+userController.getAndSendPasswordAsEmail = (function (request, response) {
     userDB.getUserByEmail(req.body.email, function (error, data) {
         if (error == null) {
-
+            var email = data.data.email;
+            var password = data.data.password;
         } else {
             response.json(error);
         }
