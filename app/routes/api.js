@@ -6,7 +6,7 @@ var userController = require('../controllers/usercontroller');
 var postController = require('../controllers/postcontroller');
 var loginController = require('../controllers/logincontroller');
 var quoteController = require('../controllers/quotecontroller');
-var favController = require('../controllers/favcontroller');
+var topicController = require('../controllers/topiccontroller');
 var bdayController = require('../controllers/bdaycontroller');
 var profileController = require('../controllers/profilecontroller');
 var categoryController = require('../controllers/categorycontroller');
@@ -108,12 +108,12 @@ module.exports = function (router, passport) {
     router.post('/updatequote', quoteController.update);
     router.get('/getquotebyid', quoteController.getById);
 
-    //Favourite router
-    router.post('/addfav', favController.add);
-    router.delete('/removefav', favController.remove);
-    router.post('/updatefav', favController.update);
-    router.get('/getfavourites', favController.all);
-    router.post('/searchfav', favController.search);
+    //topic router
+    router.post('/addfav', topicController.add);
+    router.delete('/removefav', topicController.remove);
+    router.post('/updatefav', topicController.update);
+    router.get('/getTopics', topicController.all);
+    //router.post('/searchfav', topicController.search);
     router.post('/getfavposts', postController.getFavPosts);
 
     //Birthday router

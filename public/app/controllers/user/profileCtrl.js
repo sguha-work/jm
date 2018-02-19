@@ -252,10 +252,10 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
 
         $scope.selected = {};
 
-        $scope.getFavourites = function () {
+        $scope.getTopics = function () {
             $rootScope.showLoader = true;
             $http({
-                url: CONSTANT.API_BASE_URL + 'getfavourites',
+                url: CONSTANT.API_BASE_URL + 'getTopics',
                 method: "GET",
             })
                 .then(function (response) {

@@ -76,7 +76,7 @@ app.service('homePageService', function($window, $http,CONSTANT){
 
         homepageservice.getFavourites = function(){
             return $http({
-                url: CONSTANT.API_BASE_URL + 'getfavourites',
+                url: CONSTANT.API_BASE_URL + 'getTopics',
                 method: "GET",
             }).then(function(data){
                 return data;

@@ -5,7 +5,7 @@ var randomstring = require("randomstring");
 var Facebook = require('./facebook.js');
 var facebookSchema = Facebook.schema;
 var googleSchema = require('./google.js').schema;
-var favouriteSchema = require('./favourites.js').schema;
+var topicSchema = require('./topics.js').schema;
 var followingSchema = require('./following.js').schema;
 var messages = require('../config/messages.js');
 var mailer = require('../helpers/mailer.js');
@@ -23,7 +23,7 @@ var userSchema = new Schema({
     facebook    : [ facebookSchema ],
     fb_acc_token: { type:String },
     google      : [ googleSchema ],
-    favourites  : [ favouriteSchema ],
+    topics      : [ topicSchema ],
     penName     : { type:String },
     shortBio    : { type:String },
     dateOfBirth : { type:Date },

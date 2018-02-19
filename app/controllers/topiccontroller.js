@@ -1,6 +1,6 @@
 'use strict';
 
-var Topic = require('../models/topic.js');
+var Topic = require('../models/topics.js');
 var messages = require('../config/messages.js');
 var topicDB = require('../db/topicdb.js');
 

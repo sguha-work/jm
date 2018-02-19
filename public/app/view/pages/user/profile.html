@@ -228,7 +228,7 @@
                     </div>
                     <div style="text-align:center">
                       <input type="button" name="previous" class="previous action-button" value="Previous">
-                      <input type="button" id="btn_getFavourite" name="next" class="next nextbtn action-button" ng-click="getFavourites()" value="Next">
+                      <input type="button" id="btn_getFavourite" name="next" class="next nextbtn action-button" ng-click="getTopics()" value="Next">
                     </div>
                   </div>
                 </div>
@@ -282,10 +282,10 @@
                         <!--ng-repeat-->
                         <li ng-repeat="favourite in favourites">
                           <div class="simag" ng-click="selectFavourites(favourite)">
-                            <img src="http://dimsemenov.com/plugins/royal-slider/img/home.jpg" class="resimgs" ng-class="{ image_selected : favourite.selected }">
+                            <img src="{{favourite.topicImage?favourite.topicImage:'http://dimsemenov.com/plugins/royal-slider/img/home.jpg'}}" class="resimgs" ng-class="{ image_selected : favourite.selected }">
                             <img class="favsels" src="app/view/images/green.png" ng-class="{ show_tick : favourite.selected }">
                           </div>
-                          <h2>{{favourite.favourite}}</h2>
+                          <h2>{{favourite.topicName}}</h2>
                           <div class="viewfav">
                             <div class="wid50s wid50sleft">
                               <img class="vmids" src="app/view/images/eye.png">
