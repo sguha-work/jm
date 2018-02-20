@@ -291,12 +291,12 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
             reader.readAsDataURL(element.files[0]);
         }
 
-        $scope.selectTopics = function (topics) {
+        $scope.selectTopics = function (topic) {
             if ($scope.selectedTopic.length > 0) {
                 for (var i = 0; i < $scope.selectedTopic.length; i++) {
-                    if ($scope.selectedTopic[i]._id == topics._id) {
+                    if ($scope.selectedTopic[i]._id == topic._id) {
                         $scope.selectedTopic.splice(i, 1);
-                        topics.selected = false;
+                        topic.selected = false;
                         return false;
                     }
                 }
