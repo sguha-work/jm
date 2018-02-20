@@ -170,11 +170,11 @@
     opacity: 1;
 }
 .lSAction > .lSPrev {
-    background-position: 0 0;
+    background-position: 1px 1px;
     left: -10px;
 }
 .lSAction > .lSNext {
-    background-position: -29px 0;
+    background-position: -30px 1px;
     right: -10px;
 }
 .lSAction > a.disabled {
