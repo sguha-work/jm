@@ -280,12 +280,12 @@
                     <div class="item" style="margin-bottom: 0px; padding-left:5%">
                       <ul id="responsive" class="responsive">
                         <!--ng-repeat-->
-                        <li ng-repeat="favourite in favourites">
-                          <div class="simag" ng-click="selectFavourites(favourite)">
-                            <img src="{{favourite.topicImage?favourite.topicImage:'http://dimsemenov.com/plugins/royal-slider/img/home.jpg'}}" class="resimgs" ng-class="{ image_selected : favourite.selected }">
-                            <img class="favsels" src="app/view/images/green.png" ng-class="{ show_tick : favourite.selected }">
+                        <li ng-repeat="topic in topics">
+                          <div class="simag" ng-click="selectTopicss(topic)">
+                            <img src="{{topic.topicImage?topic.topicImage:'http://dimsemenov.com/plugins/royal-slider/img/home.jpg'}}" class="resimgs" ng-class="{ image_selected : topic.selected }">
+                            <img class="favsels" src="app/view/images/green.png" ng-class="{ show_tick : topic.selected }">
                           </div>
-                          <h2>{{favourite.topicName}}</h2>
+                          <h2>{{topic.topicName}}</h2>
                           <div class="viewfav">
                             <div class="wid50s wid50sleft">
                               <img class="vmids" src="app/view/images/eye.png">

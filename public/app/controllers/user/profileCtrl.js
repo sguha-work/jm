@@ -10,7 +10,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         $scope.profile.email = $rootScope.current_user.email;
         $scope.selectedFrnds = [];
         $scope.following = [];
-        $scope.selectedFav = [];
+        $scope.selectedTopic = [];
         $scope.profile.privacyPolicy = "public";
 
         $scope.totalNumberOfUser = "";
@@ -114,7 +114,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
             profile_details.profilePic = $base64.encode('a string');
             profile_details.dateOfBirth = returnDate(profile_details);
             profile_details.profilePic = $scope.base64_img;
-            profile_details.favourites = $scope.favourites;
+            profile_details.favourites = $scope.selectedTopic;
             profile_details.id = $rootScope.current_user._id;
             $rootScope.showLoader = true;
             $http({
@@ -261,7 +261,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 .then(function (response) {
 
                     if (response.data.success) {
-                        $scope.favourites = response.data.data;
+                        $scope.topics = response.data.data;
                         $timeout(function () {
                             showList();
                             $rootScope.showLoader = false;
@@ -275,7 +275,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 },
                     function (response) { // optional
                         console.log("some error occured");
-                        $scope.favourites = [];
+                        $scope.topics = [];
                         $rootScope.showLoader = false;
                     });
         }
@@ -291,22 +291,22 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
             reader.readAsDataURL(element.files[0]);
         }
 
-        $scope.selectFavourites = function (favourite) {
-            if ($scope.selectedFav.length > 0) {
-                for (var i = 0; i < $scope.selectedFav.length; i++) {
-                    if ($scope.selectedFav[i]._id == favourite._id) {
-                        $scope.selectedFav.splice(i, 1);
-                        favourite.selected = false;
+        $scope.selectTopics = function (topics) {
+            if ($scope.selectedTopic.length > 0) {
+                for (var i = 0; i < $scope.selectedTopic.length; i++) {
+                    if ($scope.selectedTopic[i]._id == topics._id) {
+                        $scope.selectedTopic.splice(i, 1);
+                        topics.selected = false;
                         return false;
                     }
                 }
-                $scope.selectedFav.push(favourite);
-                favourite.selected = true;
+                $scope.selectedTopic.push(topic);
+                topic.selected = true;
             } else {
-                $scope.selectedFav.push(favourite);
-                favourite.selected = true;
+                $scope.selectedTopic.push(topic);
+                topic.selected = true;
             }
-            console.log($scope.selectedFav);
+            console.log($scope.selectedTopic);
         }
 
         $scope.selectFriend = function (frnd) {
@@ -332,7 +332,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                     .then(function (response) {
 
                         if (response.data.success) {
-                            $scope.favourites = response.data.data;
+                            $scope.topics = response.data.data;
                             showList();
 
                         } else {
@@ -359,7 +359,6 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 loop: false,
                 cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
                 speed: 600,
-                controls: false,
                 pager: false,
                 responsive: [
                     {

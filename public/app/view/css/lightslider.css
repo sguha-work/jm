@@ -153,16 +153,16 @@
 
 /* slider actions */
 .lSAction > a {
-    width: 38px;
+    width: 35px;
     display: block;
     top: 50%;
-    height: 42px;
+    height: 32px;
     background-image: url('../images/controls.png');
     cursor: pointer;
     position: absolute;
     z-index: 99;
     margin-top: -16px;
-    opacity: 0.5;
+    opacity: 1;
     -webkit-transition: opacity 0.35s linear 0s;
     transition: opacity 0.35s linear 0s;
 }
@@ -174,7 +174,7 @@
     left: -10px;
 }
 .lSAction > .lSNext {
-    background-position: -48px 0;
+    background-position: -29px 0;
     right: -10px;
 }
 .lSAction > a.disabled {
