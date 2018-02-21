@@ -22,7 +22,20 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         });
 
         getTotalNumberOfUser();
-
+        var checkAndReplaceForInvalidImage = (function (userObject) {
+            var s = document.createElement("IMG");
+            s.src = userObject.profilePic
+            $("img[src='"+userObject.profilePic+"']").hide();
+            s.onerror = function () {
+                console.log("file with " + userObject.profilePic + " invalid");
+                userObject.profilePic = null;
+                $("img[src='"+userObject.profilePic+"']").show();
+            }
+            s.onload = function () {
+                $("img[src='"+userObject.profilePic+"']").show();
+                
+            }
+        });
         var getRandomProfiles = (function () {
             userRegService.getRandomProfiles().then(function (data) {
                 var userDataArray = [];
@@ -36,8 +49,10 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                             var pic = "app/view/images/profile_pictures/" + userObject.profilePic.split("/").pop();
                             userObject.profilePic = pic;
                         }
+                        
                     }
-                    userObject.name = data.data[index].firstName;
+                    checkAndReplaceForInvalidImage(userObject);
+                    userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
                     userDataArray.push(userObject);
                 }
                 $scope.randomProfiles = userDataArray;
@@ -329,10 +344,10 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         }
 
         $scope.searchfav = function (text) {
-            if (text != null && text != "" && text.length>=1) {
+            if (text != null && text != "" && text.length >= 1) {
                 var filterredSet = [];
-                for(var index in $scope.topicsSet) {
-                    if($scope.topicsSet[index].topicName.toLowerCase().indexOf(text.toLowerCase())!==-1) {
+                for (var index in $scope.topicsSet) {
+                    if ($scope.topicsSet[index].topicName.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
                         filterredSet.push($scope.topicsSet[index]);
                     }
                 }
@@ -356,7 +371,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 //             function (response) { // optional
                 //                 console.log("some error occured");
                 //             });
-            } else if(text.length==0) {
+            } else if (text.length == 0) {
                 $scope.topics = $scope.initialTopics;
             }
         }
