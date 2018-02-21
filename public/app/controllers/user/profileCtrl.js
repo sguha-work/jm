@@ -267,6 +267,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                     if (response.data.success) {
                         $scope.topicsSet = response.data.data;
                         $scope.topics = getRandom10(response.data.data);
+                        $scope.initialTopics = $scope.topics;
                         $timeout(function () {
                             showList();
                             $rootScope.showLoader = false;
@@ -328,7 +329,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         }
 
         $scope.searchfav = function (text) {
-            if (text != null && text != "" && text.length>=3) {
+            if (text != null && text != "" && text.length>=1) {
                 var filterredSet = [];
                 for(var index in $scope.topicsSet) {
                     if($scope.topicsSet[index].topicName.toLowerCase().indexOf(text.toLowerCase())!==-1) {
@@ -355,6 +356,8 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 //             function (response) { // optional
                 //                 console.log("some error occured");
                 //             });
+            } else if(text.length==0) {
+                $scope.topics = $scope.initialTopics;
             }
         }
 

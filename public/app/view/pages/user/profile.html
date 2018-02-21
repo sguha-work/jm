@@ -300,15 +300,15 @@
 
 
                       </ul>
-                      <div style="text-align: center" ng-show="favourites.length === 0">As there are no stories for now you may skip to next step</div>
+                      <div style="text-align: center" ng-show="topicsSet.length === 0">As there are no stories for now you may skip to next step</div>
                       <div id="goToPrevSlide">&nbsp;</div>
                       <div id="goToNextSlide">&nbsp;</div>
                     </div>
                   </div>
                   <div style="text-align:center">
                     <input type="button" name="previous" class="previous action-button" value="Previous">
-                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Proceed" ng-disabled="favourites.length !== 0 && selectedFav.length < 3"
-                      ng-class="{ disabled_button: favourites.length !== 0 && selectedFav.length < 3 }">
+                    <input type="button" name="submit" class="next nextbtn action-button" ng-click="submitProfile(profile)" value="Proceed" ng-disabled="topicsSet.length !== 0 && selectedTopic.length < 3"
+                      ng-class="{ disabled_button: topicsSet.length !== 0 && selectedTopic.length < 3 }">
                   </div>
                 </div>
                 <div class="fullwid">
