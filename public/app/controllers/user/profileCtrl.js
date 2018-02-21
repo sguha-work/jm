@@ -251,8 +251,8 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         }
 
         $scope.selected = {};
-        var getRandom10 = (function(dataSet) {
-            var newDataSet = dataSet.sort( function() { return 0.5 - Math.random() } );
+        var getRandom10 = (function (dataSet) {
+            var newDataSet = dataSet.sort(function () { return 0.5 - Math.random() });
             newDataSet = newDataSet.slice(0, 10);
             return newDataSet;
         });
@@ -328,26 +328,33 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         }
 
         $scope.searchfav = function (text) {
-            if (text != null && text != "") {
-                $http({
-                    url: CONSTANT.API_BASE_URL + 'searchfav',
-                    data: { name: text },
-                    method: "POST",
-                })
-                    .then(function (response) {
+            if (text != null && text != "" && text.length>=3) {
+                var filterredSet = [];
+                for(var index in $scope.topicsSet) {
+                    if($scope.topicsSet[index].topicName.toLowerCase().indexOf(text.toLowerCase())!==-1) {
+                        filterredSet.push($scope.topicsSet[index]);
+                    }
+                }
+                $scope.topics = filterredSet;
+                //     $http({
+                //         url: CONSTANT.API_BASE_URL + 'searchfav',
+                //         data: { name: text },
+                //         method: "POST",
+                //     })
+                //         .then(function (response) {
 
-                        if (response.data.success) {
-                            $scope.topics = response.data.data;
-                            showList();
+                //             if (response.data.success) {
+                //                 $scope.topics = response.data.data;
+                //                 showList();
 
-                        } else {
-                            console.log("err");
-                        }
+                //             } else {
+                //                 console.log("err");
+                //             }
 
-                    },
-                        function (response) { // optional
-                            console.log("some error occured");
-                        });
+                //         },
+                //             function (response) { // optional
+                //                 console.log("some error occured");
+                //             });
             }
         }
 

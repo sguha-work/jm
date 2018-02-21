@@ -269,10 +269,10 @@
                     <div class="srcbox">
                       <div class="input-group">
                         <input type="text" class="infullwid" placeholder="Search By Topics" aria-describedby="basic-addon1" style="border: none;"
-                          ng-model="search_text">
-                        <span class="input-group-addon srcbgs" id="basic-addon1" ng-click="searchfav(search_text)">
+                          ng-model="search_text" ng-change="searchfav(search_text)">
+                        <!-- <span class="input-group-addon srcbgs" id="basic-addon1" ng-click="searchfav(search_text)">
                           <img class="" src="app/view/images/search_icon.png">
-                        </span>
+                        </span> -->
                       </div>
                     </div>
                   </div>
