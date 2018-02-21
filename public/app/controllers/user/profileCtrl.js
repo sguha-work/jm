@@ -251,7 +251,11 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         }
 
         $scope.selected = {};
-
+        var getRandom10 = (function(dataSet) {
+            var newDataSet = dataSet.sort( function() { return 0.5 - Math.random() } );
+            newDataSet = newDataSet.slice(0, 10);
+            return newDataSet;
+        });
         $scope.getTopics = function () {
             $rootScope.showLoader = true;
             $http({
@@ -261,7 +265,8 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                 .then(function (response) {
 
                     if (response.data.success) {
-                        $scope.topics = response.data.data;
+                        $scope.topicsSet = response.data.data;
+                        $scope.topics = getRandom10(response.data.data);
                         $timeout(function () {
                             showList();
                             $rootScope.showLoader = false;
@@ -353,42 +358,42 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         var showList = function () {
             window.prettyPrint && prettyPrint();
             $('.windowWidh').text($(window).width());
-            var slider = $('#responsive').lightSlider({
-                item: 6,
-                slideMove: 2,
-                loop: false,
-                cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-                speed: 600,
-                pager: false,
-                responsive: [
-                    {
-                        breakpoint: 800,
-                        settings: {
-                            item: 3,
-                            slideMove: 1,
-                            slideMargin: 6,
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            item: 2,
-                            slideMove: 1
-                        }
-                    }
-                ],
+            // var slider = $('#responsive').lightSlider({
+            //     item: 6,
+            //     slideMove: 2,
+            //     loop: false,
+            //     cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+            //     speed: 600,
+            //     pager: false,
+            //     responsive: [
+            //         {
+            //             breakpoint: 800,
+            //             settings: {
+            //                 item: 3,
+            //                 slideMove: 1,
+            //                 slideMargin: 6,
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 480,
+            //             settings: {
+            //                 item: 2,
+            //                 slideMove: 1
+            //             }
+            //         }
+            //     ],
 
-                onSliderLoad: function () {
-                    $('#responsive').removeClass('cS-hidden');
-                }
-            });
+            //     onSliderLoad: function () {
+            //         $('#responsive').removeClass('cS-hidden');
+            //     }
+            // });
 
-            $('#goToPrevSlide').click(function () {
-                slider.goToPrevSlide();
-            });
-            $('#goToNextSlide').click(function () {
-                slider.goToNextSlide();
-            });
+            // $('#goToPrevSlide').click(function () {
+            //     slider.goToPrevSlide();
+            // });
+            // $('#goToNextSlide').click(function () {
+            //     slider.goToNextSlide();
+            // });
 
         };
 

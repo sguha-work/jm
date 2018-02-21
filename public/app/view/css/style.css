@@ -627,6 +627,11 @@
 	   margin-bottom: 60px;
    }
    .responsive li {
+	float: left;
+    height: 250px;
+    width: 200px;
+	margin-right: 5px;
+	margin-bottom: 5px;
 	   color: #292929;
 	   border-radius: 2px;
 	   overflow: hidden;
