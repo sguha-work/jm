@@ -18,7 +18,7 @@
        </div>
      </div>
      <a href="#" ng-click="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Sign out"><i class="fa fa-sign-out"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"><img src="/w3images/avatar2.png" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a>
+     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"><img ng-src="{{current_user.profilePic ? current_user.profilePic:'app/view/images/user_2.png'}}" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a>
     </div>
    </div>
    
@@ -221,9 +221,9 @@
 
           
            <button style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="removePost(post._id)"><i class="fa fa-times"></i>  remove</button> 
-           <div class="social_icons"><img style="width: 50px;"  class="img-responsive" src="app/view/images/fb2_share.png" ng-click="shareFb(post.postContent)"/></div>
-           <div class="social_icons"><img style="width: 50px;"  class="img-responsive" src="app/view/images/twitter_share.png" ng-click="shareTwitter(post.postContent)"/></div>
-           <div class="social_icons"><img style="width: 50px;"  class="img-responsive" src="app/view/images/pint_share.png" ng-click="sharePintrest(post.postContent)" /></div>
+           <div class="social_icons"><img   class="img-responsive social_icons" src="app/view/images/fb2_share.png" ng-click="shareFb(post.postContent)"/></div>
+           <div class="social_icons"><img   class="img-responsive social_icons" src="app/view/images/twitter_share.png" ng-click="shareTwitter(post.postContent)"/></div>
+           <div class="social_icons"><img   class="img-responsive social_icons" src="app/view/images/pint_share.png" ng-click="sharePintrest(post.postContent)" /></div>
 
            <button style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="reportAbuse(post)"><i class="fa fa-times"></i>  Report Abuse</button> 
            <div style="margin-top: 30px;" ng-if="post.reportBox" class="animationIf">
