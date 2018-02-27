@@ -34,7 +34,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       // $http.post(CONSTANT.API_BASE_URL+'alluserPosts', post)
       authService.getAllUserPosts(post)
         .then(function (response) {
-          $scope.postsArray = response.data;
+          $scope.postsArray = response.data;alert(1+JSON.stringify($scope.postsArray));
           post.comments = response.data.comments;
         })
         .catch(function (response) {
@@ -90,16 +90,16 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       })
   }
 
-  $scope.getAllUserPosts = function () {
-    var post = { "id": $rootScope.current_user._id };
-    $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post)
-      .then(function (response) {
-        $scope.postsArray = response.data;
-      })
-      .catch(function (response) {
+  // $scope.getAllUserPosts = function () {
+  //   var post = { "id": $rootScope.current_user._id };
+  //   $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post)
+  //     .then(function (response) {
+  //       $scope.postsArray = response.data;
+  //     })
+  //     .catch(function (response) {
 
-      })
-  }
+  //     })
+  // }
 
   $scope.likePost = function (post) {
     var postData = {};

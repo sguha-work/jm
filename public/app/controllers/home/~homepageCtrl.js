@@ -8,7 +8,6 @@ function ($scope, $rootScope, CONSTANT,  $http, $window, authService, toastr, ho
     $scope.prepost ={};
     $scope.showFirst = true;
     $scope.post = {};
-
 $scope.url="app/view/images/bgimg1.jpg"
 $scope.setBgImg=function(url){
   $scope.url=url;

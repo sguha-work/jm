@@ -67,10 +67,10 @@ var routes = angular.module('appRoutes', ['ngRoute', 'facebook']).config(functio
             authenticated: true
         })
 
-        .when('/homepage', {
-            templateUrl: 'app/view/pages/home/homepage.html',
-            authenticated: true
-        })
+        // .when('/homepage', {
+        //     templateUrl: 'app/view/pages/home/homepage.html',
+        //     authenticated: true
+        // })
         // .when('/auth/facebook',{
         //     authenticated: false
         // })

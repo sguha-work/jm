@@ -2,7 +2,7 @@ app.service('homePageService', function($window, $http,CONSTANT){
     
         var homepageservice = {};
         
-        homepageservice.getAllUserPosts = function(post){
+        homepageservice.getAllUserPosts = function(post){alert("y");
             return $http.post(CONSTANT.API_BASE_URL+'gettimelineposts', post).then(function(data){
                 return data;
             })
