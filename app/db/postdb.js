@@ -91,7 +91,7 @@ postDB.getAllFollowingPosts = function(following, done){
 
   list = [];
   function asyncLoop(i, cb) {
-      if (i < following.length) {
+      if (typeof following!== "undefined" && following && i < following.length) {
           Post.find({'userId':  following[i].followingUserId , "isDraft": false }).exec(function (err, o) {
             console.log(o);
               list.push(o);

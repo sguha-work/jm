@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare) {
+app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare, homePageService) {
 
   if (!authService.isLoggedIn()) {
     $location.path('/');
@@ -32,14 +32,19 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     if ($rootScope.current_user) {
       var post = { "id": $rootScope.current_user._id };
       // $http.post(CONSTANT.API_BASE_URL+'alluserPosts', post)
-      authService.getAllUserPosts(post)
-        .then(function (response) {
-          $scope.postsArray = response.data;alert(1+JSON.stringify($scope.postsArray));
-          post.comments = response.data.comments;
-        })
-        .catch(function (response) {
+      // authService.getAllUserPosts(post)
+      //   .then(function (response) {
+      //     $scope.postsArray = response.data;alert(1+JSON.stringify($scope.postsArray));
+      //     post.comments = response.data.comments;
+      //   })
+      //   .catch(function (response) {
 
-        })
+      //   })
+      homePageService.getAllUserPosts(post).then(function (data) {
+        alert(JSON.stringify(data))
+      }).catch(function (error) {
+        alert(JSON.stringify(error))
+      });
     }
   }
   $scope.getAllUserPosts();
@@ -81,7 +86,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     post.poster = $rootScope.current_user.firstName + " " + $rootScope.current_user.lastName;
     post.posterImage = $rootScope.current_user.profilePic;
     //$http.post(CONSTANT.API_BASE_URL+'addpost', post)
-    authService.getAllUserPosts(post)
+    homePageService.getAllUserPosts(post)
       .then(function (response) {
         $scope.getAllUserPosts();
       })
