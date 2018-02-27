@@ -261,19 +261,14 @@
         <button ng-if="post.showCommentBox" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="postComment(post)">
           <i class="fa fa-comment"></i>  Comment</button>
 
-        <div style="margin-bottom:15px">
+        <div style="">
           <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
             <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(post, rating)"></div>
           </span>
         </div>
 
-
-
-        <button style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="removePost(post._id)">
-          <i class="fa fa-times"></i>  remove</button>
-        <div class="social_icons">
-          <img class="img-responsive social_icons" src="app/view/images/fb2_share.png" ng-click="shareFb(post.postContent)"
-          />
+        <div class="social_icons" style="margin-left: 5%;">
+          <img class="img-responsive social_icons" src="app/view/images/fb2_share.png" ng-click="shareFb(post.postContent)" />
         </div>
         <div class="social_icons">
           <img class="img-responsive social_icons" src="app/view/images/twitter_share.png" ng-click="shareTwitter(post.postContent)"
@@ -283,6 +278,10 @@
           <img class="img-responsive social_icons" src="app/view/images/pint_share.png" ng-click="sharePintrest(post.postContent)"
           />
         </div>
+
+        <button style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="removePost(post._id)">
+          <i class="fa fa-times"></i>  remove</button>
+
 
         <button style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="reportAbuse(post)">
           <i class="fa fa-times"></i>  Report Abuse</button>
