@@ -11,7 +11,7 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
                 if (data.data.success) {
                     $timeout(function () {
                         // $location.path('/home');
-                        $location.path('/page');
+                        $location.path('/home');
                         $rootScope.showLoader = false;
                         toastr.success('Login Successful');
                     }, 1500)
@@ -107,13 +107,13 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         $("#myModal").modal();
     });
 
-    $scope.sendPassword = (function(event) {
+    $scope.sendPassword = (function (event) {
         var email = $scope.forgetPasswordEmail;
         $(".modal-header button").trigger("click");
         event.preventDefault();
         authService.getAndSendPasswordAsEmail(email).then(function () {
-            toaster.success("Please check "+email+" for the password recovery option");
-        }, function() {
+            toaster.success("Please check " + email + " for the password recovery option");
+        }, function () {
             toastr.error("Unable to fetch password of this email");
         });
     });

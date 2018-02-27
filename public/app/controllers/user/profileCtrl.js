@@ -25,15 +25,15 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
         var checkAndReplaceForInvalidImage = (function (userObject) {
             var s = document.createElement("IMG");
             s.src = userObject.profilePic
-            $("img[src='"+userObject.profilePic+"']").hide();
+            $("img[src='" + userObject.profilePic + "']").hide();
             s.onerror = function () {
                 console.log("file with " + userObject.profilePic + " invalid");
                 userObject.profilePic = null;
-                $("img[src='"+userObject.profilePic+"']").show();
+                $("img[src='" + userObject.profilePic + "']").show();
             }
             s.onload = function () {
-                $("img[src='"+userObject.profilePic+"']").show();
-                
+                $("img[src='" + userObject.profilePic + "']").show();
+
             }
         });
         var getRandomProfiles = (function () {
@@ -49,7 +49,7 @@ app.controller('profileCtrl', ['$scope', 'CONSTANT', '$http',
                             var pic = "app/view/images/profile_pictures/" + userObject.profilePic.split("/").pop();
                             userObject.profilePic = pic;
                         }
-                        
+
                     }
                     checkAndReplaceForInvalidImage(userObject);
                     userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
