@@ -233,7 +233,7 @@
         <h4>{{post.poster}}</h4>
         <br>
         <hr class="w3-clear">
-        <p>{{post.postContent}}</p>
+        <p ng-bind-html="{{post.postContent}}"></p>
         <div ng-if="post.comments.length!=0" ng-repeat="comment in post.comments">
           <p>{{comment.commentBody}}</p>
         </div>

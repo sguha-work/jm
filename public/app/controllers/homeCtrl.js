@@ -41,7 +41,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
       //   })
       homePageService.getAllUserPosts(post).then(function (data) {
-        alert(JSON.stringify(data))
+        $scope.postsArray = data.data.data;
       }).catch(function (error) {
         alert(JSON.stringify(error))
       });

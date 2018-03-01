@@ -9,7 +9,6 @@ app.service('homePageService', function ($window, $http, CONSTANT) {
     }
 
     homepageservice.getAllUserPosts = (function (post) {
-        alert("my");
         return $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post).then(function (data) {
             return data;
         })

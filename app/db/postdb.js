@@ -44,7 +44,7 @@ postDB.getPost = function (postData, done) {
 };
 
 postDB.getAllUserPosts = function (id, done) {
-  Post.find({ "userId": id, "isDraft": false }).sort({ 'dateAndTime': -1 }).exec(function (err, data) {
+  Post.find({"isDraft": false }).sort({ 'dateAndTime': -1 }).exec(function (err, data) {
     if (err) {
       return done(err);
     }

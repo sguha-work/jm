@@ -48,11 +48,11 @@ app.service('authService', function ($window, $http, CONSTANT) {
 
     //***********************Home Controller Reated Services*******************/
 
-    authservice.getAllUserPosts = function (post) {
-        return $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post).then(function (response) {
-            return response;
-        })
-    }
+    // authservice.getAllUserPosts = function (post) {
+    //     return $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post).then(function (response) {
+    //         return response;
+    //     })
+    // }
 
     authservice.postStatus = function (post) {
         return $http.post(CONSTANT.API_BASE_URL + 'addpost', post).then(function (data) {
