@@ -15,6 +15,20 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     max: 5
   }];
 
+  var checkPostImageURL = (function (src) {
+    return new Promise(function (resolve, reject) {
+      if (typeof src === "undefined") {
+        reject();
+        return false;
+      }
+      var image = document.createElement('img');
+      image.src = src;
+      image.onerror = function () {
+        reject();
+      };
+    });
+  });
+
   if (thehours >= 0 && thehours < 12) {
     themessage = morning;
 
@@ -42,6 +56,14 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       //   })
       homePageService.getAllUserPosts(post).then(function (data) {
         $scope.postsArray = data.data.data;
+        $timeout(function () {
+          $(".w3-row-padding").each(function () {
+            var p = $(this)[0];
+            checkPostImageURL($("img", p).attr('src')).then().catch(function () {
+              $("img", p).attr('src', '/app/view/images/no-image.jpg');
+            });
+          });
+        }, 500);
       }).catch(function (error) {
         alert(JSON.stringify(error))
       });
