@@ -15,6 +15,17 @@ app.controller('editProfileCtrl', ['$scope', 'CONSTANT', '$http',
         $scope.draft = {};
         $scope.showFirst = true;
 
+        $scope.saveProfile = (function() {
+            console.log($scope.profile);
+            profileService.updateUser($scope.profile).then(function() {
+                toastr.success("Profile updation complete");
+                $scope.editMode = false;
+            }, function() {
+                toastr.error("Profile updation failed");
+                $scope.editMode = false;
+            });
+        });
+
         $scope.getUserProfileById = function (id) {
             profileService.getUserById(id)
                 .then(function (response) {

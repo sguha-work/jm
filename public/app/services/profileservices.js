@@ -13,6 +13,17 @@ app.service('profileService', function($window, $http,CONSTANT){
             })
         }
 
+        profileservice.updateUser = (function(user) {
+            return $http({
+                url: CONSTANT.API_BASE_URL + 'updateuser',
+                method: "POST",
+                data: user,
+                headers: { 'Content-Type': 'application/json' }
+            }).then(function(data){
+                return data;
+            });
+        });
+
         profileservice.getUserRating = function(id){
             return $http({
                 url: CONSTANT.API_BASE_URL + 'getavg',
