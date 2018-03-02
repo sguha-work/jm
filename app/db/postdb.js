@@ -257,6 +257,12 @@ postDB.getAvgRating = function (userId, done) {
       if (err) {
           return done(err);
       }else{
+          if(typeof result == "undefined" || !result.length ) {
+            return done(null, { success:true, "count": 0});  
+          }
+          if(typeof result[0].avgRate === "undefined") {
+            result[0].avgRate = 0;
+          } 
           return done(null, { success:true, "count": result[0].avgRate});
       }
   });
