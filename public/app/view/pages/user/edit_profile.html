@@ -10,7 +10,7 @@
 				<div class="row">
 				  <div class="createProfile createProfileMar clearfix">
 					<div class="createHead">
-						<div><i class="fa fa-times round_icon" ng-click="closeProfile()"></i><i class="fa fa-edit round_icon" ng-click="editProfile()"></i></div>
+						<div><i class="fa fa-times round_icon" ng-click="closeProfile()"></i></i><i class="fa fa-edit round_icon" ng-click="editProfile()" tooltip="Click to edit profile"></i><i class="fa fa-save round_icon" ng-show="editMode" tooltip="Click to save changes" ng-click="saveProfile()"></i></div>
 					  <h2>&nbsp; </h2>
 					  <div class="proarea">
 						<div style="width: 100px !important; height: 100px; margin-top: -15%; min-height:100px !important" class="probox" ><img class="form-control img-responsive prof_img" ng-src="{{profile.profilePic ? profile.profilePic : app/view/images/avatars.png}}" style="display:block !important"
