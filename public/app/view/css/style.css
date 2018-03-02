@@ -901,7 +901,7 @@
 	   min-height: 120px
    }
    .sarea {
-	   width: 345px;
+	   width: 98%;
 	   margin: 25px 25px 25px 0;
    }
    .whtboxPlus, .whtbox {
@@ -1576,7 +1576,7 @@ tr:hover .nortbl {
 	   max-width: 65px;
    }
    .sarea {
-	   width: 365px;
+	   width: 98%;
 	   margin: 25px 25px 25px 0;
    }
    }
