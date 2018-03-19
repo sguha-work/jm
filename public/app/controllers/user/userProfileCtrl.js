@@ -11,6 +11,10 @@ app.controller('userProfileCtrl', ['$scope', 'CONSTANT', '$http',
         $scope.selectedTopic = [];
         $scope.profile.privacyPolicy = "public";
 
+        $scope.closeProfile = (function () {
+            $location.path("/home");
+        });
+
         var checkAndReplaceForInvalidImage = (function (userObject) {
             var s = document.createElement("IMG");
             s.src = userObject.profilePic
@@ -25,6 +29,12 @@ app.controller('userProfileCtrl', ['$scope', 'CONSTANT', '$http',
 
             }
         });
+
+        var splitdate = function (dateObj) {
+            $scope.userProfile.month = dateObj.getUTCMonth() + 1; //months from 1-12
+            $scope.userProfile.date = dateObj.getUTCDate();
+            $scope.userProfile.year = dateObj.getUTCFullYear();
+        }
 
         var getUserProfileById = function (id) {
             $http({
@@ -41,6 +51,7 @@ app.controller('userProfileCtrl', ['$scope', 'CONSTANT', '$http',
                         $scope.userProfile.profilePic = pic;
                     }
                     checkAndReplaceForInvalidImage($scope.userProfile);
+                    splitdate(new Date($scope.userProfile.dateOfBirth));
                 },
                     function (response) { // optional
                         console.log(response);
