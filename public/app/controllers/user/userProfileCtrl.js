@@ -1,6 +1,6 @@
 app.controller('userProfileCtrl', ['$scope', 'CONSTANT', '$http',
     '$routeParams', 'authService',
-    '$rootScope', '$location', '$timeout', 'toastr', 
+    '$rootScope', '$location', '$timeout', 'toastr',
     function ($scope, CONSTANT, $http, $routeParams, authService, $rootScope, $location, $timeout,
         toastr) {
 
@@ -25,7 +25,7 @@ app.controller('userProfileCtrl', ['$scope', 'CONSTANT', '$http',
 
             }
         });
-        
+
         var getUserProfileById = function (id) {
             $http({
                 url: CONSTANT.API_BASE_URL + 'getUserById',
@@ -50,6 +50,6 @@ app.controller('userProfileCtrl', ['$scope', 'CONSTANT', '$http',
 
         getUserProfileById($routeParams.id);
 
-       
+
 
     }])
