@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare, homePageService) {
+app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare, homePageService, userRegService) {
 
   if (!authService.isLoggedIn()) {
     $location.path('/');
@@ -299,6 +299,46 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
       })
   }
+
+  var checkAndReplaceForInvalidImage = (function (userObject) {
+    var s = document.createElement("IMG");
+    s.src = userObject.profilePic
+    $("img[src='" + userObject.profilePic + "']").hide();
+    s.onerror = function () {
+        console.log("file with " + userObject.profilePic + " invalid");
+        userObject.profilePic = null;
+        $("img[src='" + userObject.profilePic + "']").show();
+    }
+    s.onload = function () {
+        $("img[src='" + userObject.profilePic + "']").show();
+
+    }
+});
+
+  var getRandomProfiles = (function () {
+            userRegService.getRandomProfiles().then(function (data) {
+                var userDataArray = [];
+                for (var index in data.data) {
+                    var userObject = {};
+                    if (typeof data.data[index].profilePic == "undefined") {
+                        userObject.profilePic = "app/view/images/avatarss.png";
+                    } else {
+                        userObject.profilePic = data.data[index].profilePic;
+                        if (userObject.profilePic.indexOf("/") !== -1 && userObject.profilePic.indexOf("http://") === -1 && userObject.profilePic.indexOf("https://") === -1) {
+                            var pic = "app/view/images/profile_pictures/" + userObject.profilePic.split("/").pop();
+                            userObject.profilePic = pic;
+                        }
+
+                    }
+                    checkAndReplaceForInvalidImage(userObject);
+                    userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
+                    userDataArray.push(userObject);
+                }
+                $scope.randomProfiles = userDataArray;
+            });
+        });
+
+        getRandomProfiles();
 
 })
 
