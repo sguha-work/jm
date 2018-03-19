@@ -183,13 +183,6 @@ app.controller('editProfileCtrl', ['$scope', 'CONSTANT', '$http',
 
         }
 
-        //   $scope.options = {
-        //     language: 'en',
-        //     allowedContent: true,
-        //     entities: false,
-        //     removePlugins :'elementspath,save,font'
-        //   };
-
 
         var splitdate = function (dateObj) {
             $scope.profile.month = dateObj.getUTCMonth() + 1; //months from 1-12

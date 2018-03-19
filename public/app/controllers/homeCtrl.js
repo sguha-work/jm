@@ -95,8 +95,8 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   }
   $scope.getRoandomQuote();
 
-  $scope.showProfile = function () {
-    $location.path("/profile/");
+  $scope.showUserProfile = function (id) {
+    $location.path("/userprofile/"+id);
   }
 
   $scope.editProfile = function () {
@@ -320,6 +320,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
                 var userDataArray = [];
                 for (var index in data.data) {
                     var userObject = {};
+                    userObject.id = data.data[index]["_id"];
                     if (typeof data.data[index].profilePic == "undefined") {
                         userObject.profilePic = "app/view/images/avatarss.png";
                     } else {
@@ -333,7 +334,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
                     checkAndReplaceForInvalidImage(userObject);
                     userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
                     userDataArray.push(userObject);
-                }
+                }console.log(data.data);
                 $scope.randomProfiles = userDataArray;
             });
         });

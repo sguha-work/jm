@@ -53,6 +53,11 @@ var routes = angular.module('appRoutes', ['ngRoute', 'facebook']).config(functio
             controller: 'editProfileCtrl',
             authenticated: true
         })
+        .when('/userprofile/:id', {
+            templateUrl: 'app/view/pages/user/user_profile.html',
+            controller: 'userProfileCtrl',
+            authenticated: true
+        })
         .when('/logout', {
             authenticated: true
         })
