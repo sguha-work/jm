@@ -5,4 +5,4 @@ var otpSchema = new Schema({
     otp: { type: Number, required: true },
     validTill: { type: Number, required: true },
 });
-module.exports = mongoose.model('OTP', otpSchema);
+module.exports = mongoose.model('otp', otpSchema);

@@ -11,10 +11,10 @@ var generateOTP = (function() {
     });
 })
 
-otpService.getPasswordResetOTP = (function(email) {console.log("email "+email);
+otpService.getPasswordResetOTP = (function(email) {
     return new Promise(function(resolve, reject) {
         if(typeof email === "undefined" || email.trim() === "") {
-            reject();
+            reject({"error": "No email id specified"});
         }
         generateOTP().then(function(number) {
             var otpObject = new OTP();
