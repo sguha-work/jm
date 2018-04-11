@@ -11,7 +11,7 @@ var generateOTP = (function() {
     });
 })
 
-otpService.getPasswordResetOTP = (function(email) {
+otpService.getPasswordResetOTP = (function(email) {console.log("email "+email);
     return new Promise(function(resolve, reject) {
         if(typeof email === "undefined" || email.trim() === "") {
             reject();
@@ -23,8 +23,8 @@ otpService.getPasswordResetOTP = (function(email) {
             otpObject.forEmail = email;
             otpDB.storeOTP(otpObject).then(function() {
                 resolve(otpObject);
-            }).catch(function() {
-                reject();
+            }).catch(function(error) {
+                reject(error);
             });
             
         });

@@ -4,9 +4,9 @@ const otpDB = {};
 
 otpDB.storeOTP = (function(otpObject) {
     return new Promise(function(resolve, reject) {
-        otpObject.save(function(error) {
+        otpObject.save(function(error) { 
             if(error) {
-                reject();
+                reject(error);
             } else {
                 resolve();
             }

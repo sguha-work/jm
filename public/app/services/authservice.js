@@ -7,12 +7,12 @@ app.service('authService', function ($window, $http, CONSTANT) {
         })
     }
 
-    authservice.sendPasswordResetOTP = (function(email) {
-        return new Promise(function(resolve, reject) {
-            $http.get(CONSTANT.API_BASE_URL + 'sendResetPasswordOTP', email).then(function() {
+    authservice.sendPasswordResetOTP = (function (email) {
+        return new Promise(function (resolve, reject) {
+            $http.post(CONSTANT.API_BASE_URL + 'sendResetPasswordOTP', {"email": email}).then(function () {
                 // mail sent
                 resolve();
-            }, function() {
+            }, function () {
                 // mail send error
                 reject();
             });
@@ -71,14 +71,6 @@ app.service('authService', function ($window, $http, CONSTANT) {
             return data;
         })
     }
-
-    authservice.getAndSendPasswordAsEmail = (function(email) {
-        return $http.get(CONSTANT.API_BASE_URL + 'getAndSendPasswordAsEmail', email).then(function(data) {
-            return data;
-        }, function(data) {
-            return data;
-        });
-    });
 
     return authservice;
 })

@@ -181,7 +181,7 @@ mailer.sendPasswordResetOTPViaMail = (function (otpObject) {
 
         var mailOptions = {
             from: 'jiya.tech',
-            to: otpObject.email,
+            to: otpObject.forEmail,
             subject: 'Password reset OTP',
             html: `<b><h3>JIYA</h3></b><br/>
                Hello <b>User</b>. This is the OTP which should be provided in password reset form<br>
@@ -193,10 +193,8 @@ mailer.sendPasswordResetOTPViaMail = (function (otpObject) {
 
         smtpTransport.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
-                reject();
+                reject(error);
             } else {
-                console.log('Email sent: ' + info.response);
                 resolve({ success: true });
 
             }
