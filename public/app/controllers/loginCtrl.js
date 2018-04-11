@@ -117,15 +117,15 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         $("#myModal").modal();
     });
 
-    $scope.sendPassword = (function (event) {
-        var email = $scope.forgetPasswordEmail;
-        $(".modal-header button").trigger("click");
-        event.preventDefault();
-        authService.getAndSendPasswordAsEmail(email).then(function () {
-            toaster.success("Please check " + email + " for the password recovery option");
-        }, function () {
-            toastr.error("Unable to fetch password of this email");
-        });
-    });
+    // $scope.sendPassword = (function (event) {
+    //     var email = $scope.forgetPasswordEmail;
+    //     $(".modal-header button").trigger("click");
+    //     event.preventDefault();
+    //     authService.getAndSendPasswordAsEmail(email).then(function () {
+    //         toaster.success("Please check " + email + " for the password recovery option");
+    //     }, function () {
+    //         toastr.error("Unable to fetch password of this email");
+    //     });
+    // });
 
 })
