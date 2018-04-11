@@ -40,12 +40,12 @@
 
 								<div class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
 									<label for="usrname">
-										<span class="glyphicon glyphicon-user"></span> Enter your email id</label>
+										<span class="glyphicon glyphicon-user"></span> Enter your email id to receive password reset OTP</label>
 									<input style="margin-top: 10px;" type="text" class="form-control" ng-change="checkValue()" ng-model="forgetPasswordEmail" id="usrname" placeholder="Enter email">
 									<span class="error error_span">{{forgetPasswordEmailFieldVerificationError}}</span>
 								</div>
 								<button type="submit" class="btn btn-success btn-block" ng-class="{ disabled_button: forgetPasswordEmailFieldInvalid }" ng-disabled="forgetPasswordEmailFieldInvalid" ng-click="sendPassword($event)">
-									<span class="glyphicon glyphicon-off"></span> Send Password</button>
+									<span class="glyphicon glyphicon-off" ng-click="sendOTPAsMail()"></span> Send OTP</button>
 							</div>
 						</div>
 					</div>

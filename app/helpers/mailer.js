@@ -168,9 +168,42 @@ mailer.accountCreationMail = function (email, password, token, done) {
     });
 }
 
+/**
+ * This function send otp to user to reset password
+ */
+mailer.sendPasswordResetOTPViaMail = (function (otpObject) {
+    return new Promise(function (resolve, reject) {
+        var address = getCurrentIp();
+        var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: gmailAccount
+        });
 
+        var mailOptions = {
+            from: 'jiya.tech',
+            to: otpObject.email,
+            subject: 'Password reset OTP',
+            html: `<b><h3>JIYA</h3></b><br/>
+               Hello <b>User</b>. This is the OTP which should be provided in password reset form<br>
+               <b>`+ otpObject.otp + `</b><br>
+               <b>Please Note:</b> This OTP will remain valid for 20 minutes only.
+               `
 
+        };
 
+        smtpTransport.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                console.log('Email sent: ' + info.response);
+                resolve({ success: true });
+
+            }
+        })
+    });
+
+});
 mailer.reportMail = function (obj, done) {
     var address = getCurrentIp();
     var smtpTransport = nodemailer.createTransport({
@@ -203,48 +236,4 @@ mailer.reportMail = function (obj, done) {
     });
 }
 
-mailer.forgetPasswordMail = function (email, password, done) {
-    var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: gmailAccount
-    });
-    //   smtpTransport.use('complie', hbs({
-    //     viewPath: __dirname,
-    //     extName:'.hbs'
-    //   }))
-
-    smtpTransport.use('compile', hbs({
-        viewEngine: {
-            extname: '.hbs',
-            layoutsDir: path.join(__dirname, '../views'),
-            defaultLayout: 'forgetPassword'
-        },
-        viewPath: path.join(__dirname, '../views'),
-        extName: '.hbs'
-    }));
-
-    var mailOptions = {
-        from: 'jiya.tech',
-        to: email,
-        //bcc: '',
-        subject: 'Password request Email',
-        template: 'forgetPassword',
-        context: {
-            email: email,
-            password: password
-        }
-
-    };
-
-    smtpTransport.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-            return;
-        } else {
-            console.log('Email sent: ' + info.response);
-            done();
-
-        }
-    });
-}
 module.exports = mailer;

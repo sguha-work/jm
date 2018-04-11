@@ -55,6 +55,7 @@ io.on('connection', function(socket) {
 
 server.listen(process.env.PORT || 3200, function(){
   console.log("server started");
+  console.log("visit http://localhost:"+(process.env.PORT || 3200));
 });
 
 // app.listen(process.env.PORT || 3200, function(){

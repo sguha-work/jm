@@ -7,6 +7,18 @@ app.service('authService', function ($window, $http, CONSTANT) {
         })
     }
 
+    authservice.sendPasswordResetOTP = (function(email) {
+        return new Promise(function(resolve, reject) {
+            $http.get(CONSTANT.API_BASE_URL + 'sendResetPasswordOTP', email).then(function() {
+                // mail sent
+                resolve();
+            }, function() {
+                // mail send error
+                reject();
+            });
+        });
+    });
+
     authservice.login = function (loginData) {
         return $http.post('/api/authenticate', loginData).then(function (data) {
             if (data.data.token) {

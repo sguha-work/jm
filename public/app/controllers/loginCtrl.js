@@ -91,12 +91,22 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
 
     }
 
+    $scope.sendOTPAsMail = (function() {
+        authService.sendPasswordResetOTP($scope.forgetPasswordEmail).then(function() {
+            alert("sent mail");
+        }).catch(function() {
+            // error
+        });
+        return false;
+    });
+
     $scope.checkValue = (function () {
         var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (regex.test(String($scope.forgetPasswordEmail).toLowerCase())) {
             $scope.forgetPasswordEmailFieldVerificationError = "";
             $scope.forgetPasswordEmailFieldInvalid = false;
             // need to check wheather the email exists in db
+           
         } else {
             $scope.forgetPasswordEmailFieldVerificationError = "Given email id is not valid";
             $scope.forgetPasswordEmailFieldInvalid = true;

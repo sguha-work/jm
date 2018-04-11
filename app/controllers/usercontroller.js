@@ -4,6 +4,7 @@ var User = require('../models/user.js');
 var messages = require('../config/messages.js');
 var userDB = require('../db/userdb.js');
 var mailer = require('../helpers/mailer.js');
+var otpService = require('../services/otp.service.js');
 //var userSchema = mongoose('User').schema;
 // var os = require('os');
 // var nodemailer = require('nodemailer');
@@ -79,6 +80,27 @@ userController.update = function (req, res) {
         }
     });
 }
+
+/** 
+ * This method sends an otp to given mail address to reset the password
+*/
+userController.sendResetPasswordOTP = (function (request, response) {
+    return new Promise(function (resolve, reject) {
+        var email = request.body.email;
+        otpService.getPasswordResetOTP(email).then(function (otpObject) {
+            mailer.sendPasswordResetOTPViaMail(otpObject).then(function (success) {
+                resolve(success);
+            }).catch(function () {
+                console.log("error");
+                reject();
+            });
+        }).catch(function () {
+            console.log("error");
+            reject();
+        });
+    });
+
+});
 
 userController.add = function (req, res) {
     if (req.body.firstName == null || req.body.firstName == "" ||
