@@ -34,11 +34,16 @@ otpService.getPasswordResetOTP = (function (email) {
 
 otpService.getOTPFromDB = (function (email) {
     return new Promise(function (resolve, reject) {
-        OTP.find({"forEmail": email}, function(error, data) {console.log(data);
+        OTP.find({"forEmail": email}, function(error, data) {console.log("data", data);
             if(error) {
                 reject(error);
             } else {
-                resolve(data);
+                if(data.length > 1) {
+                    rewsolve(data[data.length]);
+                } else {
+                    resolve(data[0]);
+                }
+                
             }
         });
     });

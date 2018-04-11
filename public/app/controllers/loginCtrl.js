@@ -94,11 +94,30 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
     $scope.sendOTPAsMail = (function(event) {
         event.preventDefault();
         authService.sendPasswordResetOTP($scope.forgetPasswordEmail).then(function() {
-            alert("sent mail");
+            $("#div_forgetPassword1").hide();
+            $("#btn_sendOTP").hide();
+            $("#div_forgetPassword2").show();
+            $("#btn_resetPassword").show();
         }).catch(function() {
             // error
         });
         return false;
+    });
+
+    $scope.resetPassword = (function(event) {
+        event.preventDefault();
+        var otp = $scope.forgetPasswordOTP;
+        var email = $scope.forgetPasswordEmail;
+        var newPassword = $scope.forgetPasswordPasswordText;
+        if($scope.forgetPasswordPasswordText != $scope.forgetPasswordConfirmPasswordText || otp.trim() === "") {
+            alert("Error in input");
+        } else {
+            authService.resetPassword(email, otp, newPassword).then(function(response) {
+                alert(JSON.stringify(response));
+            }).catch(function(error) {
+                alert("error");
+            });
+        }
     });
 
     $scope.checkValue = (function () {
@@ -115,6 +134,10 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
     });
 
     $scope.showModal = (function () {
+        $("#div_forgetPassword1").show();
+        $("#btn_sendOTP").show();
+        $("#div_forgetPassword2").hide();
+        $("#btn_resetPassword").hide();
         $("#myModal").modal();
     });
 

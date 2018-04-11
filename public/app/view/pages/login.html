@@ -37,17 +37,37 @@
 									<span class="glyphicon glyphicon-lock"></span> Forgot Password</h4>
 							</div>
 							<div class="modal-body">
-
-								<div class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
+								<!-- forget password form 1-->
+								<div id="div_forgetPassword1" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
 									<label for="usrname">
 										<span class="glyphicon glyphicon-user"></span> Enter your email id to receive password reset OTP</label>
 									<input style="margin-top: 10px;" type="text" class="form-control" ng-change="checkValue()" ng-model="forgetPasswordEmail"
 									 id="usrname" placeholder="Enter email">
 									<span class="error error_span">{{forgetPasswordEmailFieldVerificationError}}</span>
 								</div>
-								<button type="submit" class="btn btn-success btn-block" ng-class="{ disabled_button: forgetPasswordEmailFieldInvalid }" ng-disabled="forgetPasswordEmailFieldInvalid"
+								<button id="btn_sendOTP" type="submit" class="btn btn-success btn-block" ng-class="{ disabled_button: forgetPasswordEmailFieldInvalid }" ng-disabled="forgetPasswordEmailFieldInvalid"
 								 ng-click="sendOTPAsMail($event)">
 									<span class="glyphicon glyphicon-off"></span> Send OTP</button>
+
+								<!--forget password form 2-->
+								<div id="div_forgetPassword2" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
+									<label for="email">
+										<span class="glyphicon glyphicon-user"></span> Enter OTP sent at {{forgetPasswordEmail}}</label>
+									<input style="margin-top: 10px;" type="text" class="form-control" ng-change="" ng-model="forgetPasswordOTP"
+									 id="email" placeholder="Enter OTP">
+									 <label for="email">
+										<span class="glyphicon glyphicon-user"></span> Enter new password for your profile</label>
+									<input style="margin-top: 10px;" type="password" class="form-control" ng-change="" ng-model="forgetPasswordPasswordText"
+									 id="email" placeholder="Enter New Password">
+									 <label for="email">
+										<span class="glyphicon glyphicon-user"></span> Please confirm new password</label>
+									<input style="margin-top: 10px;" type="password" class="form-control" ng-change="" ng-model="forgetPasswordConfirmPasswordText"
+									 id="email" placeholder="Confirm New Password">
+									<span class="error error_span"></span>
+								</div>
+								<button id="btn_resetPassword" type="submit" class="btn btn-success btn-block" ng-class="{ disabled_button: forgetPasswordEmailFieldInvalid }" ng-disabled="forgetPasswordEmailFieldInvalid"
+								 ng-click="resetPassword($event)">
+									<span class="glyphicon glyphicon-off"></span> Reset Password</button>
 							</div>
 						</div>
 					</div>

@@ -108,8 +108,10 @@ userController.resetPassword = (function(request, response) {
     var otpText = request.body.otp;
     var email = request.body.email;
     var password = request.body.password;
-    otpService.getOTPFromDB(email).then(function(otpObject) {
-        if(otpText === otpObject.otp) {
+    otpService.getOTPFromDB(email).then(function(otpObject) {console.log("otpObject", otpObject);console.log("password", password);
+        if(otpText != otpObject.otp || Date.now<otpObject.validTill) {
+            response.send({"error": "Invalid or expired OTP"});
+        } else {
             // otp matched updating the password
             User.findOneAndUpdate({ "email": email }, { $set: { password: password } }, function(error, data) {
                 if(error) {
@@ -117,9 +119,7 @@ userController.resetPassword = (function(request, response) {
                 } else {
                     response.send({"success": true});
                 }
-            })
-        } else {
-            response.send({"error": "Invalid OTP"});
+            });
         }
     }).catch(function(error) {
         response.send(error);

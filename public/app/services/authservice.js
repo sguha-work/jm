@@ -7,6 +7,9 @@ app.service('authService', function ($window, $http, CONSTANT) {
         })
     }
 
+    /**
+     * call the api to receive password receive otp via mail
+     */
     authservice.sendPasswordResetOTP = (function (email) {
         return new Promise(function (resolve, reject) {
             $http.post(CONSTANT.API_BASE_URL + 'sendResetPasswordOTP', {"email": email}).then(function () {
@@ -15,6 +18,16 @@ app.service('authService', function ($window, $http, CONSTANT) {
             }, function () {
                 // mail send error
                 reject();
+            });
+        });
+    });
+
+    authservice.resetPassword = (function(email, otp, password) {alert(email+" "+ otp+" "+password);
+        return new Promise(function (resolve, reject) {
+            $http.post(CONSTANT.API_BASE_URL + 'resetpassword', {"email": email, "otp": otp, "password": password}).then(function (response) {
+               resolve(response);
+            }, function (error) {
+                reject(error);
             });
         });
     });
