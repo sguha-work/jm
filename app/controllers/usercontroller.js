@@ -113,7 +113,7 @@ userController.resetPassword = (function(request, response) {
             response.send({"error": "Invalid or expired OTP"});
         } else {
             // otp matched updating the password
-            User.findOneAndUpdate({ "email": email }, { $set: { password: password } }, function(error, data) {
+            User.findOneAndUpdate({ "email": email }, { $set: { password: (new User()).generateHash(password) } }, function(error, data) {
                 if(error) {
                     response.send({"error": "Failed to update password"});        
                 } else {
@@ -153,7 +153,6 @@ userController.add = function (req, res) {
 
 userController.updateprofile = function (req, res) {
     userDB.updateProfile(req.body, function (err, response) {
-        console.log("*******"); console.log(err); console.log(response);
         if (err) {
             res.json(err);
         } else {
@@ -241,17 +240,6 @@ userController.checkIfEmailIdExists = (function (request, response) {
     userDB.getUserByEmail(req.body.email, function (error, data) {
         if (error == null) {
             response.json({ success: true });
-        } else {
-            response.json(error);
-        }
-    });
-});
-
-userController.getAndSendPasswordAsEmail = (function (request, response) {
-    userDB.getUserByEmail(req.body.email, function (error, data) {
-        if (error == null) {
-            var email = data.data.email;
-            var password = data.data.password;
         } else {
             response.json(error);
         }

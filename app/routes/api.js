@@ -74,7 +74,6 @@ module.exports = function (router, passport) {
     router.post('/createuser', userController.createUser);
     router.get('/getTotalNumberOfUser', userController.getTotalNumberOfUser);
     router.get('/getRandomProfiles', userController.getRandomProfiles);
-    router.get('/getAndSendPasswordAsEmail', userController.getAndSendPasswordAsEmail);
     
     //Post router
     router.post('/alluserPosts', postController.getAllUserPosts);
