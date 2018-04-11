@@ -70,6 +70,7 @@ module.exports = function (router, passport) {
     router.post('/search', userController.search);
     router.get('/groupmail', userController.sendMulticlientMail);
     router.post('/sendresetpasswordotp', userController.sendResetPasswordOTP);
+    router.post('/resetpassword', userController.resetPassword);
     router.post('/createuser', userController.createUser);
     router.get('/getTotalNumberOfUser', userController.getTotalNumberOfUser);
     router.get('/getRandomProfiles', userController.getRandomProfiles);

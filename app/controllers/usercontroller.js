@@ -101,6 +101,31 @@ userController.sendResetPasswordOTP = (function (request, response) {
 
 });
 
+/**
+ * This function checks the otp and if correct then reset the password based on the user email
+ */
+userController.resetPassword = (function(request, response) {
+    var otpText = request.body.otp;
+    var email = request.body.email;
+    var password = request.body.password;
+    otpService.getOTPFromDB(email).then(function(otpObject) {
+        if(otpText === otpObject.otp) {
+            // otp matched updating the password
+            User.findOneAndUpdate({ "email": email }, { $set: { password: password } }, function(error, data) {
+                if(error) {
+                    response.send({"error": "Failed to update password"});        
+                } else {
+                    response.send({"success": true});
+                }
+            })
+        } else {
+            response.send({"error": "Invalid OTP"});
+        }
+    }).catch(function(error) {
+        response.send(error);
+    });
+});
+
 userController.add = function (req, res) {
     if (req.body.firstName == null || req.body.firstName == "" ||
         req.body.lastName == null || req.body.lastName == "" ||

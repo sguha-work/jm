@@ -4,32 +4,44 @@ var otpDB = require('../db/otpdb.js');
 
 const otpService = {};
 
-var generateOTP = (function() {
-    return new Promise(function(resolve, reject) {
+var generateOTP = (function () {
+    return new Promise(function (resolve, reject) {
         var number = Math.floor(100000 + Math.random() * 900000);
         resolve(number);
     });
 })
 
-otpService.getPasswordResetOTP = (function(email) {
-    return new Promise(function(resolve, reject) {
-        if(typeof email === "undefined" || email.trim() === "") {
-            reject({"error": "No email id specified"});
+otpService.getPasswordResetOTP = (function (email) {
+    return new Promise(function (resolve, reject) {
+        if (typeof email === "undefined" || email.trim() === "") {
+            reject({ "error": "No email id specified" });
         }
-        generateOTP().then(function(number) {
+        generateOTP().then(function (number) {
             var otpObject = new OTP();
             otpObject.otp = number;
             otpObject.validTill = Date.now() + 1200000000;
             otpObject.forEmail = email;
-            otpDB.storeOTP(otpObject).then(function() {
+            otpDB.storeOTP(otpObject).then(function () {
                 resolve(otpObject);
-            }).catch(function(error) {
+            }).catch(function (error) {
                 reject(error);
             });
-            
+
         });
     });
-    
+
+});
+
+otpService.getOTPFromDB = (function (email) {
+    return new Promise(function (resolve, reject) {
+        OTP.find({"forEmail": email}, function(error, data) {console.log(data);
+            if(error) {
+                reject(error);
+            } else {
+                resolve(data);
+            }
+        });
+    });
 });
 
 module.exports = otpService;
