@@ -46,7 +46,7 @@
 									<span class="error error_span">{{forgetPasswordEmailFieldVerificationError}}</span>
 								</div>
 								<button type="submit" class="btn btn-success btn-block" ng-class="{ disabled_button: forgetPasswordEmailFieldInvalid }" ng-disabled="forgetPasswordEmailFieldInvalid"
-								 ng-click="sendOTPAsMail()">
+								 ng-click="sendOTPAsMail($event)">
 									<span class="glyphicon glyphicon-off"></span> Send OTP</button>
 							</div>
 						</div>

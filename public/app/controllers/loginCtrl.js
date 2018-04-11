@@ -91,7 +91,8 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
 
     }
 
-    $scope.sendOTPAsMail = (function() {
+    $scope.sendOTPAsMail = (function(event) {
+        event.preventDefault();
         authService.sendPasswordResetOTP($scope.forgetPasswordEmail).then(function() {
             alert("sent mail");
         }).catch(function() {
