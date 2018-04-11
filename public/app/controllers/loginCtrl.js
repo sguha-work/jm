@@ -109,13 +109,20 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         var otp = $scope.forgetPasswordOTP;
         var email = $scope.forgetPasswordEmail;
         var newPassword = $scope.forgetPasswordPasswordText;
+
         if($scope.forgetPasswordPasswordText != $scope.forgetPasswordConfirmPasswordText || otp.trim() === "") {
             alert("Error in input");
         } else {
+            $(".modal-header button").trigger("click");// closing the modal
             authService.resetPassword(email, otp, newPassword).then(function(response) {
-                alert(JSON.stringify(response));
+                if(response.data.success) {
+                    toastr.success("Password changed successfully, Please login with your new password from now on");
+                } else {
+                    toastr.error("Pasword reset failed");
+                }
+                
             }).catch(function(error) {
-                alert("error");
+                toastr.error("Pasword reset failed");
             });
         }
     });

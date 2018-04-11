@@ -39,7 +39,7 @@ otpService.getOTPFromDB = (function (email) {
                 reject(error);
             } else {
                 if(data.length > 1) {
-                    rewsolve(data[data.length]);
+                    resolve(data[data.length]);
                 } else {
                     resolve(data[0]);
                 }

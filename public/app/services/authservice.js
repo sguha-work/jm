@@ -22,7 +22,7 @@ app.service('authService', function ($window, $http, CONSTANT) {
         });
     });
 
-    authservice.resetPassword = (function(email, otp, password) {alert(email+" "+ otp+" "+password);
+    authservice.resetPassword = (function(email, otp, password) {
         return new Promise(function (resolve, reject) {
             $http.post(CONSTANT.API_BASE_URL + 'resetpassword', {"email": email, "otp": otp, "password": password}).then(function (response) {
                resolve(response);
