@@ -87,7 +87,7 @@ userController.update = function (req, res) {
 userController.sendResetPasswordOTP = (function (request, response) {
     return new Promise(function (resolve, reject) {
         var email = request.body.email;
-        otpService.getPasswordResetOTP(email).then(function (otpObject) {
+        otpService.getPasswordResetOTP(email).then(function (otpObject) {console.log("otp object", otpObject);
             mailer.sendPasswordResetOTPViaMail(otpObject).then(function (success) {
                 resolve(success);
             }).catch(function () {

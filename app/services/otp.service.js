@@ -1,4 +1,7 @@
 'use strict';
+var OTP = require('../models/otp.model.js');
+var otpDB = require('../db/otpdb.js');
+
 const otpService = {};
 
 var generateOTP = (function() {
@@ -14,13 +17,16 @@ otpService.getPasswordResetOTP = (function(email) {
             reject();
         }
         generateOTP().then(function(number) {
-            var otpObject = {
-                otp: number,
-                isValid: true,
-                validTill: Date.now() + 1200000000,
-                forEmail: email
-            };
-            resolve(otpObject);
+            var otpObject = new OTP();
+            otpObject.otp = number;
+            otpObject.validTill = Date.now() + 1200000000;
+            otpObject.forEmail = email;
+            otpDB.storeOTP(otpObject).then(function() {
+                resolve(otpObject);
+            }).catch(function() {
+                reject();
+            });
+            
         });
     });
     
