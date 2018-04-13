@@ -90,8 +90,8 @@ mailer.activationMail = function (email, token, done) {
         extName: '.hbs'
     }));
 
-    var url = address + ':3200/activate/' + token;
-    //var url = 'https://jiyatech.au-syd.mybluemix.net/activate/'+token;
+    //var url = address + ':3200/activate/' + token;
+    var url = 'https://jiyatech.au-syd.mybluemix.net/activate/'+token;
 
     var mailOptions = {
         from: 'jiya.tech',
@@ -138,8 +138,8 @@ mailer.accountCreationMail = function (email, password, token, done) {
         extName: '.hbs'
     }));
 
-    var url = address + ':3200/activate/' + token;
-    //var url = 'https://jiyatech.au-syd.mybluemix.net/activate/'+token;
+    //var url = address + ':3200/activate/' + token;
+    var url = 'https://jiyatech.au-syd.mybluemix.net/activate/'+token;
 
     var mailOptions = {
         from: 'jiya.tech',
