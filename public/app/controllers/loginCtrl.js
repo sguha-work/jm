@@ -93,13 +93,20 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
 
     $scope.sendOTPAsMail = (function(event) {
         event.preventDefault();
+        $("#btn_sendOTP").css({
+            "pointer-events": "none",
+            "opacity": 0.5
+        });
         authService.sendPasswordResetOTP($scope.forgetPasswordEmail).then(function() {
+            $("#btn_sendOTP").removeAttr("style");
             $("#div_forgetPassword1").hide();
             $("#btn_sendOTP").hide();
             $("#div_forgetPassword2").show();
             $("#btn_resetPassword").show();
         }).catch(function() {
+            $("#btn_sendOTP").removeAttr("style");
             // error
+            alert("Unable to process otp email, please try latter");
         });
         return false;
     });
@@ -110,15 +117,19 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         var email = $scope.forgetPasswordEmail;
         var newPassword = $scope.forgetPasswordPasswordText;
 
-        if($scope.forgetPasswordPasswordText != $scope.forgetPasswordConfirmPasswordText || otp.trim() === "") {
+        if($scope.forgetPasswordPasswordText.trim() === "" || $scope.forgetPasswordPasswordText != $scope.forgetPasswordConfirmPasswordText || otp.trim() === "") {
             alert("Error in input");
         } else {
             $(".modal-header button").trigger("click");// closing the modal
+            $("#div_forgetPassword1").show();
+            $("#btn_sendOTP").show();
+            $("#div_forgetPassword2").hide();
+            $("#btn_resetPassword").hide();
             authService.resetPassword(email, otp, newPassword).then(function(response) {
                 if(response.data.success) {
                     toastr.success("Password changed successfully, Please login with your new password from now on");
                 } else {
-                    toastr.error("Pasword reset failed");
+                    toastr.error("Password reset failed");
                 }
                 
             }).catch(function(error) {
