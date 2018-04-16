@@ -138,6 +138,7 @@ userController.add = function (req, res) {
     user.lastName = req.body.lastName;
     user.password = user.generateHash(req.body.password);
     user.email = req.body.email;
+    user.phoneNumber = req.body.phoneNumber;
 
 
     userDB.addUser(user, function (err, data) {

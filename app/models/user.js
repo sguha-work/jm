@@ -17,6 +17,7 @@ var userSchema = new Schema({
     firstName   : { type:String, required:true },
     lastName    : { type:String, required:true }, 
     email       : { type:String, lowercase:true, required:true, unique:true},
+    phoneNumber : {type:String, required:false},
     status      : { type:String },
     profilePic  : {type:String},
     isNewUser   : { type:Boolean },
