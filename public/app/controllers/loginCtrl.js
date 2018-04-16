@@ -91,19 +91,19 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
 
     }
 
-    $scope.sendOTPAsMail = (function(event) {
+    $scope.sendOTPAsMail = (function (event) {
         event.preventDefault();
         $("#btn_sendOTP").css({
             "pointer-events": "none",
             "opacity": 0.5
         });
-        authService.sendPasswordResetOTP($scope.forgetPasswordEmail).then(function() {
+        authService.sendPasswordResetOTP($scope.forgetPasswordEmail).then(function () {
             $("#btn_sendOTP").removeAttr("style");
             $("#div_forgetPassword1").hide();
             $("#btn_sendOTP").hide();
             $("#div_forgetPassword2").show();
             $("#btn_resetPassword").show();
-        }).catch(function() {
+        }).catch(function () {
             $("#btn_sendOTP").removeAttr("style");
             // error
             alert("Unable to process otp email, please try latter");
@@ -111,13 +111,13 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
         return false;
     });
 
-    $scope.resetPassword = (function(event) {
+    $scope.resetPassword = (function (event) {
         event.preventDefault();
         var otp = $scope.forgetPasswordOTP;
         var email = $scope.forgetPasswordEmail;
         var newPassword = $scope.forgetPasswordPasswordText;
 
-        if($scope.forgetPasswordPasswordText.trim() === "" || $scope.forgetPasswordPasswordText != $scope.forgetPasswordConfirmPasswordText || otp.trim() === "") {
+        if ($scope.forgetPasswordPasswordText.trim() === "" || $scope.forgetPasswordPasswordText != $scope.forgetPasswordConfirmPasswordText || otp.trim() === "") {
             alert("Error in input");
         } else {
             $(".modal-header button").trigger("click");// closing the modal
@@ -125,14 +125,14 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
             $("#btn_sendOTP").show();
             $("#div_forgetPassword2").hide();
             $("#btn_resetPassword").hide();
-            authService.resetPassword(email, otp, newPassword).then(function(response) {
-                if(response.data.success) {
+            authService.resetPassword(email, otp, newPassword).then(function (response) {
+                if (response.data.success) {
                     toastr.success("Password changed successfully, Please login with your new password from now on");
                 } else {
                     toastr.error("Password reset failed");
                 }
-                
-            }).catch(function(error) {
+
+            }).catch(function (error) {
                 toastr.error("Pasword reset failed");
             });
         }
@@ -144,7 +144,7 @@ app.controller('loginCtrl', function ($scope, $rootScope, $http, authService, CO
             $scope.forgetPasswordEmailFieldVerificationError = "";
             $scope.forgetPasswordEmailFieldInvalid = false;
             // need to check wheather the email exists in db
-           
+
         } else {
             $scope.forgetPasswordEmailFieldVerificationError = "Given email id is not valid";
             $scope.forgetPasswordEmailFieldInvalid = true;
