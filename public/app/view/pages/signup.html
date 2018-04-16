@@ -43,8 +43,27 @@
                                     <span class="error error_span" ng-show="signupForm.email.$error.email">
                                         Not valid email!</span>
                                 </div>
+
                             </div>
                         </div>
+
+                        <div class="text-field-cont">
+                            <div layout="row">
+                                <div flex="none">
+                                    <div class="icon-cont">
+                                        <img src="app/view/images/user.png" width="20" />
+                                    </div>
+                                </div>
+                                <div flex>
+                                    <input type="text" ng-model="user.phoneNumber" name="phoneNumber" placeholder="Phone Number(optional) " ng-model-options="{'updateOn': 'blur'}"
+                                    />
+                                    <span class="error error_span" ng-show="signupForm.email.$error.email">
+                                        Not valid phone number!</span>
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div class="text-field-cont">
                             <div layout="row">
                                 <div flex="none">

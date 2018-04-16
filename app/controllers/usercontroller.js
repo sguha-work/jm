@@ -85,43 +85,45 @@ userController.update = function (req, res) {
  * This method sends an otp to given mail address to reset the password
 */
 userController.sendResetPasswordOTP = (function (request, response) {
-   
-        var email = request.body.email;
-        otpService.getPasswordResetOTP(email).then(function (otpObject) {console.log("otp object", otpObject);
-            mailer.sendPasswordResetOTPViaMail(otpObject).then(function (success) {
-                response.send(success);
-            }).catch(function (error) {
-                response.send(error);
-            });
+
+    var email = request.body.email;
+    otpService.getPasswordResetOTP(email).then(function (otpObject) {
+        console.log("otp object", otpObject);
+        mailer.sendPasswordResetOTPViaMail(otpObject).then(function (success) {
+            response.send(success);
         }).catch(function (error) {
-            console.log("error");
             response.send(error);
         });
-    
+    }).catch(function (error) {
+        console.log("error");
+        response.send(error);
+    });
+
 
 });
 
 /**
  * This function checks the otp and if correct then reset the password based on the user email
  */
-userController.resetPassword = (function(request, response) {
+userController.resetPassword = (function (request, response) {
     var otpText = request.body.otp;
     var email = request.body.email;
     var password = request.body.password;
-    otpService.getOTPFromDB(email).then(function(otpObject) {console.log("otpObject", otpObject);console.log("password", password);
-        if(otpText != otpObject.otp || Date.now<otpObject.validTill) {
-            response.send({"error": "Invalid or expired OTP"});
+    otpService.getOTPFromDB(email).then(function (otpObject) {
+        console.log("otpObject", otpObject); console.log("password", password);
+        if (otpText != otpObject.otp || Date.now < otpObject.validTill) {
+            response.send({ "error": "Invalid or expired OTP" });
         } else {
             // otp matched updating the password
-            User.findOneAndUpdate({ "email": email }, { $set: { password: (new User()).generateHash(password) } }, function(error, data) {
-                if(error) {
-                    response.send({"error": "Failed to update password"});        
+            User.findOneAndUpdate({ "email": email }, { $set: { password: (new User()).generateHash(password) } }, function (error, data) {
+                if (error) {
+                    response.send({ "error": "Failed to update password" });
                 } else {
-                    response.send({"success": true});
+                    response.send({ "success": true });
                 }
             });
         }
-    }).catch(function(error) {
+    }).catch(function (error) {
         response.send(error);
     });
 });
@@ -138,6 +140,7 @@ userController.add = function (req, res) {
     user.lastName = req.body.lastName;
     user.password = user.generateHash(req.body.password);
     user.email = req.body.email;
+    user.phoneNumber = req.body.phoneNumber;
 
 
     userDB.addUser(user, function (err, data) {

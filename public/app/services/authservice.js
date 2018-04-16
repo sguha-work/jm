@@ -12,7 +12,7 @@ app.service('authService', function ($window, $http, CONSTANT) {
      */
     authservice.sendPasswordResetOTP = (function (email) {
         return new Promise(function (resolve, reject) {
-            $http.post(CONSTANT.API_BASE_URL + 'sendResetPasswordOTP', {"email": email}).then(function () {
+            $http.post(CONSTANT.API_BASE_URL + 'sendResetPasswordOTP', { "email": email }).then(function () {
                 // mail sent
                 resolve();
             }, function () {
@@ -22,10 +22,10 @@ app.service('authService', function ($window, $http, CONSTANT) {
         });
     });
 
-    authservice.resetPassword = (function(email, otp, password) {
+    authservice.resetPassword = (function (email, otp, password) {
         return new Promise(function (resolve, reject) {
-            $http.post(CONSTANT.API_BASE_URL + 'resetpassword', {"email": email, "otp": otp, "password": password}).then(function (response) {
-               resolve(response);
+            $http.post(CONSTANT.API_BASE_URL + 'resetpassword', { "email": email, "otp": otp, "password": password }).then(function (response) {
+                resolve(response);
             }, function (error) {
                 reject(error);
             });
