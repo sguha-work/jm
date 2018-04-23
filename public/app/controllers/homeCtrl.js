@@ -96,7 +96,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   $scope.getRoandomQuote();
 
   $scope.showUserProfile = function (id) {
-    $location.path("/userprofile/"+id);
+    $location.path("/userprofile/" + id);
   }
 
   $scope.editProfile = function () {
@@ -300,46 +300,97 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       })
   }
 
+  /**
+   * This function check and load the ck editor
+   */
+  $scope.loadCKEditor = (function () {
+    // applying ck editor
+    $("#txt_postWriter").animate({
+      "height": "+=251"
+    }, 500, function () {
+      $("#txt_postWriter").parent().animate({
+        "opacity": "0.5"
+      }, 250, function () {
+        CKEDITOR.replace("txt_postWriter");
+        $("#txt_postWriter").parent().animate({
+          "opacity": "1"
+        }, 250);
+      });
+
+    });
+  });
+
+  $scope.destroyCKEditor = (function () {
+    var editorInstance = CKEDITOR.instances['txt_postWriter'];
+    $("#txt_postWriter").parent().animate({
+      "opacity": "0.5"
+    }, 250, function () {
+      editorInstance.destroy();
+      $("#txt_postWriter").animate({
+        "height": "-=251"
+      }, 500, function () {
+        $("#txt_postWriter").parent().animate({
+          "opacity": "1"
+        }, 250);
+      })
+    });
+  });
+
+
+  /**
+   * This function save post as draft
+   */
+  $scope.saveAsDraft = (function() {
+    $scope.destroyCKEditor();
+  });
+
+  /**
+   * This function save post to database and publish the post
+   */
+  $scope.saveAndPublishPost = (function() {
+    $scope.destroyCKEditor();
+  });
+
   var checkAndReplaceForInvalidImage = (function (userObject) {
     var s = document.createElement("IMG");
     s.src = userObject.profilePic
     $("img[src='" + userObject.profilePic + "']").hide();
     s.onerror = function () {
-        console.log("file with " + userObject.profilePic + " invalid");
-        userObject.profilePic = null;
-        $("img[src='" + userObject.profilePic + "']").show();
+      console.log("file with " + userObject.profilePic + " invalid");
+      userObject.profilePic = null;
+      $("img[src='" + userObject.profilePic + "']").show();
     }
     s.onload = function () {
-        $("img[src='" + userObject.profilePic + "']").show();
+      $("img[src='" + userObject.profilePic + "']").show();
 
     }
-});
+  });
 
   var getRandomProfiles = (function () {
-            userRegService.getRandomProfiles().then(function (data) {
-                var userDataArray = [];
-                for (var index in data.data) {
-                    var userObject = {};
-                    userObject.id = data.data[index]["_id"];
-                    if (typeof data.data[index].profilePic == "undefined") {
-                        userObject.profilePic = "app/view/images/avatarss.png";
-                    } else {
-                        userObject.profilePic = data.data[index].profilePic;
-                        if (userObject.profilePic.indexOf("/") !== -1 && userObject.profilePic.indexOf("http://") === -1 && userObject.profilePic.indexOf("https://") === -1) {
-                            var pic = "app/view/images/profile_pictures/" + userObject.profilePic.split("/").pop();
-                            userObject.profilePic = pic;
-                        }
+    userRegService.getRandomProfiles().then(function (data) {
+      var userDataArray = [];
+      for (var index in data.data) {
+        var userObject = {};
+        userObject.id = data.data[index]["_id"];
+        if (typeof data.data[index].profilePic == "undefined") {
+          userObject.profilePic = "app/view/images/avatarss.png";
+        } else {
+          userObject.profilePic = data.data[index].profilePic;
+          if (userObject.profilePic.indexOf("/") !== -1 && userObject.profilePic.indexOf("http://") === -1 && userObject.profilePic.indexOf("https://") === -1) {
+            var pic = "app/view/images/profile_pictures/" + userObject.profilePic.split("/").pop();
+            userObject.profilePic = pic;
+          }
 
-                    }
-                    checkAndReplaceForInvalidImage(userObject);
-                    userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
-                    userDataArray.push(userObject);
-                }console.log(data.data);
-                $scope.randomProfiles = userDataArray;
-            });
-        });
+        }
+        checkAndReplaceForInvalidImage(userObject);
+        userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
+        userDataArray.push(userObject);
+      } console.log(data.data);
+      $scope.randomProfiles = userDataArray;
+    });
+  });
 
-        getRandomProfiles();
+  getRandomProfiles();
 
 })
 

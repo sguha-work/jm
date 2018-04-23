@@ -102,10 +102,10 @@
           <div class="w3-card-2 w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Whats your Status?</h6>
-              <input style="width: 100%; margin-bottom: 2vh;" type="text" ng-model="post.postContent" contenteditable="true" class="w3-border w3-padding status_input">
-              <button ng-click="postStatus(post)" type="button" class="w3-button w3-theme">
+              <textarea ng-click="loadCKEditor()" id="txt_postWriter" style="height: 40px;width: 100%; margin-bottom: 2vh;" type="text" ng-model="post.postContent" contenteditable="true" class="w3-border w3-padding status_input"></textarea>
+              <button ng-click="saveAndPublishPost()" type="button" class="w3-button w3-theme">
                 <i class="fa fa-pencil"></i>  Post</button>
-              <button style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="saveAsDraft(post)">
+              <button ng-click="saveAsDraft()" style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="saveAsDraft(post)">
                 <i class="fa fa-times"></i> Save as Draft</button>
             </div>
           </div>
