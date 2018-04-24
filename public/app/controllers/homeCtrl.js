@@ -287,19 +287,22 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
   }
 
-  $scope.saveAsDraft = function (post) {
-    post.userId = $rootScope.current_user._id;
-    post.poster = $rootScope.current_user.firstName + " " + $rootScope.current_user.lastName;
-    post.posterImage = $rootScope.current_user.profilePic;
-    $http.post(CONSTANT.API_BASE_URL + 'savedraft', post)
-      .then(function (response) {
-        $scope.getAllUserPosts();
-      })
-      .catch(function (response) {
+  // $scope.saveAsDraft = function (post) {
+  //   post.userId = $rootScope.current_user._id;
+  //   post.poster = $rootScope.current_user.firstName + " " + $rootScope.current_user.lastName;
+  //   post.posterImage = $rootScope.current_user.profilePic;
+  //   $http.post(CONSTANT.API_BASE_URL + 'savedraft', post)
+  //     .then(function (response) {
+  //       $scope.getAllUserPosts();
+  //     })
+  //     .catch(function (response) {
 
-      })
-  }
-
+  //     })
+  // }
+  var enablePluginsForCKEditor = (function() {
+    CKEDITOR.config.extraPlugins="language";
+    CKEDITOR.config.extraPlugins="colorbutton";
+  });
   /**
    * This function check and load the ck editor
    */
@@ -311,6 +314,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       $("#txt_postWriter").parent().animate({
         "opacity": "0.5"
       }, 250, function () {
+        enablePluginsForCKEditor();
         CKEDITOR.replace("txt_postWriter");
         $("#txt_postWriter").parent().animate({
           "opacity": "1"
@@ -341,6 +345,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
    * This function save post as draft
    */
   $scope.saveAsDraft = (function() {
+    var editorInstance = CKEDITOR.instances['txt_postWriter'];
+    editorInstance.config.readOnly = true;
+
     $scope.destroyCKEditor();
   });
 

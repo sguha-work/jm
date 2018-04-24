@@ -95,12 +95,13 @@ module.exports = function (router, passport) {
 
 
     //drafts router  
-    router.post('/savedraft', postController.saveAsdraft);
+    //router.post('/savedraft', postController.saveAsdraft);
     router.post('/getalldrafts', postController.getAllUserDrafts);
     router.post('/updatedraft', postController.updateDraft);
     router.delete('/deletedrafts', postController.deleteMultipleDrafts);
     router.get('/getreports', postController.getAllReports);
     router.delete('/deletereports', postController.deleteReports);
+    router.post('/post/add', postController.add);
 
     //Quote router
     router.post('/addquote', quoteController.add);
