@@ -4,31 +4,28 @@ var mongoosastic = require('mongoosastic');
 var bcrypt = require('bcrypt-nodejs');
 var likeSchema = require('./likes').schema;
 var commentSchema = require('./comments').schema;
-var ratingSchema = require('./ratings').schema; 
+var ratingSchema = require('./ratings').schema;
 
 var PostSchema = new Schema({
-    userId : { type:String },
-    postContent : { type:String },
-    postType : { type:String },
-    poster : { type:String },
-    posterImage : { type:String },
-    postLanguage : { type:String },
-    postCategory    : { type:String , es_indexed:true},
-    dateAndTime    : { type:Date },
-    likes    : [ likeSchema ],
-    comments  : [ commentSchema ],
-    rating :  [ ratingSchema ],
-    hastags    : [ ],
-    keywords    : { type:String },
-    favourates    : { type:String , es_indexed:true},
-    isDraft : { type:Boolean },
-    postTitle    : { type:String },
-    postTopic    : { type:String , es_indexed:true},
-    posterRole   : { type:String },
-    bookMarks : []
-   });
+    postContent: { type: String, required: false },
+    userId: { type: String, required: false },
+    userEmail: { type: String, required: false },
+    systemInfo: { type: Schema.Types.Mixed, required: false },
+    postImage: { type: String, required: false },
+    hastags: { type: String, required: false },
+    postTitle: { type: String, required: false },
+    postLanguage: { type: String, required: false },
+    postBackGround: { type: String, required: false },
+    postType: { type: String, required: false },
+    postTopic: { type: String, required: false },
+    postLastModificationTime: { type: String, required: false },
+    isDraft: { type: Boolean, required: false },
+    rating: { type: Number, required: false },
+    lastModified: { type: String, required: false },
+    isTrashed: { type: Boolean, required: false },
+});
 
-   PostSchema.plugin(mongoosastic);
+PostSchema.plugin(mongoosastic);
 
-   module.exports = mongoose.model('Post', PostSchema);
+module.exports = mongoose.model('Post', PostSchema);
 

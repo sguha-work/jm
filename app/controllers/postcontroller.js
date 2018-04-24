@@ -70,30 +70,29 @@ postController.getAllUserPosts = function (req, res) {
 
 
 postController.add = function (req, res) {
-    var post = new Post();
-    post.postContent = req.body.postContent;
-    post.userId = req.body.userId;
-    post.poster = req.body.poster;
-    post.posterImage = req.body.posterImage;
-    post.hastags = req.body.hastags.split(/[ ,]+/).filter(Boolean);
-    post.postTitle = req.body.postTitle;
-    post.postTopic = req.body.postTopic;
-    post.postLanguage = req.body.postLanguage;
-    post.posterRole = req.body.posterRole;
-    post.postType = req.body.postType;
-    post.isDraft = false;
-    if (req.body.isDraft) {
-        post.isDraft = req.body.isDraft;
-    }
-    post.dateAndTime = new Date();
-    postDB.addPost(post, function (err, data) {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(data);
-        }
-    })
+    var postObject = new Post();
+    postObject.postContent = req.body.postContent;
+    postObject.userId = req.body.userId;
+    postObject.userEmail = req.body.userEmail;
+    postObject.systemInfo = req.body.systemInfo;
+    postObject.systemInfo.host = req.hostname;
+    postObject.systemInfo.origin = req.origin;
+    postObject.postImage = req.body.postImage;
+    postObject.hastags = req.body.hastags;
+    postObject.postTitle = req.body.postTitle;
+    postObject.postLanguage = req.body.postLanguage;
+    postObject.postBackGround = req.body.postBackGround;
+    postObject.postType = req.body.postType;
+    postObject.postTopic = req.body.postTopic;
+    postObject.isDraft = req.body.isDraft;
+    postObject.lastModified = req.body.lastModified;
+    postObject.isTrashed = req.body.isTrashed;
+    postObject.rating = req.body.rating;
+    postDB.addPost(postObject).then(function (data) {
+        res.json({ "success": true, "messege": data });
+    }).catch(function (error) {
+        res.json({ "success": false, "messege": error });
+    });
 }
 
 postController.likePost = function (req, res) {

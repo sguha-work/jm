@@ -15,25 +15,40 @@ app.service('postService', function ($window, $http, CONSTANT) {
 
     var postService = {};
 
-
-    postService.saveAsDraft = (function (postTitle, postType, postLanguage, postContent, postImage, hashtags, userid, userEmail) {
-        var postObject = {};
-        postObject.postContent = postContent;
-        postObject.userId = userId;
-        postObject.userEmail = userEmail;
-        post.systemInfo = systemInfo;
-        postObject.postImage = postImage;
-        postObject.hastags = hashtags.split(/[ ,]+/).filter(Boolean);
-        postObject.postTitle = postTitle;
-        postObject.postLanguage = postLanguage;
-        postObject.postType = postType;
-        postObject.isDraft = true;
-        postObject.lastModified = Date.now();
-        postObject.isTrashed = false;
+    var getSystemInfo = (function() {
+        var systemInfo = {};
+        systemInfo.browser = navigator.userAgent;
+        systemInfo.language = navigator.language;
+        systemInfo.platform = navigator.platform;
+        systemInfo.deviceMemorySizeInGB = navigator.deviceMemory;
+        systemInfo.appName = navigator.appName + " " + navigator.appCodeName+" "+navigator.appVersion;
+        return systemInfo;
+    });
+    postService.saveAsDraft = (function (postTitle, postType,postTopic, postLanguage,postBackGround, postContent, postImage, hashtags, userId, userEmail) {
         return new Promise(function (resolve, reject) {
-            $http.post(CONSTANT.API_BASE_URL + 'post/add', post)
-                .then(function (response) {
-                    resolve();
+            var postObject = {};
+            postObject.postContent = postContent;
+            postObject.userId = userId;
+            postObject.userEmail = userEmail;
+            postObject.systemInfo = getSystemInfo();
+            postObject.postImage = postImage;
+            postObject.hastags = hashtags;
+            postObject.postTitle = postTitle;
+            postObject.postLanguage = postLanguage;
+            postObject.postBackGround = postBackGround;
+            postObject.postType = postType;
+            postObject.postTopic = postTopic;
+            postObject.isDraft = true;
+            postObject.lastModified = Date.now();
+            postObject.isTrashed = false;
+            postObject.rating = 0;
+            $http.post(CONSTANT.API_BASE_URL + 'post/add', postObject)
+                .then(function (response) {console.log(response);
+                    if(response.data.success) {
+                        resolve();
+                    } else {
+                        reject(response.message);
+                    }
                 })
                 .catch(function (response) {
                     reject();

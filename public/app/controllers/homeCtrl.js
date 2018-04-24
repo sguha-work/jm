@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare, homePageService, userRegService) {
+app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebook, toastr, authService, $timeout, $location, Socialshare, homePageService, userRegService, postService) {
 
   if (!authService.isLoggedIn()) {
     $location.path('/');
@@ -299,9 +299,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
   //     })
   // }
-  var enablePluginsForCKEditor = (function() {
-    CKEDITOR.config.extraPlugins="language";
-    CKEDITOR.config.extraPlugins="colorbutton";
+  var enablePluginsForCKEditor = (function () {
+    CKEDITOR.config.extraPlugins = "language";
+    CKEDITOR.config.extraPlugins = "colorbutton";
   });
   /**
    * This function check and load the ck editor
@@ -344,17 +344,35 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   /**
    * This function save post as draft
    */
-  $scope.saveAsDraft = (function() {
+  $scope.saveAsDraft = (function () {
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
     editorInstance.config.readOnly = true;
+    postTitle = "";
+    postType = "";
+    postTopic = "";
+    postLanguage = "";
+    postContent = editorInstance.getData();
+    postImage = $rootScope.current_user.profilePic
+    postBackGround = "";
+    hashtags = "";
+    userId = $rootScope.current_user._id
+    userEmail = $rootScope.current_user.email;
+    postService.saveAsDraft(postTitle, postType, postTopic, postLanguage, postBackGround, postContent, postImage, hashtags, userId, userEmail).then(function (messege) {
+      // post saved as draft
+      toastr.success("Post saved as draft successfully");
+      $scope.destroyCKEditor();
+    }).catch(function (messege) {
+      // post saving failed
+      toastr.error("Post cannot be saved right now");
+      $scope.destroyCKEditor();
+    });
 
-    $scope.destroyCKEditor();
   });
 
   /**
    * This function save post to database and publish the post
    */
-  $scope.saveAndPublishPost = (function() {
+  $scope.saveAndPublishPost = (function () {
     $scope.destroyCKEditor();
   });
 
