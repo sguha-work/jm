@@ -302,8 +302,6 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   var enablePluginsForCKEditor = (function () {
     CKEDITOR.config.extraPlugins = "language";
     CKEDITOR.config.extraPlugins = "colorbutton";
-    CKEDITOR.config.extraPlugins = "image2";
-    CKEDITOR.config.removePlugins = 'easyimage';
   });
   /**
    * This function check and load the ck editor
@@ -318,6 +316,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       }, 250, function () {
         enablePluginsForCKEditor();
         CKEDITOR.replace("txt_postWriter");
+        $("#div_backgroundColor").css({
+          "visibility": "visible"
+        });
         $("#txt_postWriter").parent().animate({
           "opacity": "1"
         }, 250);
@@ -331,6 +332,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     $("#txt_postWriter").parent().animate({
       "opacity": "0.5"
     }, 250, function () {
+      $("#div_backgroundColor").css({
+        "visibility": "hidden"
+      });
       editorInstance.destroy();
       $("#txt_postWriter").animate({
         "height": "-=251"
