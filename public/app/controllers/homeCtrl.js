@@ -15,6 +15,23 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     max: 5
   }];
 
+  $scope.backgroundColorArray = [
+    "#FF7F50",
+    "#6495ED",
+    "#DC143C",
+    "#008B8B",
+    "#B8860B",
+    "#9932CC",
+    "#FF8C00",
+    "#FF1493",
+    "#1E90FF",
+    "#808080",
+    "#90EE90",
+    "#FFFF00",
+    "red",
+    "#F5DEB3",
+    "#FFFFFF"
+  ];
   var checkPostImageURL = (function (src) {
     return new Promise(function (resolve, reject) {
       if (typeof src === "undefined") {
