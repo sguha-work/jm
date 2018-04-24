@@ -302,6 +302,8 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   var enablePluginsForCKEditor = (function () {
     CKEDITOR.config.extraPlugins = "language";
     CKEDITOR.config.extraPlugins = "colorbutton";
+    CKEDITOR.config.extraPlugins = "image2";
+    CKEDITOR.config.removePlugins = 'easyimage';
   });
   /**
    * This function check and load the ck editor
