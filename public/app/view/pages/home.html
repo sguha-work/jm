@@ -130,26 +130,31 @@
                         <input style="margin-top: 10px;" type="text" class="form-control" ng-model="postTitle" id="" placeholder="Enter title">
                       </div>
                       <!-- select type form -->
-                      <div id="div_types" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
+                      <div ng-if="types.length" id="div_types" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <p for="usrname">Select type for your writing</p>
-                        <div ng-repeat="type in types" ng-class="(postType == type.type)?'div_typeActive':''" ng-click="selectType({{type.type}})" class="div_type">
-                          <img class="img_typeImage" src="{{type.typeImage}}" />
-                          <label class="label_typeText">{{type.type}}</label>
+                        <div>
+                          <div ng-repeat="type in types" ng-class="(postType == type.type)?'div_typeActive':''" ng-click="selectType(type.type)" class="div_type">
+                            <img class="img_typeImage" src="{{type.typeImage}}" />
+                            <label class="label_typeText">{{type.type}}</label>
+                          </div>
                         </div>
                       </div>
                       <!-- select topic form -->
-                      <div id="div_topic" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
+                      <div ng-if="topics.length" id="div_topic" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <p for="usrname">Select topic for your writing</p>
-                        <div ng-repeat="topic in topics" ng-class="(postType.indexOf(type.topicName) >= 0 )?'div_typeActive':''" ng-click="selectTopic({{type.type}})" class="div_type">
+                        <div>
+                          <div ng-repeat="topic in topics" ng-class="(postType.indexOf(topic.topicName) >= 0 )?'div_typeActive':''" ng-click="selectTopic(topic.topicName)"
+                            class="div_type">
                             <img class="img_typeImage" src="{{topic.topicImage}}" />
                             <label class="label_typeText">{{topic.topicName}}</label>
                           </div>
+                        </div>
                       </div>
                       <!-- Enter hashtag form -->
-                      <div id="div_topic" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
+                      <div id="" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <label for="usrname">Select topic for your writing</label>
                         <input style="margin-top: 10px;" type="text" class="form-control" ng-model="hashtags" id="" placeholder="Enter ',' separated hastags">
-                        <button id="btn_submitHashTag" type="submit" class="btn btn-success btn-block" ng-click="storeHashTags()">Submit </button>
+                        <button id="btn_submitHashTag" type="submit" class="btn btn-success btn-block" ng-click="submitPostAndCloseModal()">Submit </button>
                       </div>
                     </div>
                   </div>
@@ -165,7 +170,7 @@
                   title="{{color}}" ng-class="(postBackGroundColor==color)?'span_backgroundColorSelectActive':''" style="background-color: {{color}}"></span>
 
               </div>
-              <button ng-click="saveAndPublishPost()" type="button" class="w3-button w3-theme">
+              <button ng-click="prepareToPublishPost()" type="button" class="w3-button w3-theme">
                 <i class="fa fa-pencil"></i>  Post</button>
               <button ng-click="saveAsDraft()" style="float: right;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom" ng-click="saveAsDraft(post)">
                 <i class="fa fa-times"></i> Save as Draft</button>

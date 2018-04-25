@@ -20,7 +20,7 @@
 #myModal .div_type {
 	height: 65px;
     width: 15%;
-    float: right;
+    float: left;
     margin-left: 5px;
     margin-right: 5px;
     cursor: pointer;

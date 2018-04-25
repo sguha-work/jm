@@ -20,14 +20,14 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
    */
   $http.get(CONSTANT.API_BASE_URL + 'types/getAll').then(function (data) {
     $scope.types = data.data.data;
-    $scope.types = [];
   }).catch(function (error) {
     toastr.error("Problem in connection");
+    $scope.types = [];
   });
 
-  $http.get(CONSTANT.API_BASE_URL + "getTopics").then(function() {
+  $http.get(CONSTANT.API_BASE_URL + "getTopics").then(function (data) {
     $scope.topics = data.data.data;
-  }).catch(function() {
+  }).catch(function () {
     toastr.error("Problem in connection");
     $scope.topics = [];
   });
@@ -408,19 +408,23 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     $("#myModal").modal();
   });
   $scope.postType = "";
-  $scope.selectType = (function(type) {
-    $scope.postType = type;
+  $scope.selectType = (function (type) {
+    $scope.postType = type; console.log($scope.postType);
   });
   $scope.postTopic = [];
-  $scope.selectTopic = (function(topic) {
-    if($scope.postTopic.indexOf(topic) === -1) {
-      $scope.postTopic.push(topic)
+  $scope.selectTopic = (function (topic) {
+    if ($scope.postTopic.length < 3) {
+      if ($scope.postTopic.indexOf(topic) === -1) {
+        $scope.postTopic.push(topic)
+      } else {
+        var index = $scope.postTopic.indexOf(topic);
+        $scope.postTopic.splice(index, 1);
+      } 
     } else {
-      var index = $scope.postTopic.indexOf(topic);
-      $scope.postTopic.splice(index, 1);
+      toastr.error("You can only select 3 topics for one content");
     }
   });
-  $scope.saveAndPublishPost = (function () {
+  $scope.prepareToPublishPost = (function () {
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
     var data = editorInstance.getData().trim();
     if (data != "") {
@@ -431,6 +435,11 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     }
 
   });
+  $scope.submitPostAndCloseModal = (function() {
+    $(".modal-header button").trigger("click");// closing the modal
+    $rootScope.showLoader = true;
+
+  })
 
   var checkAndReplaceForInvalidImage = (function (userObject) {
     var s = document.createElement("IMG");
