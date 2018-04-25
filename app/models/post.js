@@ -17,7 +17,7 @@ var PostSchema = new Schema({
     postLanguage: { type: String, required: false },
     postBackGroundColor: { type: String, required: false },
     postType: { type: String, required: false },
-    postTopic: { type: String, required: false },
+    postTopic: { type: Schema.Types.Mixed, required: false },
     postLastModificationTime: { type: String, required: false },
     isDraft: { type: Boolean, required: false },
     rating: { type: Number, required: false },

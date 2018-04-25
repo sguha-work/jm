@@ -25,12 +25,13 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     toastr.error("Problem in connection");
   });
 
-  $http.get(CONSTANT.API_BASE_URL + "getTopics"),then(function() {
+  $http.get(CONSTANT.API_BASE_URL + "getTopics").then(function() {
     $scope.topics = data.data.data;
   }).catch(function() {
     toastr.error("Problem in connection");
     $scope.topics = [];
   });
+
   $scope.backgroundColorArray = [
     "#FF7F50",
     "#6495ED",
@@ -378,7 +379,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     editorInstance.config.readOnly = true;
     postTitle = "";
     postType = "";
-    postTopic = "";
+    postTopic = [];
     postLanguage = "";
     postContent = editorInstance.getData();
     postImage = $rootScope.current_user.profilePic
@@ -409,6 +410,15 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   $scope.postType = "";
   $scope.selectType = (function(type) {
     $scope.postType = type;
+  });
+  $scope.postTopic = [];
+  $scope.selectTopic = (function(topic) {
+    if($scope.postTopic.indexOf(topic) === -1) {
+      $scope.postTopic.push(topic)
+    } else {
+      var index = $scope.postTopic.indexOf(topic);
+      $scope.postTopic.splice(index, 1);
+    }
   });
   $scope.saveAndPublishPost = (function () {
     var editorInstance = CKEDITOR.instances['txt_postWriter'];

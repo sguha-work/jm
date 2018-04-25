@@ -139,9 +139,11 @@
                       </div>
                       <!-- select topic form -->
                       <div id="div_topic" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
-                        <label for="usrname">
-                          <span class="glyphicon"></span> Select topic for your writing</label>
-
+                        <p for="usrname">Select topic for your writing</p>
+                        <div ng-repeat="topic in topics" ng-class="(postType.indexOf(type.topicName) >= 0 )?'div_typeActive':''" ng-click="selectTopic({{type.type}})" class="div_type">
+                            <img class="img_typeImage" src="{{topic.topicImage}}" />
+                            <label class="label_typeText">{{topic.topicName}}</label>
+                          </div>
                       </div>
                       <!-- Enter hashtag form -->
                       <div id="div_topic" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
