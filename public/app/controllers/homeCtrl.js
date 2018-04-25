@@ -15,6 +15,15 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     max: 5
   }];
 
+  /**
+   * Following section will fetch the types from server and stores them
+   */
+  $http.get(CONSTANT.API_BASE_URL + 'types/getAll').then(function (data) {
+    $scope.types = data.data.data;
+  }).catch(function (error) {
+    toastr.error("Problem in connection");
+  });
+
   $scope.backgroundColorArray = [
     "#FF7F50",
     "#6495ED",
@@ -299,7 +308,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   });
 
   $scope.postBackGroundColor = "#FFFFFF"
-  
+
   /**
    * This function change editor's background color
    */
@@ -356,6 +365,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
    * This function save post as draft
    */
   $scope.saveAsDraft = (function () {
+    $rootScope.showLoader = true;
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
     editorInstance.config.readOnly = true;
     postTitle = "";
@@ -370,10 +380,12 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     userEmail = $rootScope.current_user.email;
     postService.saveAsDraft(postTitle, postType, postTopic, postLanguage, postBackGroundColor, postContent, postImage, hashtags, userId, userEmail).then(function (messege) {
       // post saved as draft
+      $rootScope.showLoader = false;
       toastr.success("Post saved as draft successfully");
       $scope.destroyCKEditor();
     }).catch(function (messege) {
       // post saving failed
+      $rootScope.showLoader = false;
       toastr.error("Post cannot be saved right now");
       $scope.destroyCKEditor();
     });
