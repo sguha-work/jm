@@ -12,7 +12,7 @@ var PostSchema = new Schema({
     userEmail: { type: String, required: false },
     systemInfo: { type: Schema.Types.Mixed, required: false },
     postImage: { type: String, required: false },
-    hastags: { type: String, required: false },
+    hastags: { type: Schema.Types.Mixed, required: false },
     postTitle: { type: String, required: false },
     postLanguage: { type: String, required: false },
     postBackGroundColor: { type: String, required: false },

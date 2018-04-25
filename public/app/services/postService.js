@@ -57,6 +57,38 @@ app.service('postService', function ($window, $http, CONSTANT) {
 
     });
 
+    postService.publish = (function (postTitle, postType,postTopic, postLanguage,postBackGroundColor, postContent, postImage, hashtags, userId, userEmail) {
+        return new Promise(function (resolve, reject) {
+            var postObject = {};
+            postObject.postContent = postContent;
+            postObject.userId = userId;
+            postObject.userEmail = userEmail;
+            postObject.systemInfo = getSystemInfo();
+            postObject.postImage = postImage;
+            postObject.hastags = hashtags;
+            postObject.postTitle = postTitle;
+            postObject.postLanguage = postLanguage;
+            postObject.postBackGroundColor = postBackGroundColor;
+            postObject.postType = postType;
+            postObject.postTopic = postTopic;
+            postObject.isDraft = false;
+            postObject.lastModified = Date.now();
+            postObject.isTrashed = false;
+            postObject.rating = 0;
+            $http.post(CONSTANT.API_BASE_URL + 'post/add', postObject)
+                .then(function (response) {
+                    if(response.data.success) {
+                        resolve();
+                    } else {
+                        reject(response.message);
+                    }
+                })
+                .catch(function (response) {
+                    reject();
+                })
+        });
+
+    });
     return postService;
 
 })

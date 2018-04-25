@@ -315,16 +315,16 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     CKEDITOR.config.extraPlugins = "colorbutton";
   });
 
-  $scope.postBackGroundColor = "#FFFFFF"
-
   /**
    * This function change editor's background color
    */
+  $scope.postBackGroundColor = "#FFFFFF"
   $scope.changeEditorBackground = (function ($event, color) {
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
     editorInstance.document.getBody().setStyle('background-color', color);
     $scope.postBackGroundColor = color;
   });
+
   /**
    * This function check and load the ck editor
    */
@@ -358,6 +358,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
         "visibility": "hidden"
       });
       editorInstance.destroy();
+      $("#txt_postWriter").val("");
       $("#txt_postWriter").animate({
         "height": "-=251"
       }, 500, function () {
@@ -391,8 +392,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       // post saved as draft
       $rootScope.showLoader = false;
       toastr.success("Post saved as draft successfully");
-      $scope.destroyCKEditor();
-      $("#txt_postWriter").val("");
+      $scope.destroyCKEditor();      
     }).catch(function (messege) {
       // post saving failed
       $rootScope.showLoader = false;
@@ -411,6 +411,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   $scope.selectType = (function (type) {
     $scope.postType = type; console.log($scope.postType);
   });
+
   $scope.postTopic = [];
   $scope.selectTopic = (function (topic) {
     if ($scope.postTopic.length < 3) {
@@ -424,6 +425,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       toastr.error("You can only select 3 topics for one content");
     }
   });
+
   $scope.prepareToPublishPost = (function () {
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
     var data = editorInstance.getData().trim();
@@ -435,11 +437,34 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     }
 
   });
+
   $scope.submitPostAndCloseModal = (function() {
     $(".modal-header button").trigger("click");// closing the modal
     $rootScope.showLoader = true;
+    var editorInstance = CKEDITOR.instances['txt_postWriter'];
+    editorInstance.config.readOnly = true;
+    postTitle = $scope.postTitle;
+    postType = $scope.postType;
+    postTopic = $scope.postTopic;
+    postLanguage = "";
+    postContent = editorInstance.getData();
+    postImage = $rootScope.current_user.profilePic
+    postBackGroundColor = $scope.postBackGroundColor;
+    hashtags = $scope.hashtags.split(",");
+    userId = $rootScope.current_user._id
+    userEmail = $rootScope.current_user.email;
 
-  })
+    postService.publish(postTitle, postType, postTopic, postLanguage, postBackGroundColor, postContent, postImage, hashtags, userId, userEmail).then(function() {
+      // post published
+      $rootScope.showLoader = false;
+      toastr.success("Post published");
+      $scope.destroyCKEditor(); 
+    }).catch(function() {
+      // post publishing failed
+      $rootScope.showLoader = false;
+      toastr.error("Post cannot be published right now");
+    });
+  });
 
   var checkAndReplaceForInvalidImage = (function (userObject) {
     var s = document.createElement("IMG");
