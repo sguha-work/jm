@@ -361,6 +361,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   });
 
 
+
   /**
    * This function save post as draft
    */
@@ -395,8 +396,19 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   /**
    * This function save post to database and publish the post
    */
+  var showModal = (function () {
+    $("#myModal").modal();
+  });
   $scope.saveAndPublishPost = (function () {
-    $scope.destroyCKEditor();
+    var editorInstance = CKEDITOR.instances['txt_postWriter'];
+    var data = editorInstance.getData().trim();
+    if (data != "") {
+      showModal();
+      $scope.destroyCKEditor();
+    } else {
+      toastr.error("Nothing to submit");
+    }
+
   });
 
   var checkAndReplaceForInvalidImage = (function (userObject) {

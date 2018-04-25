@@ -17,6 +17,25 @@
 	border: 2px solid red;
 }
 
+#myModal .div_type {
+	height: 65px;
+    width: 15%;
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#myModal .div_type .img_typeImage {
+	height: 100%;
+	width: 100%;
+	border-radius: 10px;
+}
+
+.label_typeText {
+	font-weight: bold;
+}
+
 .selectBox {
 	position: relative;
 }
