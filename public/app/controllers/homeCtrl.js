@@ -431,7 +431,6 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     var data = editorInstance.getData().trim();
     if (data != "") {
       showModal();
-      $scope.destroyCKEditor();
     } else {
       toastr.error("Nothing to submit");
     }
@@ -442,7 +441,6 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     $(".modal-header button").trigger("click");// closing the modal
     $rootScope.showLoader = true;
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
-    editorInstance.config.readOnly = true;
     postTitle = $scope.postTitle;
     postType = $scope.postType;
     postTopic = $scope.postTopic;
