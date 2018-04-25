@@ -383,11 +383,11 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       $rootScope.showLoader = false;
       toastr.success("Post saved as draft successfully");
       $scope.destroyCKEditor();
+      $("#txt_postWriter").val("");
     }).catch(function (messege) {
       // post saving failed
       $rootScope.showLoader = false;
       toastr.error("Post cannot be saved right now");
-      $scope.destroyCKEditor();
     });
 
   });
