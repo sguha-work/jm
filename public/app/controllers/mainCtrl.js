@@ -10,7 +10,9 @@ app.controller('mainCtrl', function ($http, authService, $location, Facebook, $r
         if (authService.isLoggedIn()) {
             authService.getUser().then(function (data) {
                 if (typeof data.data.user === "undefined") {
-                    $window.localStorage.removeItem(token);
+                    if(typeof $window.localStorage["token"] !== "undefined") {
+                        $window.localStorage.removeItem("token");
+                    }
                     $location.path('/');
                 }
                 $rootScope.current_user = data.data.user;
