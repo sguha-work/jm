@@ -132,7 +132,7 @@
                       <!-- select type form -->
                       <div id="div_types" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <p for="usrname">Select type for your writing</p>
-                        <div ng-repeat="type in types" class="div_type">
+                        <div ng-repeat="type in types" ng-class="(postType == type.type)?'div_typeActive':''" ng-click="selectType({{type.type}})" class="div_type">
                           <img class="img_typeImage" src="{{type.typeImage}}" />
                           <label class="label_typeText">{{type.type}}</label>
                         </div>

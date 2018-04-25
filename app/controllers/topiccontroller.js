@@ -31,13 +31,11 @@ topicController.update =  function(req, res){
 }
 
 topicController.all = function(req, res){
-    topicDB.findAll(function(err, data){
-        if(err){
-            res.json(err);
-        }else {
-            res.json(data);
-        }
-    }) 
+    topicDB.findAll().then(function(data) {
+        res.json(data);
+    }).catch(function(data) {
+        res.json(data);
+    }); 
 }
 
 topicController.remove = function(req,res){

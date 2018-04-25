@@ -20,10 +20,17 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
    */
   $http.get(CONSTANT.API_BASE_URL + 'types/getAll').then(function (data) {
     $scope.types = data.data.data;
+    $scope.types = [];
   }).catch(function (error) {
     toastr.error("Problem in connection");
   });
 
+  $http.get(CONSTANT.API_BASE_URL + "getTopics"),then(function() {
+    $scope.topics = data.data.data;
+  }).catch(function() {
+    toastr.error("Problem in connection");
+    $scope.topics = [];
+  });
   $scope.backgroundColorArray = [
     "#FF7F50",
     "#6495ED",
@@ -398,6 +405,10 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
    */
   var showModal = (function () {
     $("#myModal").modal();
+  });
+  $scope.postType = "";
+  $scope.selectType = (function(type) {
+    $scope.postType = type;
   });
   $scope.saveAndPublishPost = (function () {
     var editorInstance = CKEDITOR.instances['txt_postWriter'];

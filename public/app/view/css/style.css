@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
+.div_typeActive {
+	border: 2px solid red;
+}
+
 #myModal .div_type .img_typeImage {
 	height: 100%;
 	width: 100%;

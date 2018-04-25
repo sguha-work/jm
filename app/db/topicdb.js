@@ -73,14 +73,17 @@ topicDB.getAll = function(done){
     });
 }
 
-topicDB.findAll = function(done){
-  Topic.find({}, function (err, result) {
+topicDB.findAll = function(){
+  return new Promise(function(resolve, reject) {
+    Topic.find({}, function (err, result) {
       if (err) {
-        return done(err);
+        reject({ "success": false, "data": error });
       } else {
-        return done(null, { success: true, "data": result });
+        resolve({ "success": true, "data": result });
       }
     });
+  });
+  
 }
 
 topicDB.searchFav = function(name, done){
