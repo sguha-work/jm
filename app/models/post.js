@@ -15,7 +15,7 @@ var PostSchema = new Schema({
     hastags: { type: String, required: false },
     postTitle: { type: String, required: false },
     postLanguage: { type: String, required: false },
-    postBackGround: { type: String, required: false },
+    postBackGroundColor: { type: String, required: false },
     postType: { type: String, required: false },
     postTopic: { type: String, required: false },
     postLastModificationTime: { type: String, required: false },

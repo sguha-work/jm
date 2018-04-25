@@ -13,6 +13,9 @@
 	margin-left: 1%;
 	margin-right: 1%;
 }
+.span_backgroundColorSelectActive {
+	border: 2px solid red;
+}
 
 .selectBox {
 	position: relative;

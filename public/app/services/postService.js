@@ -24,7 +24,7 @@ app.service('postService', function ($window, $http, CONSTANT) {
         systemInfo.appName = navigator.appName + " " + navigator.appCodeName+" "+navigator.appVersion;
         return systemInfo;
     });
-    postService.saveAsDraft = (function (postTitle, postType,postTopic, postLanguage,postBackGround, postContent, postImage, hashtags, userId, userEmail) {
+    postService.saveAsDraft = (function (postTitle, postType,postTopic, postLanguage,postBackGroundColor, postContent, postImage, hashtags, userId, userEmail) {
         return new Promise(function (resolve, reject) {
             var postObject = {};
             postObject.postContent = postContent;
@@ -35,7 +35,7 @@ app.service('postService', function ($window, $http, CONSTANT) {
             postObject.hastags = hashtags;
             postObject.postTitle = postTitle;
             postObject.postLanguage = postLanguage;
-            postObject.postBackGround = postBackGround;
+            postObject.postBackGroundColor = postBackGroundColor;
             postObject.postType = postType;
             postObject.postTopic = postTopic;
             postObject.isDraft = true;

@@ -28,9 +28,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     "#808080",
     "#90EE90",
     "#FFFF00",
-    "red",
-    "#F5DEB3",
-    "#FFFFFF"
+    "#FFFFFF",
+    "#E6EFC4",
+    "#F5DEB3"
   ];
   var checkPostImageURL = (function (src) {
     return new Promise(function (resolve, reject) {
@@ -133,17 +133,6 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
       })
   }
-
-  // $scope.getAllUserPosts = function () {
-  //   var post = { "id": $rootScope.current_user._id };
-  //   $http.post(CONSTANT.API_BASE_URL + 'alluserPosts', post)
-  //     .then(function (response) {
-  //       $scope.postsArray = response.data;
-  //     })
-  //     .catch(function (response) {
-
-  //     })
-  // }
 
   $scope.likePost = function (post) {
     var postData = {};
@@ -304,21 +293,20 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
   }
 
-  // $scope.saveAsDraft = function (post) {
-  //   post.userId = $rootScope.current_user._id;
-  //   post.poster = $rootScope.current_user.firstName + " " + $rootScope.current_user.lastName;
-  //   post.posterImage = $rootScope.current_user.profilePic;
-  //   $http.post(CONSTANT.API_BASE_URL + 'savedraft', post)
-  //     .then(function (response) {
-  //       $scope.getAllUserPosts();
-  //     })
-  //     .catch(function (response) {
-
-  //     })
-  // }
   var enablePluginsForCKEditor = (function () {
     CKEDITOR.config.extraPlugins = "language";
     CKEDITOR.config.extraPlugins = "colorbutton";
+  });
+
+  $scope.postBackGroundColor = "#FFFFFF"
+  
+  /**
+   * This function change editor's background color
+   */
+  $scope.changeEditorBackground = (function ($event, color) {
+    var editorInstance = CKEDITOR.instances['txt_postWriter'];
+    editorInstance.document.getBody().setStyle('background-color', color);
+    $scope.postBackGroundColor = color;
   });
   /**
    * This function check and load the ck editor
@@ -376,11 +364,11 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     postLanguage = "";
     postContent = editorInstance.getData();
     postImage = $rootScope.current_user.profilePic
-    postBackGround = "";
+    postBackGroundColor = $scope.postBackGroundColor;
     hashtags = "";
     userId = $rootScope.current_user._id
     userEmail = $rootScope.current_user.email;
-    postService.saveAsDraft(postTitle, postType, postTopic, postLanguage, postBackGround, postContent, postImage, hashtags, userId, userEmail).then(function (messege) {
+    postService.saveAsDraft(postTitle, postType, postTopic, postLanguage, postBackGroundColor, postContent, postImage, hashtags, userId, userEmail).then(function (messege) {
       // post saved as draft
       toastr.success("Post saved as draft successfully");
       $scope.destroyCKEditor();
