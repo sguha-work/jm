@@ -10,7 +10,6 @@ var app = angular.module('userApp', ['appRoutes',
                                      'directive.g+signin',
                                      'angularMoment',
                                      'summernote',
-                                     'ckeditor',
                                      'base64',
                                      ]);
 
