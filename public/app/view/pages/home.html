@@ -132,7 +132,7 @@
                       <!-- select type form -->
                       <div ng-if="types.length" id="div_types" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <p for="usrname">Select type for your writing</p>
-                        <div>
+                        <div style="height:70px">
                           <div ng-repeat="type in types" ng-class="(postType == type.type)?'div_typeActive':''" ng-click="selectType(type.type)" class="div_type">
                             <img class="img_typeImage" src="{{type.typeImage}}" />
                             <label class="label_typeText">{{type.type}}</label>
@@ -143,7 +143,7 @@
                       <div ng-if="topics.length" id="div_topic" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
                         <p for="usrname">Select topic for your writing</p>
                         <div>
-                          <div ng-repeat="topic in topics" ng-class="(postType.indexOf(topic.topicName) >= 0 )?'div_typeActive':''" ng-click="selectTopic(topic.topicName)"
+                          <div ng-repeat="topic in topics" ng-class="(postTopic.indexOf(topic.topicName) >= 0 )?'div_typeActive':''" ng-click="selectTopic(topic.topicName)"
                             class="div_type">
                             <img class="img_typeImage" src="{{topic.topicImage}}" />
                             <label class="label_typeText">{{topic.topicName}}</label>
@@ -151,9 +151,9 @@
                         </div>
                       </div>
                       <!-- Enter hashtag form -->
-                      <div id="" class="form-group" style="margin-bottom: 20px;margin-top: 20px;">
-                        <label for="usrname">Select topic for your writing</label>
-                        <input style="margin-top: 10px;" type="text" class="form-control" ng-model="hashtags" id="" placeholder="Enter ',' separated hastags">
+                      <div id="" class="form-group" style="">
+                        <label for="usrname">Enter comma separated hashtags for your writing</label>
+                        <input style="margin-top: 10px;margin-bottom: 10px;" type="text" class="form-control" ng-model="hashtags" id="" placeholder="Enter ',' separated hastags">
                         <button id="btn_submitHashTag" type="submit" class="btn btn-success btn-block" ng-click="submitPostAndCloseModal()">Submit </button>
                       </div>
                     </div>

@@ -392,7 +392,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
       // post saved as draft
       $rootScope.showLoader = false;
       toastr.success("Post saved as draft successfully");
-      $scope.destroyCKEditor();      
+      $scope.destroyCKEditor();
     }).catch(function (messege) {
       // post saving failed
       $rootScope.showLoader = false;
@@ -409,21 +409,23 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   });
   $scope.postType = "";
   $scope.selectType = (function (type) {
-    $scope.postType = type; console.log($scope.postType);
+    $scope.postType = type; 
   });
 
   $scope.postTopic = [];
   $scope.selectTopic = (function (topic) {
-    if ($scope.postTopic.length < 3) {
-      if ($scope.postTopic.indexOf(topic) === -1) {
+
+    if ($scope.postTopic.indexOf(topic) === -1) {
+      if ($scope.postTopic.length < 3) {
         $scope.postTopic.push(topic)
       } else {
-        var index = $scope.postTopic.indexOf(topic);
-        $scope.postTopic.splice(index, 1);
-      } 
+        toastr.error("You can only select 3 topics for one content");
+      }
     } else {
-      toastr.error("You can only select 3 topics for one content");
+      var index = $scope.postTopic.indexOf(topic);
+      $scope.postTopic.splice(index, 1);
     }
+
   });
 
   $scope.prepareToPublishPost = (function () {
@@ -437,7 +439,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
   });
 
-  $scope.submitPostAndCloseModal = (function() {
+  $scope.submitPostAndCloseModal = (function () {
     $(".modal-header button").trigger("click");// closing the modal
     $rootScope.showLoader = true;
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
@@ -452,12 +454,12 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     userId = $rootScope.current_user._id
     userEmail = $rootScope.current_user.email;
 
-    postService.publish(postTitle, postType, postTopic, postLanguage, postBackGroundColor, postContent, postImage, hashtags, userId, userEmail).then(function() {
+    postService.publish(postTitle, postType, postTopic, postLanguage, postBackGroundColor, postContent, postImage, hashtags, userId, userEmail).then(function () {
       // post published
       $rootScope.showLoader = false;
       toastr.success("Post published");
-      $scope.destroyCKEditor(); 
-    }).catch(function() {
+      $scope.destroyCKEditor();
+    }).catch(function () {
       // post publishing failed
       $rootScope.showLoader = false;
       toastr.error("Post cannot be published right now");
@@ -496,9 +498,9 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
         }
         checkAndReplaceForInvalidImage(userObject);
-        userObject.name = data.data[index].firstName; console.log(userObject.profilePic);
+        userObject.name = data.data[index].firstName; 
         userDataArray.push(userObject);
-      } console.log(data.data);
+      } 
       $scope.randomProfiles = userDataArray;
     });
   });
