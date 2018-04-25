@@ -31,7 +31,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
     toastr.error("Problem in connection");
     $scope.topics = [];
   });
-
+  $scope.postTitle = "";
   $scope.backgroundColorArray = [
     "#FF7F50",
     "#6495ED",
@@ -440,6 +440,18 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   });
 
   $scope.submitPostAndCloseModal = (function () {
+    if($scope.postTitle.trim()==="") {
+      toastr.error("Please enter title for your post");
+      return false;
+    }
+    if($scope.postType.trim()==="") {
+      toastr.error("Please select type for your post");
+      return false;
+    }
+    if($scope.postTopic.length == 0) {
+      toastr.error("Please select atleast 1 topic for your post");
+      return false;
+    }
     $(".modal-header button").trigger("click");// closing the modal
     $rootScope.showLoader = true;
     var editorInstance = CKEDITOR.instances['txt_postWriter'];
