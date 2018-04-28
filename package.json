@@ -44,7 +44,7 @@
     "summernote": "^0.8.8",
     "winston": "^2.4.0"
   },
-"engines": {
+  "engines": {
     "node": "8.9.1",
     "npm": "5.5.1"
   }

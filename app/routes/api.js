@@ -13,7 +13,7 @@ var profileController = require('../controllers/profilecontroller');
 var categoryController = require('../controllers/categorycontroller');
 var feedbackController = require('../controllers/feedbackcontroller');
 var notificationController = require('../controllers/notificationcontroller');
-
+var searchController = require('../controllers/searchcontroller');
 
 var path = require('path');
 var jwt = require('jsonwebtoken');
@@ -68,7 +68,7 @@ module.exports = function (router, passport) {
     router.delete('/deleteUser', userController.remove);
     router.post('/updateuser', userController.update);
     router.post('/updateprofile', userController.updateprofile);
-    router.post('/search', userController.search);
+    //router.post('/search', userController.search);
     router.get('/groupmail', userController.sendMulticlientMail);
     router.post('/sendresetpasswordotp', userController.sendResetPasswordOTP);
     router.post('/resetpassword', userController.resetPassword);
@@ -89,7 +89,7 @@ module.exports = function (router, passport) {
     router.post('/getavg', postController.getAvgRating);
     router.post('/reportabuse', postController.reportAbuse);
     router.post('/gettimelineposts', postController.getAllTimelinePosts);
-    router.post('/searchpost', postController.searchPost);
+    //router.post('/searchpost', postController.searchPost);
     router.post('/getfilterposts', postController.getFilteredPosts);
     router.post('/bookmarkpost', postController.bookMarkPost);
     router.post('/removebookmark', postController.removeBookMark);
@@ -143,6 +143,9 @@ module.exports = function (router, passport) {
     router.delete('/deletecategory', categoryController.remove);
     router.post('/getcategorybyid', categoryController.getById);
     router.get('/getcategories', categoryController.all);
+
+    // search releted APIs
+    router.get('/search', searchController.search);
 
     //feeback router
     router.post('/addfeedback', feedbackController.add);
@@ -233,3 +236,4 @@ module.exports = function (router, passport) {
 
     return router;
 }
+
