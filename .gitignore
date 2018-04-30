@@ -6,3 +6,5 @@ app/config/auth.js
 app/helpers/mailer.js
 
 public/app/constants/config.js
+
+html/scss

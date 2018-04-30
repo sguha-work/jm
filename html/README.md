@@ -1,1 +1,0 @@
-## All the html templates goes here
