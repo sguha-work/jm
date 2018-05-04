@@ -30,10 +30,10 @@ var searchPostContentWithKeyWord = (function(keyWord) {
 });
 searchController.search = (function(request, response) {
     var resultObject = {};
-    var keyWordForSearch = request.body.key;
+    var keyToSearch = request.body.key;
     // searching user
     var searchUserPromise = new Promise(function(resolve, reject) {
-        searchUserWithKeyWord(keyWordForSearch).then((data) => {
+        searchUserWithKeyWord(keyToSearch).then((data) => {
             resultObject.user = data;
             resolve();
         }).catch(function() {
@@ -44,7 +44,7 @@ searchController.search = (function(request, response) {
     
     // searching postname
     var searchPostNamePromise = new Promise(function(resolve, reject) {
-        searchPostNameWithKeyWord(keyWordForSearch).then(function(data) {
+        searchPostNameWithKeyWord(keyToSearch).then(function(data) {
             resultObject.postWithName = data;
             resolve();
         }).catch(function() {
