@@ -53,9 +53,9 @@ io.on('connection', function(socket) {
   socket.emit("event2", "hi");
 });
 
-server.listen(process.env.PORT || 3200, function(){
+server.listen(process.env.PORT || 4200, function(){
   console.log("server started");
-  console.log("visit http://localhost:"+(process.env.PORT || 3200));
+  console.log("visit http://localhost:"+(process.env.PORT || 4200));
 });
 
 // app.listen(process.env.PORT || 3200, function(){

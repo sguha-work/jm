@@ -269,6 +269,26 @@ userController.getRandomProfiles = (function (request, response) {
     });
 });
 
+/**
+ * The following function will be called by the search controller
+ */
+//
+userController.searchByKeyword = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        var username = req.body.username;
+        var Query;
+        Query = User.find({ "firstName": /.*keyWord.*/i, "isNewUser": false }, { 'password': 0 });
+        var users = [];
+        Query.exec(function (err, dataFromDatabase) {
+            if (!err) {console.log("**data**", dataFromDatabase);
+                users= dataFromDatabase;
+                resolve(users);
+            } else {console.log("**data**");
+                reject();
+            }
+        });
+    });
+})
 
 module.exports = userController;
 

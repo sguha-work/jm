@@ -310,6 +310,19 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
   }
 
+  var search = ((keyWord) => {
+    $http({
+      method: 'GET',
+      url: CONSTANT.API_BASE_URL + 'search',
+      data: { key: keyWord },
+      headers: {
+        'Content-type': 'application/json;charset=utf-8'
+      }
+    }).then(function(data) {
+      console.log("***** data *****"+JSON.stringify(data.data.data));
+    }, function() {});
+  });
+  search("angshu");
   var enablePluginsForCKEditor = (function () {
     CKEDITOR.config.extraPlugins = "language";
     CKEDITOR.config.extraPlugins = "colorbutton";

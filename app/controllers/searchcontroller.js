@@ -1,27 +1,31 @@
 'use strict';
 
-var User = require('../models/user.js');
-var messages = require('../config/messages.js');
-var userDB = require('../db/userdb.js');
-var mailer = require('../helpers/mailer.js');
-var otpService = require('../services/otp.service.js');
+var UserController = require('../controllers/usercontroller.js');
+// var messages = require('../config/messages.js');
+// var userDB = require('../db/userdb.js');
+// var mailer = require('../helpers/mailer.js');
+// var otpService = require('../services/otp.service.js');
 
 const searchController = {};
 
 var searchUserWithKeyWord = (function(keyWord) {
     return new Promise(function(resolve, reject) {
-
+        UserController.searchByKeyword(keyWord).then((data) => {
+            resolve(data);
+        }).catch(() => {console.log("**reject**");
+            reject();
+        });
     });
 });
 
 var searchPostNameWithKeyWord = (function(keyWord) {
     return new Promise(function(resolve, reject) {
-        
+        resolve([]);
     });
 });
 var searchPostContentWithKeyWord = (function(keyWord) {
     return new Promise(function(resolve, reject) {
-        
+        resolve([]);
     });
 });
 searchController.search = (function(request, response) {
@@ -29,7 +33,7 @@ searchController.search = (function(request, response) {
     var keyWordForSearch = request.body.key;
     // searching user
     var searchUserPromise = new Promise(function(resolve, reject) {
-        searchUserWithKeyWord(keyWordForSearch).then(function(data) {
+        searchUserWithKeyWord(keyWordForSearch).then((data) => {
             resultObject.user = data;
             resolve();
         }).catch(function() {
@@ -61,7 +65,7 @@ searchController.search = (function(request, response) {
     });
 
     Promise.all([searchUserPromise, searchPostNamePromise, searchPostContentPromise]).then(function() {
-        response.json({"success": false, "data": resultObject});
+        response.json({"success": true, "data": resultObject});
     }).catch(function() {
         response.json({"success": false, "data": null});
     });
