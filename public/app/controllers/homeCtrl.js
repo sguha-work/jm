@@ -311,7 +311,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
   }
 
   var search = ((keyWord) => {
-    $http.post(CONSTANT.API_BASE_URL + 'search', {key: keyWord}).then(function(data) {
+    $http.get(CONSTANT.API_BASE_URL + 'search?key='+keyWord).then(function(data) {
       console.log("***** data *****"+JSON.stringify(data.data.data));
     }, function() {});
   });

@@ -145,7 +145,7 @@ module.exports = function (router, passport) {
     router.get('/getcategories', categoryController.all);
 
     // search releted APIs
-    router.post('/search', searchController.search);
+    router.get('/search', searchController.search);
  
     //feeback router
     router.post('/addfeedback', feedbackController.add);

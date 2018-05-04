@@ -8,7 +8,7 @@ var UserController = require('../controllers/usercontroller.js');
 
 const searchController = {};
 
-var searchUserWithKeyWord = (function(keyWord) {
+var searchUserWithKeyWord = (function(keyWord) {console.log("**keyWord**",keyWord);
     return new Promise(function(resolve, reject) {
         UserController.searchByKeyword(keyWord).then((data) => {
             resolve(data);
@@ -30,7 +30,7 @@ var searchPostContentWithKeyWord = (function(keyWord) {
 });
 searchController.search = (function(request, response) {
     var resultObject = {};
-    var keyToSearch = request.body.key;
+    var keyToSearch = request.query.key;//req.query
     // searching user
     var searchUserPromise = new Promise(function(resolve, reject) {
         searchUserWithKeyWord(keyToSearch).then((data) => {
