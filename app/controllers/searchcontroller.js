@@ -8,9 +8,9 @@ var UserController = require('../controllers/usercontroller.js');
 
 const searchController = {};
 
-var searchUserWithKeyWord = (function(keyWord) {console.log("**keyWord**",keyWord);
+var searchUserWithKeyWord = (function(keyWord) {
     return new Promise(function(resolve, reject) {
-        UserController.searchByKeyword(keyWord).then((data) => {console.log("data",data);
+        UserController.searchByKeyword(keyWord).then((data) => {
             resolve(data);
         }).catch(() => {
             reject();
