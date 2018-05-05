@@ -10,9 +10,9 @@ const searchController = {};
 
 var searchUserWithKeyWord = (function(keyWord) {console.log("**keyWord**",keyWord);
     return new Promise(function(resolve, reject) {
-        UserController.searchByKeyword(keyWord).then((data) => {
+        UserController.searchByKeyword(keyWord).then((data) => {console.log("data",data);
             resolve(data);
-        }).catch(() => {console.log("**reject**");
+        }).catch(() => {
             reject();
         });
     });
@@ -53,9 +53,9 @@ searchController.search = (function(request, response) {
         });
     });
 
-    // searching postname
+    // searching postcontent
     var searchPostContentPromise = new Promise(function(resolve, reject) {
-        searchPostContentWithKeyWord(keyWordForSearch).then(function(data) {
+        searchPostContentWithKeyWord(keyToSearch).then(function(data) {
             resultObject.postWithContent = data;
             resolve();
         }).catch(function() {
@@ -65,27 +65,12 @@ searchController.search = (function(request, response) {
     });
 
     Promise.all([searchUserPromise, searchPostNamePromise, searchPostContentPromise]).then(function() {
-        response.json({"success": true, "data": resultObject});
+        response.json({"success": true, "data":resultObject});
     }).catch(function() {
-        response.json({"success": false, "data": null});
+        response.json({"success": false, "data":null});
     });
 
 });
-// userController.search = function (req, res) {
-//     var username = req.body.username;
-//     var Query = User.find({ 'username': { "$regex": username, "$options": 'i' } });
-//     Query.select('-password');
-//     Query.select('-__v');
-
-//     Query.exec(function (err, user) {
-//         if (!err) {
-//             return res.send({ 'statusCode': 200, 'statusText': 'OK', 'data': user });
-//         } else {
-//             return res.send({ 'statusCode': 500, 'statusText': 'ERROR', 'err': err });
-//         }
-//     });
-// }
-
 
 
 module.exports = searchController;

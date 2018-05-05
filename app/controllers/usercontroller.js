@@ -272,11 +272,11 @@ userController.getRandomProfiles = (function (request, response) {
 /**
  * The following function will be called by the search controller
  */
-//
+//{ 'username': { "$regex": username, "$options": 'i' } }
 userController.searchByKeyword = ((keyWord) => {
     return new Promise((resolve, reject) => {
         var Query;
-        Query = User.find({ "firstName": /.*keyWord.*/i, "isNewUser": false }, { 'password': 0 });
+        Query = User.find({ 'firstName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
         var users = [];
         Query.exec(function (err, dataFromDatabase) {
             if (!err) {
