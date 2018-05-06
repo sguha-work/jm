@@ -304,6 +304,10 @@ postController.getFavPosts = function (req, res) {
     })
 }
 
+postController.searchByKeyword = ((keyWord) => {
+    
+});
+
 
 
 module.exports = postController;

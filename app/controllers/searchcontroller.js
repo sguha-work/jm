@@ -10,7 +10,7 @@ const searchController = {};
 
 var searchUserWithKeyWord = (function(keyWord) {
     return new Promise(function(resolve, reject) {
-        UserController.searchByKeyword(keyWord).then((data) => {console.log("data",data);
+        UserController.searchByKeyword(keyWord).then((data) => {
             resolve(data);
         }).catch(() => {
             reject();
@@ -18,55 +18,55 @@ var searchUserWithKeyWord = (function(keyWord) {
     });
 });
 
-var searchPostNameWithKeyWord = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
+var searchPostNameWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         resolve([]);
     });
 });
-var searchPostContentWithKeyWord = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
+var searchPostContentWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         resolve([]);
     });
 });
-searchController.search = (function(request, response) {
+searchController.search = ((request, response) => {
     var resultObject = {};
     var keyToSearch = request.query.key;//req.query
     // searching user
-    var searchUserPromise = new Promise(function(resolve, reject) {
+    var searchUserPromise = new Promise((resolve, reject) => {
         searchUserWithKeyWord(keyToSearch).then((data) => {
             resultObject.user = data;
             resolve();
-        }).catch(function() {
+        }).catch(() => {
             resultObject.user = [];
             resolve();
         });
     });
     
     // searching postname
-    var searchPostNamePromise = new Promise(function(resolve, reject) {
-        searchPostNameWithKeyWord(keyToSearch).then(function(data) {
+    var searchPostNamePromise = new Promise((resolve, reject) => {
+        searchPostNameWithKeyWord(keyToSearch).then((data) => {
             resultObject.postWithName = data;
             resolve();
-        }).catch(function() {
+        }).catch(() => {
             resultObject.postWithName = [];
             resolve();
         });
     });
 
     // searching postcontent
-    var searchPostContentPromise = new Promise(function(resolve, reject) {
-        searchPostContentWithKeyWord(keyToSearch).then(function(data) {
+    var searchPostContentPromise = new Promise((resolve, reject) => {
+        searchPostContentWithKeyWord(keyToSearch).then((data) => {
             resultObject.postWithContent = data;
             resolve();
-        }).catch(function() {
+        }).catch(() => {
             resultObject.postWithContent = [];
             resolve();
         });
     });
 
-    Promise.all([searchUserPromise, searchPostNamePromise, searchPostContentPromise]).then(function() {
+    Promise.all([searchUserPromise, searchPostNamePromise, searchPostContentPromise]).then(() => {
         response.json({"success": true, "data":resultObject});
-    }).catch(function() {
+    }).catch(() => {
         response.json({"success": false, "data":null});
     });
 

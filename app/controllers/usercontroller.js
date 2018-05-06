@@ -273,11 +273,11 @@ userController.getRandomProfiles = (function (request, response) {
  * The following function will be called by the search controller
  */
 //{ 'username': { "$regex": username, "$options": 'i' } }
-var searchForFirstName = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
+var searchForFirstName = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         var Query;
         Query = User.find({ 'firstName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
-        Query.exec(function (err, dataFromDatabase) {
+        Query.exec((err, dataFromDatabase) => {
             if (!err) {
                 resolve(dataFromDatabase);
             } else {
@@ -286,11 +286,11 @@ var searchForFirstName = (function(keyWord) {
         });
     });
 });    
-var searchForLastName = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
+var searchForLastName = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         var Query;
         Query = User.find({ 'lastName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
-        Query.exec(function (err, dataFromDatabase) {
+        Query.exec( (err, dataFromDatabase) => {
             if (!err) {
                 resolve(dataFromDatabase);
             } else {
@@ -299,11 +299,11 @@ var searchForLastName = (function(keyWord) {
         });
     });
 }); 
-var searchForPenName = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
+var searchForPenName = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         var Query;
         Query = User.find({ 'penName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
-        Query.exec(function (err, dataFromDatabase) {
+        Query.exec( (err, dataFromDatabase) => {
             if (!err) {
                 resolve(dataFromDatabase);
             } else {
@@ -315,36 +315,36 @@ var searchForPenName = (function(keyWord) {
 userController.searchByKeyword = ((keyWord) => {
     var users = {};
     return new Promise((resolve, reject) => {
-        var searchForFirstNamePromise = new Promise(function(resolve, reject) {
-            searchForFirstName(keyWord).then(function(data) {
+        var searchForFirstNamePromise = new Promise((resolve, reject) => {
+            searchForFirstName(keyWord).then((data) => {
                 users.firstNameMatched = data;
                 resolve();
-            }).catch(function() {
+            }).catch(() => {
                 users.firstNameMatched = [];
                 resolve();
             });
         });
-        var searchForLastNamePromise = new Promise(function(resolve, reject) {
-            searchForLastName(keyWord).then(function(data) {
+        var searchForLastNamePromise = new Promise((resolve, reject) => {
+            searchForLastName(keyWord).then((data) => {
                 users.lastNameMatched = data;
                 resolve();
-            }).catch(function() {
+            }).catch(() => {
                 users.lastNameMatched = [];
                 resolve();
             });
         });
-        var searchForPenNamePromise = new Promise(function(resolve, reject) {
-            searchForPenName(keyWord).then(function(data) {
+        var searchForPenNamePromise = new Promise((resolve, reject) => {
+            searchForPenName(keyWord).then((data) => {
                 users.penNameMatched = data;
                 resolve();
-            }).catch(function() {
+            }).catch(() => {
                 users.penNameMatched = [];
                 resolve();
             });
         });
-        Promise.all([searchForFirstNamePromise, searchForLastNamePromise, searchForPenNamePromise]).then(function() {console.log("users",users);
+        Promise.all([searchForFirstNamePromise, searchForLastNamePromise, searchForPenNamePromise]).then(() => {
             resolve(users);
-        }).catch(function() {
+        }).catch(() => {
             reject(users);
         });
     });
