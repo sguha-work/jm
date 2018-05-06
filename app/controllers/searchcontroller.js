@@ -10,7 +10,7 @@ const searchController = {};
 
 var searchUserWithKeyWord = (function(keyWord) {
     return new Promise(function(resolve, reject) {
-        UserController.searchByKeyword(keyWord).then((data) => {
+        UserController.searchByKeyword(keyWord).then((data) => {console.log("data",data);
             resolve(data);
         }).catch(() => {
             reject();
