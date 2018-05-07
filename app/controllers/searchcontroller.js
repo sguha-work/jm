@@ -1,15 +1,11 @@
 'use strict';
 
-var UserController = require('../controllers/usercontroller.js');
-// var messages = require('../config/messages.js');
-// var userDB = require('../db/userdb.js');
-// var mailer = require('../helpers/mailer.js');
-// var otpService = require('../services/otp.service.js');
+let UserController = require('../controllers/usercontroller.js');
 
 const searchController = {};
 
-var searchUserWithKeyWord = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
+let searchUserWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         UserController.searchByKeyword(keyWord).then((data) => {
             resolve(data);
         }).catch(() => {
@@ -18,21 +14,21 @@ var searchUserWithKeyWord = (function(keyWord) {
     });
 });
 
-var searchPostNameWithKeyWord = ((keyWord) => {
+let searchPostNameWithKeyWord = ((keyWord) => {
     return new Promise((resolve, reject) => {
         resolve([]);
     });
 });
-var searchPostContentWithKeyWord = ((keyWord) => {
+let searchPostContentWithKeyWord = ((keyWord) => {
     return new Promise((resolve, reject) => {
         resolve([]);
     });
 });
 searchController.search = ((request, response) => {
-    var resultObject = {};
-    var keyToSearch = request.query.key;//req.query
+    let resultObject = {};
+    let keyToSearch = request.query.key;//req.query
     // searching user
-    var searchUserPromise = new Promise((resolve, reject) => {
+    let searchUserPromise = new Promise((resolve, reject) => {
         searchUserWithKeyWord(keyToSearch).then((data) => {
             resultObject.user = data;
             resolve();
@@ -43,7 +39,7 @@ searchController.search = ((request, response) => {
     });
     
     // searching postname
-    var searchPostNamePromise = new Promise((resolve, reject) => {
+    let searchPostNamePromise = new Promise((resolve, reject) => {
         searchPostNameWithKeyWord(keyToSearch).then((data) => {
             resultObject.postWithName = data;
             resolve();
@@ -54,7 +50,7 @@ searchController.search = ((request, response) => {
     });
 
     // searching postcontent
-    var searchPostContentPromise = new Promise((resolve, reject) => {
+    let searchPostContentPromise = new Promise((resolve, reject) => {
         searchPostContentWithKeyWord(keyToSearch).then((data) => {
             resultObject.postWithContent = data;
             resolve();
@@ -74,6 +70,3 @@ searchController.search = ((request, response) => {
 
 
 module.exports = searchController;
-
-
-
