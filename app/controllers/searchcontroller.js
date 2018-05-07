@@ -1,6 +1,7 @@
 'use strict';
 
 let UserController = require('../controllers/usercontroller.js');
+let PostController = require('../controllers/postcontroller.js');
 
 const searchController = {};
 
@@ -16,7 +17,11 @@ let searchUserWithKeyWord = ((keyWord) => {
 
 let searchPostNameWithKeyWord = ((keyWord) => {
     return new Promise((resolve, reject) => {
-        resolve([]);
+        PostController.searchPostNameByKeyword(keyWord).then((data) => {
+            resolve(data);
+        }).catch(() => {
+            reject();
+        });
     });
 });
 let searchPostContentWithKeyWord = ((keyWord) => {
