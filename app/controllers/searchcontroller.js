@@ -17,18 +17,24 @@ let searchUserWithKeyWord = ((keyWord) => {
 
 let searchPostNameWithKeyWord = ((keyWord) => {
     return new Promise((resolve, reject) => {
-        PostController.searchPostNameByKeyword(keyWord).then((data) => {
+        PostController.searchPostNameWithKeyword(keyWord).then((data) => {
             resolve(data);
         }).catch(() => {
             reject();
         });
     });
 });
+
 let searchPostContentWithKeyWord = ((keyWord) => {
     return new Promise((resolve, reject) => {
-        resolve([]);
+        PostController.searchPostContentWithKeyWord(keyWord).then((data) => {
+            resolve(data);
+        }).catch(() => {
+            reject();
+        });
     });
 });
+
 searchController.search = ((request, response) => {
     let resultObject = {};
     let keyToSearch = request.query.key;//req.query

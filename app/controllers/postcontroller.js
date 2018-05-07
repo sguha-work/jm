@@ -289,9 +289,9 @@ postController.getFavPosts = function (req, res) {
 }
 
 /**
- * Search by key word
+ * Search post name by key word
  */
-postController.searchPostNameByKeyword = ((keyWord) => {
+postController.searchPostNameWithKeyword = ((keyWord) => {
     return new Promise((resolve, reject) => {
         var Query;
         Query = Post.find({ 'postTitle': { "$regex": keyWord, "$options": 'i' }, "isDraft": false }, { 'systemInfo': 0 });
@@ -305,6 +305,22 @@ postController.searchPostNameByKeyword = ((keyWord) => {
     });
 });
 
+/**
+ * Search post content by keyword
+ */
+postController.searchPostContentWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        var Query;
+        Query = Post.find({ 'postContent': { "$regex": keyWord, "$options": 'i' }, "isDraft": false }, { 'systemInfo': 0 });
+        Query.exec( (err, dataFromDatabase) => {
+            if (!err) {
+                resolve(dataFromDatabase);
+            } else {
+                reject();
+            }
+        });
+    });
+});
 
 
 module.exports = postController;
