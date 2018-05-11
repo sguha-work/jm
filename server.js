@@ -32,6 +32,12 @@ app.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({ extended: true , limit:'50mb'}));
 app.use(express.static(__dirname+'/public'));
 app.use("/assets", express.static(__dirname + '/public/app/assets'));
+
+app.use("/runtime.js", express.static(__dirname + '/public/app/runtime.js'));
+app.use("/polyfills.js", express.static(__dirname + '/public/app/polyfills.js'));
+app.use("/main.js", express.static(__dirname + '/public/app/main.js'));
+app.use("/styles.css", express.static(__dirname + '/public/app/styles.css'));
+
 mongoose.Promise = require('bluebird');
 //mongo_connect.connectLocal();
 mongo_connect.connectMlab();
