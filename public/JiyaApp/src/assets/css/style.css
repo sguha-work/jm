@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900");
+body { font-family: "Heebo", sans-serif; }
+
+img { max-width: 100%; height: auto; }
+
+p:last-child { margin-bottom: 0; }
+
+.pageHeader { background-color: #d3d3d3; height: 100vh; background-repeat: no-repeat; background-position: fixed; background-size: cover !important; }
+.pageHeader nav { background-color: rgba(0, 0, 0, 0.85); }
+.pageHeader nav .navbar-nav li:last-child { margin-left: 30px; }
+.pageHeader .container { height: 100%; }
+.pageHeader .container .row { height: 100%; }
+.pageHeader .navbar-brand img { width: 50px; height: 50px; }
+
+#mainFooter { background-color: #d3d3d3; }
+
+.cardImage { height: 230px; overflow: hidden; }
+
+#stories article { margin-bottom: 30px; }
+
+.contactUS iframe { width: 100%; }
+
+.loginArea { background-color: #d3d3d3; height: 100vh; background-repeat: no-repeat; background-position: fixed; }
+.loginArea .container { height: 100%; }
+.loginArea .container .row { height: 100%; }
+.loginArea .container .row .fromWrap form.login { background-color: rgba(255, 255, 255, 0.71); border-radius: 30px; }
+.loginArea .container .row .fromWrap form.login .logo { position: relative; margin-top: -100px; }
+
+/*# sourceMappingURL=style.css.map */

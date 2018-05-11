@@ -8,3 +8,5 @@ app/helpers/mailer.js
 public/app/constants/config.js
 
 html/scss
+
+public/JiyaApp/node_modules

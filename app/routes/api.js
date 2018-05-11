@@ -22,7 +22,7 @@ var jwt = require('jsonwebtoken');
 module.exports = function (router, passport) {
 
     router.get('/', function (req, res) {
-        res.sendFile(path.join(__dirname + '/public/app/view/index.html'));
+        res.sendFile(path.join(__dirname + '/public/app/index.html'));
     });
 
     router.get('/login', function (req, res) {

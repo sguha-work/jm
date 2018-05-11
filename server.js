@@ -31,6 +31,7 @@ app.use(flash());
 app.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({ extended: true , limit:'50mb'}));
 app.use(express.static(__dirname+'/public'));
+app.use("/assets", express.static(__dirname + '/public/app/assets'));
 mongoose.Promise = require('bluebird');
 //mongo_connect.connectLocal();
 mongo_connect.connectMlab();
@@ -43,7 +44,7 @@ var social = require('./app/config/passport.js')(app, passport);
 
 
 app.route('/*').get(function(req, res) { 
-    return res.sendFile(path.join(__dirname+'/public/app/view/index.html')); 
+    return res.sendFile(path.join(__dirname+'/public/app/index.html')); 
 });
 
 io.on('connection', function(socket) {
