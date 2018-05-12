@@ -14,7 +14,7 @@
                       <div class="form-group">
                           <input type="password" name="" id="password" class="form-control" placeholder="Password">
                       </div>
-                      <button type="button" class="btn btn-danger btn-lg btn-block">Login</button>
+                      <button type="button" (click)="login()" class="btn btn-danger btn-lg btn-block">Login</button>
                       <div class="form-group text-center or">
                           <img src="./assets/images/icons/or.png" alt="">
                       </div>
@@ -39,3 +39,4 @@
       </div>
   </div>
 </section>
+<app-loader *ngIf="model.showLoader"></app-loader>

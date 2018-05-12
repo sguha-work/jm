@@ -3,6 +3,11 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 // importing user defined services
 import { UserService } from './services/user.service';
 
+const publicRoutes = [
+  'login',
+  'signup'
+];
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,10 +20,14 @@ export class AppComponent {
   }
 
   private checkLoginStatusAndRedirect(): void {
-    if (this.userService.isLoggedIn()) {
-      alert("logged in");
-    } else {
-      this.router.navigate(['/login']);
+    let currentLocation: string;
+    currentLocation = (window.location).toString().split("/").pop();
+    if (publicRoutes.indexOf(currentLocation) === -1) {
+      if (this.userService.isLoggedIn()) {
+        alert("logged in");
+      } else {
+        this.router.navigate(['/login']);
+      }
     }
   }
 }

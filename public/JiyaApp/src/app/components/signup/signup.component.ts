@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   constructor(private router: Router) {
-
+    
   }
 
   ngOnInit() {
