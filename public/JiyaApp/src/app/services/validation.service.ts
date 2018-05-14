@@ -5,16 +5,42 @@ import { Injectable } from '@angular/core';
 })
 export class ValidationService {
 
-  constructor() { }
+  constructor() {
+
+  }
+
+  /**
+   * 
+   * @param email 
+   * @desc Verify email address for correct format
+   */
   public verifyEmail(email: string): boolean {
     let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(regex.test(email)) {
+    if (regex.test(email)) {
       return true;
     }
-    return false;    
+    return false;
   }
-  public verifyPassword(password: string): boolean{
-    if(password.length>6) {
+
+  /**
+   * 
+   * @param password 
+   * @desc Verify password for given criterial
+   */
+  public verifyPassword(password: string): boolean {
+    if (password.length > 6) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * 
+   * @param phoneNumber 
+   * @desc Verify the user given phone number
+   */
+  public verifyPhoneNumber(phoneNumber: string): boolean {
+    if (phoneNumber.length === 10 && parseInt(phoneNumber) !== NaN) {
       return true;
     }
     return false;
