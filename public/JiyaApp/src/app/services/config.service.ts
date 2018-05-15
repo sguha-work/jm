@@ -19,7 +19,7 @@ export class ConfigService {
       if (location.indexOf("jiyatech.au-syd.mybluemix.net") !== -1) {
         apiBaseURL = "https://jiyatech.au-syd.mybluemix.net/api/";
       } else {
-        apiBaseURL = "http://192.168.56.102:4200/api/";
+        apiBaseURL = "http://192.168.56.101:4200/api/";
       }
       window.localStorage.apiBaseUrl = apiBaseURL;
     }
