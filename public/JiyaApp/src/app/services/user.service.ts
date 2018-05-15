@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import { ConfigService } from './config.service';
 import { _LoginData } from './../interfaces/login-data';
+import { _Signupdata } from './../interfaces/signup-data';
 @Injectable({
   providedIn: 'root'
 })
@@ -76,6 +78,32 @@ export class UserService {
       this.http.post(this.config.getBaseURL() + 'resetpassword', { "email": email, "otp": otp, "password": password }).subscribe((response) => {
         resolve(response);
       }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  /**
+   * 
+   * @param firstName 
+   * @param lastName 
+   * @param password 
+   * @param email 
+   * @param phoneNumber 
+   * @desc Call the sign up api
+   */
+  public signup(firstName: string, lastName: string, password: string, email: string, phoneNumber: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let userData: _Signupdata;
+      userData = {} as _Signupdata;
+      userData.firstName = firstName;
+      userData.lastName = lastName;
+      userData.password = password;
+      userData.email = email;
+      userData.phoneNumber = phoneNumber;
+      this.http.post(this.config.getBaseURL() + "signup", userData).subscribe((success: any) => {
+        resolve(success);
+      }, (error: any) => {
         reject(error);
       });
     });

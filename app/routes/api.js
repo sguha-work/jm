@@ -20,7 +20,6 @@ var jwt = require('jsonwebtoken');
 
 //routes
 module.exports = function (router, passport) {
-
     router.get('/', function (req, res) {
         res.sendFile(path.join(__dirname + '/public/app/index.html'));
     });
@@ -146,7 +145,7 @@ module.exports = function (router, passport) {
 
     // search releted APIs
     router.get('/search', searchController.search);
- 
+
     //feeback router
     router.post('/addfeedback', feedbackController.add);
     router.put('/updatefeedback', feedbackController.update);

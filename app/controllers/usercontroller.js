@@ -142,7 +142,6 @@ userController.add = function (req, res) {
     user.email = req.body.email;
     user.phoneNumber = req.body.phoneNumber;
 
-
     userDB.addUser(user, function (err, data) {
         if (err) {
             res.json(messages.errors.technical);
