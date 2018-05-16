@@ -8,3 +8,4 @@ app/helpers/mailer.js
 public/app/constants/config.js
 
 html/scss
+html/.sass-cache
