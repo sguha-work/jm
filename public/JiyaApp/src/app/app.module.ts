@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -11,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ForgetpasswordmodalComponent } from './components/forgetpasswordmodal/forgetpasswordmodal.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,16 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    LoaderComponent
+    LoaderComponent,
+    ForgetpasswordmodalComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
