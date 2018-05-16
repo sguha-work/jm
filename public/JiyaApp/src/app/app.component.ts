@@ -24,7 +24,10 @@ export class AppComponent {
     currentLocation = (window.location).toString().split("/").pop();
     if (publicRoutes.indexOf(currentLocation) === -1) {
       if (this.userService.isLoggedIn()) {
-        alert("logged in");
+        if(currentLocation === "login") {
+          currentLocation = "home";
+        }
+        this.router.navigate(["/"+currentLocation]);
       } else {
         this.router.navigate(['/login']);
       }

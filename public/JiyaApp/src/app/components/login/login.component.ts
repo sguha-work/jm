@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     loginData.password = this.model.userPassword;
     this.userService.login(loginData).then(() => {
       this.model.showLoader = false;
-      alert("done");
+      this.router.navigate(['/home']);
     }).catch((error) => {
       this.model.showLoader = false;
       this.toastr.error("Email Id password mismatch");

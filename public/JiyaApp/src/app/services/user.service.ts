@@ -16,7 +16,7 @@ export class UserService {
    * This function checks for any active session
    */
   public isLoggedIn(): boolean {
-    if (window.localStorage.getItem('token') == "null" || window.localStorage.getItem('token') == null) {
+    if (window.localStorage.getItem('token') == "" || window.localStorage.getItem('token') == null) {
       return false;
     } else {
       return true;
@@ -30,9 +30,9 @@ export class UserService {
   public login(loginData: _LoginData): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.post(this.config.getBaseURL() + 'authenticate', loginData).subscribe((data: any) => {
-        if (typeof data.data !="undefined" && data.data.token) {
-          this.setToken(data.data.token);
-          resolve(data.data.token);
+        if (typeof data.success !="undefined" && data.success && data.token != "undefined") {
+          this.setToken(data.token);
+          resolve(data.token);
         } else {
           reject(data);
         }
