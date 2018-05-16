@@ -4,5 +4,4 @@ export interface _Signupdata {
     password: string;
     email: string;
     phoneNumber: string;
-
 }
