@@ -35,6 +35,18 @@ export class LoginComponent implements OnInit {
       $("#txt_userPassword").focus();
       return false;
     }
+    this.model.showLoader = true;
+    let loginData:_LoginData;
+    loginData = {} as _LoginData;
+    loginData.email = this.model.userEmail;
+    loginData.password = this.model.userPassword;
+    this.userService.login(loginData).then(() => {
+      this.model.showLoader = false;
+      alert("done");
+    }).catch((error) => {
+      this.model.showLoader = false;
+      this.toastr.error("Email Id password mismatch");
+    });
   }
   public goToSignUpPage() {
     this.router.navigate(['/signup']);

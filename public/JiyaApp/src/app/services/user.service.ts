@@ -30,14 +30,14 @@ export class UserService {
   public login(loginData: _LoginData): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.post(this.config.getBaseURL() + 'authenticate', loginData).subscribe((data: any) => {
-        if (data.data.token) {
+        if (typeof data.data !="undefined" && data.data.token) {
           this.setToken(data.data.token);
           resolve(data.data.token);
         } else {
-          reject();
+          reject(data);
         }
       }, (error) => {
-        reject();
+        reject(error);
       })
     });
 
