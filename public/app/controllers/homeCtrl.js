@@ -312,7 +312,7 @@ app.controller('homeCtrl', function ($scope, CONSTANT, $rootScope, $http, Facebo
 
   var search = ((keyWord) => {
     $http.get(CONSTANT.API_BASE_URL + 'search?key='+keyWord).then(function(data) {
-      console.log("***** data *****"+JSON.stringify(data.data.data));
+      console.log("***** data *****",(data.data.data));
     }, function() {});
   });
   search("angshu");

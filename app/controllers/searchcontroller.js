@@ -1,94 +1,83 @@
 'use strict';
 
-var UserController = require('../controllers/usercontroller.js');
-// var messages = require('../config/messages.js');
-// var userDB = require('../db/userdb.js');
-// var mailer = require('../helpers/mailer.js');
-// var otpService = require('../services/otp.service.js');
+let UserController = require('../controllers/usercontroller.js');
+let PostController = require('../controllers/postcontroller.js');
 
 const searchController = {};
 
-var searchUserWithKeyWord = (function(keyWord) {console.log("**keyWord**",keyWord);
-    return new Promise(function(resolve, reject) {
+let searchUserWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
         UserController.searchByKeyword(keyWord).then((data) => {
             resolve(data);
-        }).catch(() => {console.log("**reject**");
+        }).catch(() => {
             reject();
         });
     });
 });
 
-var searchPostNameWithKeyWord = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
-        resolve([]);
+let searchPostNameWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        PostController.searchPostNameWithKeyword(keyWord).then((data) => {
+            resolve(data);
+        }).catch(() => {
+            reject();
+        });
     });
 });
-var searchPostContentWithKeyWord = (function(keyWord) {
-    return new Promise(function(resolve, reject) {
-        resolve([]);
+
+let searchPostContentWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        PostController.searchPostContentWithKeyWord(keyWord).then((data) => {
+            resolve(data);
+        }).catch(() => {
+            reject();
+        });
     });
 });
-searchController.search = (function(request, response) {
-    var resultObject = {};
-    var keyToSearch = request.query.key;//req.query
+
+searchController.search = ((request, response) => {
+    let resultObject = {};
+    let keyToSearch = request.query.key;//req.query
     // searching user
-    var searchUserPromise = new Promise(function(resolve, reject) {
+    let searchUserPromise = new Promise((resolve, reject) => {
         searchUserWithKeyWord(keyToSearch).then((data) => {
             resultObject.user = data;
             resolve();
-        }).catch(function() {
+        }).catch(() => {
             resultObject.user = [];
             resolve();
         });
     });
     
     // searching postname
-    var searchPostNamePromise = new Promise(function(resolve, reject) {
-        searchPostNameWithKeyWord(keyToSearch).then(function(data) {
+    let searchPostNamePromise = new Promise((resolve, reject) => {
+        searchPostNameWithKeyWord(keyToSearch).then((data) => {
             resultObject.postWithName = data;
             resolve();
-        }).catch(function() {
+        }).catch(() => {
             resultObject.postWithName = [];
             resolve();
         });
     });
 
-    // searching postname
-    var searchPostContentPromise = new Promise(function(resolve, reject) {
-        searchPostContentWithKeyWord(keyWordForSearch).then(function(data) {
+    // searching postcontent
+    let searchPostContentPromise = new Promise((resolve, reject) => {
+        searchPostContentWithKeyWord(keyToSearch).then((data) => {
             resultObject.postWithContent = data;
             resolve();
-        }).catch(function() {
+        }).catch(() => {
             resultObject.postWithContent = [];
             resolve();
         });
     });
 
-    Promise.all([searchUserPromise, searchPostNamePromise, searchPostContentPromise]).then(function() {
-        response.json({"success": true, "data": resultObject});
-    }).catch(function() {
-        response.json({"success": false, "data": null});
+    Promise.all([searchUserPromise, searchPostNamePromise, searchPostContentPromise]).then(() => {
+        response.json({"success": true, "data":resultObject});
+    }).catch(() => {
+        response.json({"success": false, "data":null});
     });
 
 });
-// userController.search = function (req, res) {
-//     var username = req.body.username;
-//     var Query = User.find({ 'username': { "$regex": username, "$options": 'i' } });
-//     Query.select('-password');
-//     Query.select('-__v');
-
-//     Query.exec(function (err, user) {
-//         if (!err) {
-//             return res.send({ 'statusCode': 200, 'statusText': 'OK', 'data': user });
-//         } else {
-//             return res.send({ 'statusCode': 500, 'statusText': 'ERROR', 'err': err });
-//         }
-//     });
-// }
-
 
 
 module.exports = searchController;
-
-
-

@@ -272,19 +272,80 @@ userController.getRandomProfiles = (function (request, response) {
 /**
  * The following function will be called by the search controller
  */
-//
-userController.searchByKeyword = ((keyWord) => {
+//{ 'username': { "$regex": username, "$options": 'i' } }
+var searchForFirstName = ((keyWord) => {
     return new Promise((resolve, reject) => {
         var Query;
-        Query = User.find({ "firstName": /.*keyWord.*/i, "isNewUser": false }, { 'password': 0 });
-        var users = [];
-        Query.exec(function (err, dataFromDatabase) {
+        Query = User.find({ 'firstName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
+        Query.exec((err, dataFromDatabase) => {
             if (!err) {
-                users= dataFromDatabase;
-                resolve(users);
+                resolve(dataFromDatabase);
             } else {
                 reject();
             }
+        });
+    });
+});    
+var searchForLastName = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        var Query;
+        Query = User.find({ 'lastName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
+        Query.exec( (err, dataFromDatabase) => {
+            if (!err) {
+                resolve(dataFromDatabase);
+            } else {
+                reject();
+            }
+        });
+    });
+}); 
+var searchForPenName = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        var Query;
+        Query = User.find({ 'penName': { "$regex": keyWord, "$options": 'i' }, "isNewUser": false }, { 'password': 0 });
+        Query.exec( (err, dataFromDatabase) => {
+            if (!err) {
+                resolve(dataFromDatabase);
+            } else {
+                reject();
+            }
+        });
+    });
+}); 
+userController.searchByKeyword = ((keyWord) => {
+    var users = {};
+    return new Promise((resolve, reject) => {
+        var searchForFirstNamePromise = new Promise((resolve, reject) => {
+            searchForFirstName(keyWord).then((data) => {
+                users.firstNameMatched = data;
+                resolve();
+            }).catch(() => {
+                users.firstNameMatched = [];
+                resolve();
+            });
+        });
+        var searchForLastNamePromise = new Promise((resolve, reject) => {
+            searchForLastName(keyWord).then((data) => {
+                users.lastNameMatched = data;
+                resolve();
+            }).catch(() => {
+                users.lastNameMatched = [];
+                resolve();
+            });
+        });
+        var searchForPenNamePromise = new Promise((resolve, reject) => {
+            searchForPenName(keyWord).then((data) => {
+                users.penNameMatched = data;
+                resolve();
+            }).catch(() => {
+                users.penNameMatched = [];
+                resolve();
+            });
+        });
+        Promise.all([searchForFirstNamePromise, searchForLastNamePromise, searchForPenNamePromise]).then(() => {
+            resolve(users);
+        }).catch(() => {
+            reject(users);
         });
     });
 })

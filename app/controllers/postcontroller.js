@@ -187,24 +187,6 @@ postController.reportAbuse = function (req, res) {
     })
 }
 
-// postController.saveAsdraft = function(req, res){
-//     postDB.findDraft(function(err, data){
-//         if (err) { return res.json(err); }
-//         else if(!data.found) {
-//             postDB.saveDraft(req, function(err, response){
-//                 if (err) { return res.json(err); }
-//                 else{ res.json(response); }
-//             });
-//         }else{
-//             postDB.replaceDraft(data.post, req, function(err, response){
-//                 if (err) { return res.json(err); }
-//                 else{ res.json(response); }
-//             })
-//         }
-//     })
-// }
-
-
 postController.saveAsdraft = function (req, res) {
     postDB.saveDraft(req, function (err, response) {
         if (err) { return res.json(err); }
@@ -233,6 +215,7 @@ postController.getAllTimelinePosts = function (req, res) {
         }
     })
 }
+
 postController.updateDraft = function (req, res) {
     postDB.updateUserDraft(req.body.id, req.body, function (err, data) {
         if (err) {
@@ -244,6 +227,7 @@ postController.updateDraft = function (req, res) {
     })
 
 }
+
 postController.searchPost = function (req, res) {
     postDB.search(req.body.searchText, function (err, data) {
         if (err) {
@@ -304,6 +288,39 @@ postController.getFavPosts = function (req, res) {
     })
 }
 
+/**
+ * Search post name by key word
+ */
+postController.searchPostNameWithKeyword = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        var Query;
+        Query = Post.find({ 'postTitle': { "$regex": keyWord, "$options": 'i' }, "isDraft": false }, { 'systemInfo': 0 });
+        Query.exec( (err, dataFromDatabase) => {
+            if (!err) {
+                resolve(dataFromDatabase);
+            } else {
+                reject();
+            }
+        });
+    });
+});
+
+/**
+ * Search post content by keyword
+ */
+postController.searchPostContentWithKeyWord = ((keyWord) => {
+    return new Promise((resolve, reject) => {
+        var Query;
+        Query = Post.find({ 'postContent': { "$regex": keyWord, "$options": 'i' }, "isDraft": false }, { 'systemInfo': 0 });
+        Query.exec( (err, dataFromDatabase) => {
+            if (!err) {
+                resolve(dataFromDatabase);
+            } else {
+                reject();
+            }
+        });
+    });
+});
 
 
 module.exports = postController;
