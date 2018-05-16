@@ -1,29 +1,127 @@
 @import url("https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900");
-body { font-family: "Heebo", sans-serif; }
+body {
+  font-family: "Heebo", sans-serif; }
 
-img { max-width: 100%; height: auto; }
+img {
+  max-width: 100%;
+  height: auto; }
 
-p:last-child { margin-bottom: 0; }
+p:last-child {
+  margin-bottom: 0; }
 
-.pageHeader { background-color: #d3d3d3; height: 100vh; background-repeat: no-repeat; background-position: fixed; background-size: cover !important; }
-.pageHeader nav { background-color: rgba(0, 0, 0, 0.85); }
-.pageHeader nav .navbar-nav li:last-child { margin-left: 30px; }
-.pageHeader .container { height: 100%; }
-.pageHeader .container .row { height: 100%; }
-.pageHeader .navbar-brand img { width: 50px; height: 50px; }
+.pageHeader {
+  background-color: #d3d3d3;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: fixed;
+  background-size: cover !important; }
+  .pageHeader nav {
+    background-color: rgba(0, 0, 0, 0.85); }
+    .pageHeader nav .navbar-nav li:last-child {
+      margin-left: 30px; }
+  .pageHeader .container {
+    height: 100%; }
+    .pageHeader .container .row {
+      height: 100%; }
+  .pageHeader .navbar-brand img {
+    width: 50px;
+    height: 50px; }
 
-#mainFooter { background-color: #d3d3d3; }
+#mainFooter {
+  background-color: #d3d3d3; }
 
-.cardImage { height: 230px; overflow: hidden; }
+.cardImage {
+  height: 230px;
+  overflow: hidden; }
 
-#stories article { margin-bottom: 30px; }
+#stories article {
+  margin-bottom: 30px; }
 
-.contactUS iframe { width: 100%; }
+.contactUS iframe {
+  width: 100%; }
 
-.loginArea { background-color: #d3d3d3; height: 100vh; background-repeat: no-repeat; background-position: fixed; }
-.loginArea .container { height: 100%; }
-.loginArea .container .row { height: 100%; }
-.loginArea .container .row .fromWrap form.login { background-color: rgba(255, 255, 255, 0.71); border-radius: 30px; }
-.loginArea .container .row .fromWrap form.login .logo { position: relative; margin-top: -100px; }
+.loginArea {
+  background: url("../images/loginBg.jpg") no-repeat center top;
+  background-size: cover;
+  background-color: #d3d3d3;
+  min-height: 100vh; }
+  .loginArea .container .row .fromWrap {
+    margin: 0 20px; }
+    .loginArea .container .row .fromWrap .logo {
+      position: relative;
+      top: 60px; }
+    .loginArea .container .row .fromWrap form.login {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding-top: 70px !important; }
+      .loginArea .container .row .fromWrap form.login h4 {
+        font-size: 30px;
+        color: #4a4a4a;
+        font-weight: 300;
+        margin-bottom: 20px; }
+      .loginArea .container .row .fromWrap form.login .form-group {
+        margin-bottom: 20px; }
+      .loginArea .container .row .fromWrap form.login input {
+        font-size: 14px;
+        font-family: "Heebo", sans-serif;
+        font-weight: 300;
+        height: 50px;
+        border: none;
+        border-radius: 7px;
+        padding-left: 55px;
+        padding-right: 30px;
+        background-repeat: no-repeat;
+        background-position: 20px center;
+        background-size: 22px auto; }
+        .loginArea .container .row .fromWrap form.login input:focus {
+          outline: none;
+          box-shadow: none; }
+        .loginArea .container .row .fromWrap form.login input#login {
+          background-image: url("../images/icons/user.png"); }
+        .loginArea .container .row .fromWrap form.login input#password {
+          background-image: url("../images/icons/password.png"); }
+        .loginArea .container .row .fromWrap form.login input#name {
+          background-image: url("../images/icons/user.png"); }
+        .loginArea .container .row .fromWrap form.login input#email {
+          background-image: url("../images/icons/email.png"); }
+        .loginArea .container .row .fromWrap form.login input#setPassword, .loginArea .container .row .fromWrap form.login input#confirmPassword {
+          background-image: url("../images/icons/setpass.png"); }
+      .loginArea .container .row .fromWrap form.login button.btn-block {
+        background-color: #df3638;
+        height: 50px !important;
+        font-size: 16px;
+        font-family: "Heebo", sans-serif;
+        font-weight: 300;
+        height: 55px;
+        border: none;
+        border-radius: 7px; }
+        .loginArea .container .row .fromWrap form.login button.btn-block:hover {
+          background-color: #cd2f31; }
+      .loginArea .container .row .fromWrap form.login .socialLogin button {
+        font-size: 0;
+        height: 45px !important; }
+        .loginArea .container .row .fromWrap form.login .socialLogin button.googleBtn {
+          background: url("../images/google.png") no-repeat #fff center center;
+          background-size: 69% auto; }
+        .loginArea .container .row .fromWrap form.login .socialLogin button.facebookBtn {
+          background: url("../images/facebook.png") no-repeat #415dae center center;
+          background-size: 75% auto; }
+    .loginArea .container .row .fromWrap .boxShadow {
+      padding-bottom: 30px; }
+      .loginArea .container .row .fromWrap .boxShadow img {
+        display: block; }
+    .loginArea .container .row .fromWrap .registerLink {
+      margin-top: 25px; }
+      .loginArea .container .row .fromWrap .registerLink p {
+        font-size: 13px;
+        line-height: 20px; }
+        .loginArea .container .row .fromWrap .registerLink p a {
+          font-size: 12px;
+          color: #df3638;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.25s ease; }
+          .loginArea .container .row .fromWrap .registerLink p a:hover {
+            color: #000; }
 
 /*# sourceMappingURL=style.css.map */
