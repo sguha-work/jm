@@ -92,15 +92,15 @@ export class UserService {
    * @param phoneNumber 
    * @desc Call the sign up api
    */
-  public signup(firstName: string, lastName: string, password: string, email: string, phoneNumber: string): Promise<any> {
+  public signup(signupData: _Signupdata): Promise<any> {
     return new Promise((resolve, reject) => {
       let userData: _Signupdata;
       userData = {} as _Signupdata;
-      userData.firstName = firstName;
-      userData.lastName = lastName;
-      userData.password = password;
-      userData.email = email;
-      userData.phoneNumber = phoneNumber;
+      userData.firstName = signupData.firstName;
+      userData.lastName = signupData.lastName;
+      userData.password = signupData.password;
+      userData.email = signupData.email;
+      userData.phoneNumber = signupData.phoneNumber;
       this.http.post(this.config.getBaseURL() + "signup", userData).subscribe((success: any) => {
         resolve(success);
       }, (error: any) => {

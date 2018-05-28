@@ -36,6 +36,18 @@ export class ValidationService {
 
   /**
    * 
+   * @param name 
+   * @desc Verify name for given criterial
+   */
+  public verifyName(name: string): boolean {
+    if (name.length > 3) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * 
    * @param phoneNumber 
    * @desc Verify the user given phone number
    */
