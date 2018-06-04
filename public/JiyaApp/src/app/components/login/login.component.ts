@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     this.model.userPassword = "";
     this.model.wrongEmail = false;
     this.model.wrongPassword = false;
+    this.model.showForgetPassword = false;
   }
   public login() {
     if(!this.validate.verifyEmail(this.model.userEmail)) {
@@ -59,6 +60,10 @@ export class LoginComponent implements OnInit {
   public goToSignUpPage() {
     this.router.navigate(['/signup']);
     return false;
+  }
+
+  public displayForgetPasswordModal() {
+    this.model.showForgetPassword = true;
   }
   ngOnInit() {
   }
