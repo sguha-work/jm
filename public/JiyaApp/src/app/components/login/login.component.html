@@ -1,4 +1,4 @@
-<section id="loginForm" class="loginArea">
+<!-- <section id="loginForm" class="loginArea">
         <div class="container">
                 <div class="row align-items-center">
                     <div class="col-sm-5 mx-auto text-center">
@@ -42,5 +42,59 @@
                     </div>
                 </div>
             </div>
-    </section>
+    </section> -->
+<section id="loginForm" class="loginArea">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-12 text-center">
+                <div class="fromWrap">
+                    <div class="logo text-center">
+                        <img src="./assets/images/jiya.png" alt="">
+                    </div>
+                    <form action="" class="login p-5">
+                        <h4>Sign In</h4>
+                        <div class="form-group">
+                            <input [(ngModel)]="model.userEmail" type="text" style="background-image: url(./assets/images/icons/user.png);" name="txt_userEmail" id="txt_userEmail" class="form-control" placeholder="Email" autocomplete="off">
+                            <!-- For display alert -->
+                            <small id="userIdHelp" class="form-text text-danger text-right">Check user name</small>
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="model.userPassword" type="password" style="background-image: url(./assets/images/icons/password.png);" name="txt_userPassword" id="txt_userPassword" class="form-control" placeholder="Password" autocomplete="off">
+                            <!-- For display alert -->
+                            <small id="passHelp" class="form-text text-danger text-right">Wrong password</small>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger btn-block" (click) = "login()">Login</button>
+                        </div>
+                        <div class="form-group text-center or">
+                            <img src="images/icons/or.png" alt="">
+                        </div>
+                        <div class="form-group socialLogin">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <button type="button" class="btn btn-block googleBtn">Google</button>
+                                </div>
+                                <div class="col-sm">
+                                    <button type="button" class="btn btn-block facebookBtn">Facebook</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="registerLink text-center">
+                            <p>Don’t have a account?
+                                <a href="#" (click)="goToSignUpPage()">REGISTER HERE</a>
+                                <br>
+                                <a id="forgetPassword" href="#animatedModal">FORGOT PASSWORD?</a>
+                            </p>
+                        </div>
+                    </form>
+                    <div class="boxShadow">
+                        <img src="./assets/images/shadow.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <app-loader *ngIf="model.showLoader"></app-loader>
+<app-forgetpasswordmodal></app-forgetpasswordmodal>
