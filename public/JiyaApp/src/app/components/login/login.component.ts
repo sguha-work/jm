@@ -23,17 +23,25 @@ export class LoginComponent implements OnInit {
     this.model.showLoader = false;
     this.model.userEmail = "";
     this.model.userPassword = "";
+    this.model.wrongEmail = false;
+    this.model.wrongPassword = false;
   }
   public login() {
     if(!this.validate.verifyEmail(this.model.userEmail)) {
       this.toastr.error('Not a valid email address');
       $("#txt_userEmail").focus();
+      this.model.wrongEmail = true;
       return false;
+    } else {
+      this.model.wrongEmail = false;
     }
     if(!this.validate.verifyPassword(this.model.userPassword)) {
       this.toastr.error('Not a valid password');
       $("#txt_userPassword").focus();
+      this.model.wrongPassword = true;
       return false;
+    } else {
+      this.model.wrongPassword = false;
     }
     this.model.showLoader = true;
     let loginData:_LoginData;
