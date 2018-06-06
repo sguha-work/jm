@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {AfterViewInit} from '@angular/core';
 import * as $ from "jquery";
 
 // importing user defined interfaces
@@ -16,7 +17,7 @@ import {ValidationService} from './../../services/validation.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   public model: any;
   constructor(private router: Router, private toastr: ToastrService, private userService: UserService, private validate: ValidationService) {
     this.model = {};
@@ -65,7 +66,13 @@ export class LoginComponent implements OnInit {
   public displayForgetPasswordModal() {
     this.model.showForgetPassword = true;
   }
+  
   ngOnInit() {
+  
+  }
+
+  ngAfterViewInit() {
+    
   }
 
 }
