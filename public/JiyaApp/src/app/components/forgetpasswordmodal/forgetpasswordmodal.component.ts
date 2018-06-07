@@ -16,10 +16,13 @@ export class ForgetpasswordmodalComponent implements OnInit {
   constructor(public validate: ValidationService, public userService: UserService, public toastr: ToastrService) {
     this.model = {};
     this.model.forgetPasswordEmail = "";
-    this.model.forgetPasswordEmailFieldInvalid = false;
     this.model.forgetPasswordConfirmPasswordText = "";
     this.model.forgetPasswordPasswordText = "";
     this.model.forgetPasswordOTP = "";
+
+    this.model.forgetPasswordInvalidOTP = false;
+    this.model.forgetPasswordPasswordNotValid = false;
+    this.model.forgetPasswordPasswordDoesnotMatch = false;
   }
   public show() {
     $("#div_forgetPassword1").show();
@@ -48,10 +51,53 @@ export class ForgetpasswordmodalComponent implements OnInit {
   }
 
   public resetPassword(event: any) {
+    event.preventDefault();
+    $("#btn_resetPassword").css({
+      "pointer-events": "none",
+      "opacity": 0.5
+    });
+
+    if (this.model.forgetPasswordOTP == "") {
+      this.model.forgetPasswordInvalidOTP = true;
+      $("#btn_resetPassword").removeAttr("style");
+      return false;
+    } else {
+      this.model.forgetPasswordInvalidOTP = false;
+    }
+
+    if (!this.validate.verifyPassword(this.model.forgetPasswordPasswordText)) {
+      this.model.forgetPasswordPasswordNotValid = true;
+      $("#btn_resetPassword").removeAttr("style");
+      return false;
+    } else {
+      this.model.forgetPasswordPasswordNotValid = false;
+    }
+
+    if (this.model.forgetPasswordPasswordText != this.model.forgetPasswordConfirmPasswordText) {
+      this.model.forgetPasswordPasswordDoesnotMatch = true;
+      $("#btn_resetPassword").removeAttr("style");
+      return false;
+    } else {
+      this.model.forgetPasswordPasswordDoesnotMatch = false;
+    }
+
+    this.userService.resetPassword(this.model.forgetPasswordEmail, this.model.forgetPasswordOTP, this.model.forgetPasswordPasswordText).then(() => {
+      this.toastr.success("Password reset done. Login with your new password");
+      $('.close-animatedModal').trigger('click');
+      setTimeout(() => {
+        $('#stepOne').css('display', 'block');
+        $('#stepTwo').css('display', 'none');
+        $("#btn_resetPassword").removeAttr("style");
+      }, 600);
+    }).catch(() => {
+      this.toastr.error("Cannot update password please try later");
+      $("#btn_resetPassword").removeAttr("style");
+    });
+
 
   }
 
-  public sendOTPAsMail(event: any) {alert("x");
+  public sendOTPAsMail(event: any) {
     event.preventDefault();
     $("#btn_sendOTP").css({
       "pointer-events": "none",
@@ -61,7 +107,7 @@ export class ForgetpasswordmodalComponent implements OnInit {
       this.userService.sendPasswordResetOTP(this.model.forgetPasswordEmail).then(() => {
         $("#btn_sendOTP").removeAttr("style");
         $('#stepOne').css('display', 'none');
-	     	$('#stepTwo').css('display', 'block');
+        $('#stepTwo').css('display', 'block');
       }).catch(() => {
         this.toastr.error("Unable to send password resend OTP. Please try again latter.");
         $("#btn_sendOTP").removeAttr("style");
