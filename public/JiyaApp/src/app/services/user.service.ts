@@ -76,6 +76,9 @@ export class UserService {
   public resetPassword(email: string, otp: string, password: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.post(this.config.getBaseURL() + 'resetpassword', { "email": email, "otp": otp, "password": password }).subscribe((response) => {
+        if(typeof response["error"] !="undefined" && response["error"] != "") {
+          reject(response);
+        }
         resolve(response);
       }, (error) => {
         reject(error);

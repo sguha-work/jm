@@ -104,7 +104,7 @@ export class ForgetpasswordmodalComponent implements OnInit {
       "opacity": 0.5
     });
     if (this.checkEmail()) {
-      this.userService.sendPasswordResetOTP(this.model.forgetPasswordEmail).then(() => {
+      this.userService.sendPasswordResetOTP(this.model.forgetPasswordEmail).then((response) => {
         $("#btn_sendOTP").removeAttr("style");
         $('#stepOne').css('display', 'none');
         $('#stepTwo').css('display', 'block');
