@@ -16,7 +16,6 @@ export class ForgetpasswordmodalComponent implements OnInit {
   constructor(public validate: ValidationService, public userService: UserService, public toastr: ToastrService) {
     this.model = {};
     this.model.forgetPasswordEmail = "";
-    this.model.forgetPasswordEmailFieldVerificationError = "";
     this.model.forgetPasswordEmailFieldInvalid = false;
     this.model.forgetPasswordConfirmPasswordText = "";
     this.model.forgetPasswordPasswordText = "";
@@ -52,7 +51,7 @@ export class ForgetpasswordmodalComponent implements OnInit {
 
   }
 
-  public sendOTPAsMail(event: any) {
+  public sendOTPAsMail(event: any) {alert("x");
     event.preventDefault();
     $("#btn_sendOTP").css({
       "pointer-events": "none",
